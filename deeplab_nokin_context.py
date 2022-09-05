@@ -71,8 +71,10 @@ def main():
     ''' 
     task = "Suturing"
     I = Iterator(task)
-    #I.DrawDeepLab() #TODO: get ctx lines like consensus
-    I.GenerateContext()
+    I.DrawDeepLab() #TODO: get ctx lines like consensus
+    #I.GenerateContext()
+
+
     #I.DrawLabelsContext()
     quit();    
            
@@ -612,9 +614,12 @@ class Iterator:
 
         LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,needle_center_dist = self.SuturingInter(L_grasper,R_grasper,Thread,Needle,TissuePoints)
         
-
-        L_Dist = self.distTwoPoints(GrasperJawPoints[2],GrasperJawPoints[3])
-        R_Dist = self.distTwoPoints(GrasperJawPoints[0],GrasperJawPoints[1])
+        try:
+            L_Dist = self.distTwoPoints(GrasperJawPoints[2],GrasperJawPoints[3])
+            R_Dist = self.distTwoPoints(GrasperJawPoints[0],GrasperJawPoints[1])
+        except Exception as e:
+            L_Dist = 30
+            R_Dist = 30 
         PARAM_JAW_DIST = 20
         if(L_Dist < PARAM_JAW_DIST):
             L_Gripping = True
@@ -691,22 +696,26 @@ class Iterator:
             drawObject = plt.Circle(P1,radius=2,color='green', fill=True)
             ax.add_patch(drawObject)
             drawObject = plt.Circle(P2,radius=2,color='green', fill=True)
-            ax.add_patch(drawObject)           
-
-           
-            L_Grasper_Points = [GrasperJawPoints[2],GrasperJawPoints[3]]
-            R_Grasper_Points = [GrasperJawPoints[0],GrasperJawPoints[1]]
+            ax.add_patch(drawObject)          
 
             
-            for point in L_Grasper_Points:
-                drawObject = plt.Circle(point,radius=2,color='red', fill=True)
-                ax.add_patch(drawObject)
-            for point in R_Grasper_Points:
-                drawObject = plt.Circle(point,radius=2,color='green', fill=True)
-                ax.add_patch(drawObject)
         except Exception as e:
             print(e)
             return
+
+        try:
+                L_Grasper_Points = [GrasperJawPoints[2],GrasperJawPoints[3]]
+                R_Grasper_Points = [GrasperJawPoints[0],GrasperJawPoints[1]]
+
+                
+                for point in L_Grasper_Points:
+                    drawObject = plt.Circle(point,radius=2,color='red', fill=True)
+                    ax.add_patch(drawObject)
+                for point in R_Grasper_Points:
+                    drawObject = plt.Circle(point,radius=2,color='green', fill=True)
+                    ax.add_patch(drawObject)
+        except Exception as e:
+            pass
                 
         #inter, (i,j)  = utils.isIntersecting(L_grasper,Needle)
         #CtxI.getContext()        "PRED:"
@@ -1027,86 +1036,83 @@ class Iterator:
                 Tissue = utils.ViaJSONInterface(tissueFname).getDataDict()
                 Tissues[file.replace(".json","")] = Tissue
 
-        for root, dirs, files in os.walk(self.grasperJawDir):
-            for file in files:
-                #if "frame" not in file:
-                jawsFname = os.path.join(root,file)
-                GrasperJaw = utils.ViaJSONInterface(jawsFname).getDataDict()
-                GrasperJaws[file.replace(".json","")] = GrasperJaw
         #for k, v in Tissues.items():
             #print(k, v)
-
+        
+        Dirs = []
         for root, dirs, files in os.walk(self.imagesDir):
-            for file in files:
-                if "frame" not in file:
-                    continue
-                
-                imageRoot = root 
-                frameNumber = int(file.replace(".png","").split("_")[1])
-                trialFname = os.path.basename(root)
-                imageFName = os.path.join(imageRoot, file)
-                #cogitoRoot = root.replace("images","cogito_annotations")                
-                cogitoFName = os.path.join(self.cogitoDir,trialFname, utils.imageToJSON(file))
-                outputRoot =  os.path.join(self.deeplabOutputDir,trialFname)
-                outputFName = os.path.join(self.deeplabOutputDir,trialFname, file)
-                #print("outputFName",outputFName)
-                ctxFName = os.path.join(self.ctxConsensusDir, trialFname+".txt")                
-                ctxPredFName = os.path.join(self.context_output,trialFname+".txt")
-                TissuePoints = Tissues[trialFname][file]
-                GrasperJawPoints = GrasperJaws[trialFname][file]
-
+            Dirs = dirs
+            break
+        print("Trials:",Dirs)
+        for Trial in Dirs:
+            TrialRoot = os.path.join(self.imagesDir,Trial)
+            contextLines = []
+            ctxFName = os.path.join(self.ctxConsensusDir, Trial+".txt")  
+            ctxPredFName = os.path.join(self.context_output,Trial+".txt")  
+            for root, dirs, files in os.walk(TrialRoot):
+                for file in files:
+                    if "frame" not in file:
+                        continue
                     
-                
-                print("Drawing Segmentation labels and Keypoints:", os.path.basename(root),file)
-
-                RgrasperRoot = root.replace("images","deeplab_grasper_R_v4")
-                LgrasperRoot = root.replace("images","deeplab_grasper_L_v4")
-                threadRoot = root.replace("images","deeplab_thread_v4")
-                ringRoot = root.replace("images","deeplab_rings_v4")
-                needleRoot = root.replace("images","deeplab_needle_v4")
-
-                RgrasperMask = os.path.join(RgrasperRoot, utils.imageToNPY(file))
-                LgrasperMask = os.path.join(LgrasperRoot, utils.imageToNPY(file))
-                threadMask = os.path.join(threadRoot, utils.imageToNPY(file))
-                ringMask = os.path.join(ringRoot, utils.imageToNPY(file))
-                needleMask = os.path.join(needleRoot, utils.imageToNPY(file))
-
-                L_grasper = utils.NPYInterface3.loadArr(LgrasperMask)
-                R_grasper = utils.NPYInterface3.loadArr(RgrasperMask)
-                thread = utils.NPYInterface3.loadArr(threadMask)
-                needle = utils.NPYInterface3.loadArr(needleMask)
-                #ring = utils.NPYInterface3.loadArr(ringMask)
                     
-                #MPI = MPInterface(MP_comb) # turn on for MPs as well
-                CtxI = utils.ContextInterface(ctxFName,True)
-                CtxI_Pred = utils.ContextInterface(ctxFName,True)
+                    imageRoot = root 
+                    frameNumber = int(file.replace(".png","").split("_")[1])        
+                    #if( frameNumber< 5628):continue            
+                    trialFname = os.path.basename(root)
+                    imageFName = os.path.join(imageRoot, file)
+                    #cogitoRoot = root.replace("images","cogito_annotations")                
+                    cogitoFName = os.path.join(self.cogitoDir,trialFname, utils.imageToJSON(file))
+                    outputRoot =  os.path.join(self.deeplabOutputDir,trialFname)
+                    outputFName = os.path.join(outputRoot, file)
+                    #print("outputFName",outputFName)
+                                
+                    
+                    TissuePoints = Tissues[trialFname][file]
+                    
+                    
+                    #print("Drawing Segmentation labels and Keypoints:", os.path.basename(root),file)
 
-                if(not os.path.isdir(outputRoot)):
-                    path = pathlib.Path(outputRoot)
-                    path.mkdir(parents=True, exist_ok=True)
-                
-                #if os.path.exists(outputDest):
-                #    os.remove(outputDest)
-                
-                if("Knot" in self.task):
-                    #self.DrawSingleImageKT(imageSource,labelSource,outputDest)
-                    #! LG_Thread_Info, RG_Thread_Info contains intersections between graspers and the nearest thread top or bottom (combined left and right)
-                    #self, grasperSource, ThreadSource, target,CtxI,CtxI_Pred, DEBUG=False
-                    LG_Thread_Info_Top,RG_Thread_Info_Top, LG_Thread_Info_Bottom,RG_Thread_Info_Bottom = self.DrawSingleImageContextKT(
-                        LgrasperMask,RgrasperMask,threadMask,outputFName, CtxI,CtxI_Pred)
-                if("Needle" in self.task):
-                    #! LG_Info, RG_Info, N_Intersection, Needle_Ring_Distances,LG_Thread_Info, RG_Thread_Info
-                    #LG_Info, RG_Info, N_Intersection, Needle_Ring_Distances,LG_Thread_Info, RG_Thread_Info = self.DrawSingleImageContextNP(grasperMask,threadMask,needleMask,ringMask,outputDest, CtxI,CtxI_Pred)
-                    LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,LG_inter_R,RG_inter_R,Ring_Needle_inter =  self.DrawSingleImageContextNP(LgrasperMask,RgrasperMask,threadMask,needleMask,ringMask,outputFName, CtxI,CtxI_Pred)
-                if("Suturing" in self.task):
-                    #LG_Info, RG_Info, N_Intersection, Needle_Ring_Distances,LG_Thread_Info, RG_Thread_Info = self.DrawSingleImageContextS(grasperMask,threadMask,needleMask,outputDest, CtxI,CtxI_Pred)
-                    #self.DrawSingleImageContextS(L_grasper,R_grasper,thread,needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred)
-                    LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping = self.GetSuturingIntersections(L_grasper,R_grasper,thread,needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred)
-                    ctxPredLine = self.GenerateContextLineS(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,frameNumber)
-                    #" "+str(LG_inter_T)+" "+str(RG_inter_T)+" "+str(LG_inter_N)+" "+str(RG_inter_N)+" "+str(N_inter_TS)
-                    self.DrawSingleImageContextS(L_grasper,R_grasper,thread,needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred,ctxPredLine)
-                print(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS)
-                count += 1                
+                    RgrasperRoot = root.replace("images","deeplab_grasper_R_v4")
+                    LgrasperRoot = root.replace("images","deeplab_grasper_L_v4")
+                    threadRoot = root.replace("images","deeplab_thread_v4")
+                    ringRoot = root.replace("images","deeplab_rings_v4")
+                    needleRoot = root.replace("images","deeplab_needle_v4")
+
+                    RgrasperMask = os.path.join(RgrasperRoot, utils.imageToNPY(file))
+                    LgrasperMask = os.path.join(LgrasperRoot, utils.imageToNPY(file))
+                    threadMask = os.path.join(threadRoot, utils.imageToNPY(file))
+                    ringMask = os.path.join(ringRoot, utils.imageToNPY(file))
+                    needleMask = os.path.join(needleRoot, utils.imageToNPY(file))
+
+                    L_grasper = utils.NPYInterface3.loadArr(LgrasperMask)
+                    R_grasper = utils.NPYInterface3.loadArr(RgrasperMask)
+                    Thread = utils.NPYInterface3.loadArr(threadMask)
+                    Needle = utils.NPYInterface3.loadArr(needleMask)
+                    #ring = utils.NPYInterface3.loadArr(ringMask)
+                        
+                    #MPI = MPInterface(MP_comb) # turn on for MPs as well
+                    CtxI = utils.ContextInterface2(ctxFName)
+                    CtxI_Pred = utils.ContextInterface(ctxFName,True)
+                    
+                    if(not os.path.isdir(outputRoot)):
+                        path = pathlib.Path(outputRoot)
+                        path.mkdir(parents=True, exist_ok=True)                
+                    if("Knot" in self.task):
+                        #LG_Thread_Info_Top,RG_Thread_Info_Top, LG_Thread_Info_Bottom,RG_Thread_Info_Bottom = self.DrawSingleImageContextKT(
+                        #LgrasperMask,RgrasperMask,threadMask,outputFName, CtxI,CtxI_Pred)
+                        pass
+                    if("Needle" in self.task):
+                        #LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,LG_inter_R,RG_inter_R,Ring_Needle_inter =  self.DrawSingleImageContextNP(LgrasperMask,RgrasperMask,threadMask,needleMask,ringMask,outputFName, CtxI,CtxI_Pred)
+                        pass
+                    if("Suturing" in self.task):
+                        ctxPredLine = ""
+                        L_Dist,R_Dist,min_Tissue_Dist,needle_center_dist = 1,1,1,1
+                        self.DrawSingleImageContextS(L_grasper,R_grasper,Thread,Needle,TissuePoints,[],imageFName,outputFName,CtxI,CtxI_Pred,ctxPredLine,frameNumber,L_Dist,R_Dist,min_Tissue_Dist,needle_center_dist)
+                    count += 1   
+            if(len(contextLines) > 2):                
+                print("saving",ctxPredFName)
+                count+=1
+                utils.save(ctxPredFName,contextLines)             
         print(count,"images processed!")
 
     def DrawVisLabels(self):
