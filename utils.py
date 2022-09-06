@@ -120,6 +120,8 @@ It's set up now to read labels from Via
 class ViaJSONInterface:    
     def __init__(self, jsonLoc):
         self.json_location = jsonLoc    
+        self.frameNumbers = []
+        self.dataArr = []
         with open(self.json_location) as f:
             data = json.load(f)
             #self.data = data            
@@ -129,14 +131,21 @@ class ViaJSONInterface:
             for frame in imageDict:
                 # now song is a dictionary
                 frameName = frame[:len("frame_0080.png")]
+                frameNumber = int(frameName.replace("frame_","").replace(".png",""))
+                self.frameNumbers.append(frameNumber)
                 #print("Saved Via Label:",frameName)
                 regions = data["_via_img_metadata"][frame]["regions"]
                 points = [[region["shape_attributes"]["cx"],region["shape_attributes"]["cy"]] for region in regions]                
-                self.dataDict[frameName] =points
+                self.dataDict[str(frameNumber)] =points
+                self.dataArr.append(points)
                 #for attribute, value in song.items():
                 #    print(attribute, value) # example usage
-    def getDataDict(self):
+    def getDataDict(self):        
         return self.dataDict
+    def getFrameNumbers(self):
+        return self.frameNumbers
+    def getDataArr(self):
+        return self.dataArr
     '''
     Returns a list of polygons
     each polygon is a list of points ordered as [x1, y1, x2, y2, ... , xn, yn]

@@ -3,21 +3,19 @@ import json
 import pathlib
 import math
 from telnetlib import PRAGMA_HEARTBEAT
-from tkinter import Pack
-from turtle import position
-from xmlrpc.client import Boolean
+#from xmlrpc.client import Boolean
 #from cv2 import KeyPoint, threshold
 from matplotlib.colors import cnames
 import numpy as np
 from PIL import Image, ImageDraw, ImageColor,ImageFont
-from scipy import interpolate
-import time
-from scipy.interpolate import interp1d
+#from scipy import interpolate
+#import time
+#from scipy.interpolate import interp1d
 from shapely.geometry import Polygon
 from shapely.geometry import LineString
 #from dataclasses import dataclass
 #from itertools import accumulate
-from scipy import ndimage
+#from scipy import ndimage
 #from imantics import Polygons, Mask
 import utils 
 import rendering
@@ -71,8 +69,8 @@ def main():
     ''' 
     task = "Suturing"
     I = Iterator(task)
-    I.DrawDeepLab() #TODO: get ctx lines like consensus
-    #I.GenerateContext()
+    #I.DrawDeepLab() #TODO: get ctx lines like consensus
+    I.GenerateContext()
 
 
     #I.DrawLabelsContext()
@@ -926,24 +924,44 @@ class Iterator:
                 outputDest = os.path.join(self.outputDir, file)
                 ctxSource = os.path.join(self.cogitoDir, utils.imageToTXT(file))
 
+    def findClosestIndex(self,frameNumber,tfs):
+        for i in range(0,len(tfs)):
+            if(frameNumber == tfs[i]):
+                return tfs[i]
+
+            if(frameNumber < tfs[i]):
+                if i == 0: 
+                    return tfs[0]
+                else:
+                    return tfs[i-1]
+
+            if(frameNumber > tfs[i]):
+                if (i+1) >= len(tfs):
+                    return  tfs[i]
 
     def GenerateContext(self):
         count = 0
         Tissues = {} 
+        TissueFrames = {}
         GrasperJaws = {}
+        GrasperFrames = {}
         for root, dirs, files in os.walk(self.tissueDir):
             for file in files:
                 #if "frame" not in file:
                 tissueFname = os.path.join(root,file)
-                Tissue = utils.ViaJSONInterface(tissueFname).getDataDict()
-                Tissues[file.replace(".json","")] = Tissue
+                T = utils.ViaJSONInterface(tissueFname)
+                Tissues[file.replace(".json","")] = T.getDataDict()
+                TissueFrames[file.replace(".json","")] = T.getFrameNumbers()
+                print("Input: Tissue Keypoints",file)
 
         for root, dirs, files in os.walk(self.grasperJawDir):
             for file in files:
                 #if "frame" not in file:
-                jawsFname = os.path.join(root,file)
-                GrasperJaw = utils.ViaJSONInterface(jawsFname).getDataDict()
-                GrasperJaws[file.replace(".json","")] = GrasperJaw
+                jawsFname = os.path.join(root,file)      
+                J = utils.ViaJSONInterface(jawsFname)
+                GrasperJaws[file.replace(".json","")] = J.getDataDict()
+                GrasperFrames[file.replace(".json","")] = J.getFrameNumbers()
+                print("Input: Grasper Jaws",file)
         #for k, v in Tissues.items():
             #print(k, v)
         
@@ -963,23 +981,25 @@ class Iterator:
                 for file in files:
                     if "frame" not in file:
                         continue
-                    
-                    
+                                        
                     imageRoot = root 
                     frameNumber = int(file.replace(".png","").split("_")[1])        
                     #if( frameNumber< 5628):continue            
                     trialFname = os.path.basename(root)
                     imageFName = os.path.join(imageRoot, file)
                     #cogitoRoot = root.replace("images","cogito_annotations")                
-                    cogitoFName = os.path.join(self.cogitoDir,trialFname, utils.imageToJSON(file))
+                    #cogitoFName = os.path.join(self.cogitoDir,trialFname, utils.imageToJSON(file))
                     outputRoot =  os.path.join(self.deeplabOutputDir,trialFname)
                     outputFName = os.path.join(self.deeplabOutputDir,trialFname, file)
                     #print("outputFName",outputFName)
-                                
+
+                    TissueClosestIndex = TissueFrames[trialFname][0]
+                    frameNumber = 109
+                    tfs = TissueFrames[trialFname]
+                    TissueClosestIndex = self.findClosestIndex(frameNumber,tfs)
                     
-                    TissuePoints = Tissues[trialFname][file]
-                    GrasperJawPoints = GrasperJaws[trialFname][file]                    
-                    
+                    TissuePoints = Tissues[trialFname][TissueClosestIndex]
+                    GrasperJawPoints = GrasperJaws[trialFname][TissueClosestIndex]
                     #print("Drawing Segmentation labels and Keypoints:", os.path.basename(root),file)
 
                     RgrasperRoot = root.replace("images","deeplab_grasper_R_v4")
@@ -1065,11 +1085,7 @@ class Iterator:
                     outputRoot =  os.path.join(self.deeplabOutputDir,trialFname)
                     outputFName = os.path.join(outputRoot, file)
                     #print("outputFName",outputFName)
-                                
-                    
                     TissuePoints = Tissues[trialFname][file]
-                    
-                    
                     #print("Drawing Segmentation labels and Keypoints:", os.path.basename(root),file)
 
                     RgrasperRoot = root.replace("images","deeplab_grasper_R_v4")
