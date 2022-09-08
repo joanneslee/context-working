@@ -277,10 +277,10 @@ class NPYInterface2:
     def getIntersection_cached(self, grasper_gt,grasper,threadSource):
         [grasper_gt,grasper] = grasper_gt,grasper
         [thread_gt,thread] = np.load(threadSource,allow_pickle=True)
-        grasper[grasper>0.95]=1 #! instead of 0.97
-        grasper[grasper<0.95]=0 #! instead of 0.97
-        thread[thread>0.95]=1 
-        thread[thread<0.95]=0 
+        grasper[grasper>38]=1 #! instead of 0.97
+        grasper[grasper<38]=0 #! instead of 0.97
+        thread[thread>38]=1 
+        thread[thread<38]=0 
         grasper = np.squeeze(grasper)
         thread = np.squeeze(thread)
         (x_center, y_center) = ndimage.center_of_mass(grasper)
