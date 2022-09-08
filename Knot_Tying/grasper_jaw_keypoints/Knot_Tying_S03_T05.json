@@ -1,0 +1,3241 @@
+{
+    "_via_settings": {
+        "ui": {
+            "annotation_editor_height": 25,
+            "annotation_editor_fontsize": 0.8,
+            "leftsidebar_width": 18,
+            "image_grid": {
+                "img_height": 80,
+                "rshape_fill": "none",
+                "rshape_fill_opacity": 0.3,
+                "rshape_stroke": "yellow",
+                "rshape_stroke_width": 2,
+                "show_region_shape": true,
+                "show_image_policy": "all"
+            },
+            "image": {
+                "region_label": "__via_region_id__",
+                "region_color": "__via_default_region_color__",
+                "region_label_font": "10px Sans",
+                "on_image_annotation_editor_placement": "NEAR_REGION"
+            }
+        },
+        "core": {
+            "buffer_size": 18,
+            "filepath": {},
+            "default_filepath": ""
+        },
+        "project": {
+            "name": "Knot_Tying_S03_T05"
+        }
+    },
+    "_via_img_metadata": {
+        "frame_0020.png232746": {
+            "filename": "frame_0020.png",
+            "size": 232746,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 322,
+                        "cy": 416
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 323,
+                        "cy": 409
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 305,
+                        "cy": 416
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 303,
+                        "cy": 409
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0035.png248351": {
+            "filename": "frame_0035.png",
+            "size": 248351,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 482,
+                        "cy": 340
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 484,
+                        "cy": 332
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 290,
+                        "cy": 396
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 287,
+                        "cy": 390
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0050.png250054": {
+            "filename": "frame_0050.png",
+            "size": 250054,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 478,
+                        "cy": 340
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 487,
+                        "cy": 324
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 295,
+                        "cy": 399
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 290,
+                        "cy": 392
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0065.png250517": {
+            "filename": "frame_0065.png",
+            "size": 250517,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 473,
+                        "cy": 331
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 478,
+                        "cy": 312
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 298,
+                        "cy": 399
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 294,
+                        "cy": 392
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0080.png252214": {
+            "filename": "frame_0080.png",
+            "size": 252214,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 462,
+                        "cy": 336
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 457,
+                        "cy": 313
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 298,
+                        "cy": 401
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 294,
+                        "cy": 394
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0090.png259346": {
+            "filename": "frame_0090.png",
+            "size": 259346,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 373,
+                        "cy": 300
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 365,
+                        "cy": 288
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 374
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 271,
+                        "cy": 364
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0093.png250341": {
+            "filename": "frame_0093.png",
+            "size": 250341,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 346,
+                        "cy": 299
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 369,
+                        "cy": 301
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 258,
+                        "cy": 355
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 254,
+                        "cy": 344
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0108.png266563": {
+            "filename": "frame_0108.png",
+            "size": 266563,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 341,
+                        "cy": 326
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 350,
+                        "cy": 315
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 293,
+                        "cy": 372
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 277,
+                        "cy": 316
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0123.png266339": {
+            "filename": "frame_0123.png",
+            "size": 266339,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 342,
+                        "cy": 327
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 347,
+                        "cy": 316
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 370,
+                        "cy": 363
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 346,
+                        "cy": 299
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0138.png267470": {
+            "filename": "frame_0138.png",
+            "size": 267470,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 341,
+                        "cy": 329
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 348,
+                        "cy": 319
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 391,
+                        "cy": 345
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 366,
+                        "cy": 288
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0153.png268346": {
+            "filename": "frame_0153.png",
+            "size": 268346,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 340,
+                        "cy": 331
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 345,
+                        "cy": 323
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 329
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 363,
+                        "cy": 301
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0168.png265787": {
+            "filename": "frame_0168.png",
+            "size": 265787,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 353,
+                        "cy": 321
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 359,
+                        "cy": 309
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 329,
+                        "cy": 307
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 323,
+                        "cy": 298
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0183.png272832": {
+            "filename": "frame_0183.png",
+            "size": 272832,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 419,
+                        "cy": 330
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 422,
+                        "cy": 323
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 265,
+                        "cy": 250
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 258,
+                        "cy": 240
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0199.png270414": {
+            "filename": "frame_0199.png",
+            "size": 270414,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 257,
+                        "cy": 359
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 261,
+                        "cy": 354
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 281,
+                        "cy": 170
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 164
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0202.png256205": {
+            "filename": "frame_0202.png",
+            "size": 256205,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 238,
+                        "cy": 334
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 243,
+                        "cy": 327
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 286,
+                        "cy": 187
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 285,
+                        "cy": 176
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0217.png275212": {
+            "filename": "frame_0217.png",
+            "size": 275212,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 274,
+                        "cy": 262
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 280,
+                        "cy": 259
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 213,
+                        "cy": 254
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 207,
+                        "cy": 247
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0232.png261706": {
+            "filename": "frame_0232.png",
+            "size": 261706,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 202,
+                        "cy": 335
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 206,
+                        "cy": 330
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 289,
+                        "cy": 213
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 287,
+                        "cy": 208
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0242.png265805": {
+            "filename": "frame_0242.png",
+            "size": 265805,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 237,
+                        "cy": 342
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 239,
+                        "cy": 337
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 289,
+                        "cy": 217
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 284,
+                        "cy": 212
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0245.png246842": {
+            "filename": "frame_0245.png",
+            "size": 246842,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 239,
+                        "cy": 333
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 246,
+                        "cy": 327
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 278,
+                        "cy": 217
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 277,
+                        "cy": 211
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0260.png259137": {
+            "filename": "frame_0260.png",
+            "size": 259137,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 246,
+                        "cy": 331
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 252,
+                        "cy": 325
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 270,
+                        "cy": 224
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 269,
+                        "cy": 219
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0275.png259780": {
+            "filename": "frame_0275.png",
+            "size": 259780,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 238,
+                        "cy": 324
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 241,
+                        "cy": 310
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 235
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 228
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0290.png259745": {
+            "filename": "frame_0290.png",
+            "size": 259745,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 238,
+                        "cy": 321
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 243,
+                        "cy": 307
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 273,
+                        "cy": 232
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0305.png229149": {
+            "filename": "frame_0305.png",
+            "size": 229149,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 242,
+                        "cy": 321
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 259,
+                        "cy": 308
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 238
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 231
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0320.png240210": {
+            "filename": "frame_0320.png",
+            "size": 240210,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 230,
+                        "cy": 337
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 235,
+                        "cy": 329
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 276,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 271,
+                        "cy": 231
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0335.png245580": {
+            "filename": "frame_0335.png",
+            "size": 245580,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 262,
+                        "cy": 305
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 270,
+                        "cy": 289
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 270,
+                        "cy": 244
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 268,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0350.png254151": {
+            "filename": "frame_0350.png",
+            "size": 254151,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 280,
+                        "cy": 291
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 280,
+                        "cy": 284
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 280,
+                        "cy": 255
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 277,
+                        "cy": 252
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0365.png249524": {
+            "filename": "frame_0365.png",
+            "size": 249524,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 239,
+                        "cy": 312
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 242,
+                        "cy": 304
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 317,
+                        "cy": 239
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 314,
+                        "cy": 233
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0380.png250294": {
+            "filename": "frame_0380.png",
+            "size": 250294,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 242,
+                        "cy": 332
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 243,
+                        "cy": 323
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 314,
+                        "cy": 235
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 313,
+                        "cy": 230
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0395.png249988": {
+            "filename": "frame_0395.png",
+            "size": 249988,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 235,
+                        "cy": 330
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 239,
+                        "cy": 310
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 308,
+                        "cy": 236
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 310,
+                        "cy": 230
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0410.png249837": {
+            "filename": "frame_0410.png",
+            "size": 249837,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 236,
+                        "cy": 327
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 243,
+                        "cy": 307
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 311,
+                        "cy": 238
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 310,
+                        "cy": 233
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0425.png250571": {
+            "filename": "frame_0425.png",
+            "size": 250571,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 238,
+                        "cy": 323
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 244,
+                        "cy": 315
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 311,
+                        "cy": 243
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 310,
+                        "cy": 236
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0437.png252277": {
+            "filename": "frame_0437.png",
+            "size": 252277,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 228,
+                        "cy": 334
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 235,
+                        "cy": 324
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 303,
+                        "cy": 239
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 301,
+                        "cy": 233
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0440.png235672": {
+            "filename": "frame_0440.png",
+            "size": 235672,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 235,
+                        "cy": 339
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 237,
+                        "cy": 328
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 294,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 291,
+                        "cy": 233
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0455.png249196": {
+            "filename": "frame_0455.png",
+            "size": 249196,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 273,
+                        "cy": 329
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 275,
+                        "cy": 320
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 262,
+                        "cy": 255
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 255,
+                        "cy": 247
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0470.png255867": {
+            "filename": "frame_0470.png",
+            "size": 255867,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 307,
+                        "cy": 320
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 307,
+                        "cy": 311
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 194,
+                        "cy": 280
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 189,
+                        "cy": 277
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0485.png255659": {
+            "filename": "frame_0485.png",
+            "size": 255659,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 335,
+                        "cy": 321
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 337,
+                        "cy": 315
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 129,
+                        "cy": 236
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 126,
+                        "cy": 231
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0500.png256373": {
+            "filename": "frame_0500.png",
+            "size": 256373,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 330,
+                        "cy": 320
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 330,
+                        "cy": 313
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 77,
+                        "cy": 186
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 75,
+                        "cy": 179
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0515.png254846": {
+            "filename": "frame_0515.png",
+            "size": 254846,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 380,
+                        "cy": 321
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 382,
+                        "cy": 315
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 63,
+                        "cy": 176
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 59,
+                        "cy": 167
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0530.png256820": {
+            "filename": "frame_0530.png",
+            "size": 256820,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 372,
+                        "cy": 333
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 375,
+                        "cy": 327
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 39,
+                        "cy": 169
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 33,
+                        "cy": 163
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0545.png257759": {
+            "filename": "frame_0545.png",
+            "size": 257759,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 375,
+                        "cy": 339
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 331
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 25,
+                        "cy": 199
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 23,
+                        "cy": 191
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0560.png256716": {
+            "filename": "frame_0560.png",
+            "size": 256716,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 377,
+                        "cy": 334
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 328
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 24,
+                        "cy": 239
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 25,
+                        "cy": 231
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0575.png260297": {
+            "filename": "frame_0575.png",
+            "size": 260297,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 394,
+                        "cy": 313
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 395,
+                        "cy": 300
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 165,
+                        "cy": 229
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 161,
+                        "cy": 220
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0590.png256767": {
+            "filename": "frame_0590.png",
+            "size": 256767,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 462,
+                        "cy": 294
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 466,
+                        "cy": 287
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 335,
+                        "cy": 154
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 334,
+                        "cy": 147
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0599.png256950": {
+            "filename": "frame_0599.png",
+            "size": 256950,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 457,
+                        "cy": 297
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 461,
+                        "cy": 293
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 485,
+                        "cy": 153
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 483,
+                        "cy": 127
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0602.png221936": {
+            "filename": "frame_0602.png",
+            "size": 221936,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 465,
+                        "cy": 279
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 469,
+                        "cy": 271
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 459,
+                        "cy": 139
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 459,
+                        "cy": 119
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0614.png249495": {
+            "filename": "frame_0614.png",
+            "size": 249495,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 472,
+                        "cy": 252
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 478,
+                        "cy": 227
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 353,
+                        "cy": 92
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 347,
+                        "cy": 80
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0626.png256766": {
+            "filename": "frame_0626.png",
+            "size": 256766,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 459,
+                        "cy": 232
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 463,
+                        "cy": 203
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 345,
+                        "cy": 91
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 341,
+                        "cy": 75
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0636.png256412": {
+            "filename": "frame_0636.png",
+            "size": 256412,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 445,
+                        "cy": 232
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 443,
+                        "cy": 223
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 345,
+                        "cy": 92
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 338,
+                        "cy": 83
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0639.png249161": {
+            "filename": "frame_0639.png",
+            "size": 249161,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 444,
+                        "cy": 224
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 444,
+                        "cy": 217
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 343,
+                        "cy": 94
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 334,
+                        "cy": 83
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0654.png270549": {
+            "filename": "frame_0654.png",
+            "size": 270549,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 212
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 372,
+                        "cy": 200
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 282,
+                        "cy": 147
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 270,
+                        "cy": 122
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0669.png275177": {
+            "filename": "frame_0669.png",
+            "size": 275177,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 385,
+                        "cy": 226
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 387,
+                        "cy": 218
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 274,
+                        "cy": 146
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 266,
+                        "cy": 124
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0684.png274356": {
+            "filename": "frame_0684.png",
+            "size": 274356,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 387,
+                        "cy": 240
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 386,
+                        "cy": 233
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 265,
+                        "cy": 126
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 258,
+                        "cy": 110
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0699.png274763": {
+            "filename": "frame_0699.png",
+            "size": 274763,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 243
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 236
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 281,
+                        "cy": 109
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 279,
+                        "cy": 103
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0714.png273068": {
+            "filename": "frame_0714.png",
+            "size": 273068,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 373,
+                        "cy": 245
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 374,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 279,
+                        "cy": 104
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 277,
+                        "cy": 98
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0729.png277072": {
+            "filename": "frame_0729.png",
+            "size": 277072,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 365,
+                        "cy": 247
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 366,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 281,
+                        "cy": 91
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 279,
+                        "cy": 84
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0744.png277548": {
+            "filename": "frame_0744.png",
+            "size": 277548,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 359,
+                        "cy": 249
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 359,
+                        "cy": 243
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 279,
+                        "cy": 84
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 277,
+                        "cy": 77
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0759.png279031": {
+            "filename": "frame_0759.png",
+            "size": 279031,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 351,
+                        "cy": 241
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 378,
+                        "cy": 225
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 286,
+                        "cy": 74
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 281,
+                        "cy": 69
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0774.png288232": {
+            "filename": "frame_0774.png",
+            "size": 288232,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 437,
+                        "cy": 150
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 440,
+                        "cy": 141
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 274,
+                        "cy": 68
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 270,
+                        "cy": 59
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0783.png277283": {
+            "filename": "frame_0783.png",
+            "size": 277283,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 243,
+                        "cy": 193
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 247,
+                        "cy": 188
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 271,
+                        "cy": 43
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 267,
+                        "cy": 39
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0786.png262461": {
+            "filename": "frame_0786.png",
+            "size": 262461,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 250,
+                        "cy": 188
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 253,
+                        "cy": 181
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 266,
+                        "cy": 53
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 261,
+                        "cy": 48
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0801.png269644": {
+            "filename": "frame_0801.png",
+            "size": 269644,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 329,
+                        "cy": 136
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 336,
+                        "cy": 127
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 253,
+                        "cy": 153
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 248,
+                        "cy": 147
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0816.png269709": {
+            "filename": "frame_0816.png",
+            "size": 269709,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 236,
+                        "cy": 237
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 238,
+                        "cy": 232
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 315,
+                        "cy": 133
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 313,
+                        "cy": 124
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0825.png270183": {
+            "filename": "frame_0825.png",
+            "size": 270183,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 259,
+                        "cy": 174
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 265,
+                        "cy": 172
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 303,
+                        "cy": 111
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 298,
+                        "cy": 105
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0828.png258553": {
+            "filename": "frame_0828.png",
+            "size": 258553,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 251,
+                        "cy": 180
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 258,
+                        "cy": 176
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 289,
+                        "cy": 106
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 290,
+                        "cy": 99
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0843.png269521": {
+            "filename": "frame_0843.png",
+            "size": 269521,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 249,
+                        "cy": 177
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 259,
+                        "cy": 163
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 287,
+                        "cy": 100
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 287,
+                        "cy": 95
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0858.png267917": {
+            "filename": "frame_0858.png",
+            "size": 267917,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 244,
+                        "cy": 169
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 251,
+                        "cy": 156
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 289,
+                        "cy": 105
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 289,
+                        "cy": 100
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0868.png268907": {
+            "filename": "frame_0868.png",
+            "size": 268907,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 247,
+                        "cy": 169
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 252,
+                        "cy": 163
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 287,
+                        "cy": 107
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 287,
+                        "cy": 101
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0871.png254827": {
+            "filename": "frame_0871.png",
+            "size": 254827,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 246,
+                        "cy": 171
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 251,
+                        "cy": 166
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 286,
+                        "cy": 106
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 286,
+                        "cy": 99
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0886.png267522": {
+            "filename": "frame_0886.png",
+            "size": 267522,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 274,
+                        "cy": 181
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 278,
+                        "cy": 176
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 234,
+                        "cy": 135
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 233,
+                        "cy": 128
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0901.png240157": {
+            "filename": "frame_0901.png",
+            "size": 240157,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 332,
+                        "cy": 189
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 332,
+                        "cy": 183
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 157,
+                        "cy": 134
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 155,
+                        "cy": 129
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0916.png245760": {
+            "filename": "frame_0916.png",
+            "size": 245760,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 349,
+                        "cy": 216
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 351,
+                        "cy": 209
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 81,
+                        "cy": 120
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 79,
+                        "cy": 112
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0931.png250481": {
+            "filename": "frame_0931.png",
+            "size": 250481,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 370,
+                        "cy": 196
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 371,
+                        "cy": 191
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 58,
+                        "cy": 116
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 55,
+                        "cy": 110
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0946.png249209": {
+            "filename": "frame_0946.png",
+            "size": 249209,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 387,
+                        "cy": 205
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 386,
+                        "cy": 199
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 33,
+                        "cy": 137
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 31,
+                        "cy": 131
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0961.png248493": {
+            "filename": "frame_0961.png",
+            "size": 248493,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 370,
+                        "cy": 217
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 373,
+                        "cy": 212
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 27,
+                        "cy": 143
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 29,
+                        "cy": 136
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0980.png248476": {
+            "filename": "frame_0980.png",
+            "size": 248476,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 370,
+                        "cy": 220
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 372,
+                        "cy": 215
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 27,
+                        "cy": 148
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 27,
+                        "cy": 143
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0983.png241967": {
+            "filename": "frame_0983.png",
+            "size": 241967,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 377,
+                        "cy": 215
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 381,
+                        "cy": 210
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 25,
+                        "cy": 147
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 26,
+                        "cy": 135
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_0998.png260521": {
+            "filename": "frame_0998.png",
+            "size": 260521,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 452,
+                        "cy": 125
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 456,
+                        "cy": 120
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 235,
+                        "cy": 149
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 221,
+                        "cy": 131
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_1013.png264590": {
+            "filename": "frame_1013.png",
+            "size": 264590,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 375,
+                        "cy": 141
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 379,
+                        "cy": 134
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 343,
+                        "cy": 136
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 341,
+                        "cy": 129
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_1028.png261626": {
+            "filename": "frame_1028.png",
+            "size": 261626,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 350,
+                        "cy": 145
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 355,
+                        "cy": 139
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 327,
+                        "cy": 163
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 326,
+                        "cy": 158
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        },
+        "frame_1035.png262272": {
+            "filename": "frame_1035.png",
+            "size": 262272,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 334,
+                        "cy": 160
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 339,
+                        "cy": 151
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 318,
+                        "cy": 160
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 315,
+                        "cy": 154
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        }
+    },
+    "_via_attributes": {
+        "region": {},
+        "file": {}
+    },
+    "_via_data_format_version": "2.0.10",
+    "_via_image_id_list": [
+        "frame_0020.png232746",
+        "frame_0035.png248351",
+        "frame_0050.png250054",
+        "frame_0065.png250517",
+        "frame_0080.png252214",
+        "frame_0090.png259346",
+        "frame_0093.png250341",
+        "frame_0108.png266563",
+        "frame_0123.png266339",
+        "frame_0138.png267470",
+        "frame_0153.png268346",
+        "frame_0168.png265787",
+        "frame_0183.png272832",
+        "frame_0199.png270414",
+        "frame_0202.png256205",
+        "frame_0217.png275212",
+        "frame_0232.png261706",
+        "frame_0242.png265805",
+        "frame_0245.png246842",
+        "frame_0260.png259137",
+        "frame_0275.png259780",
+        "frame_0290.png259745",
+        "frame_0305.png229149",
+        "frame_0320.png240210",
+        "frame_0335.png245580",
+        "frame_0350.png254151",
+        "frame_0365.png249524",
+        "frame_0380.png250294",
+        "frame_0395.png249988",
+        "frame_0410.png249837",
+        "frame_0425.png250571",
+        "frame_0437.png252277",
+        "frame_0440.png235672",
+        "frame_0455.png249196",
+        "frame_0470.png255867",
+        "frame_0485.png255659",
+        "frame_0500.png256373",
+        "frame_0515.png254846",
+        "frame_0530.png256820",
+        "frame_0545.png257759",
+        "frame_0560.png256716",
+        "frame_0575.png260297",
+        "frame_0590.png256767",
+        "frame_0599.png256950",
+        "frame_0602.png221936",
+        "frame_0614.png249495",
+        "frame_0626.png256766",
+        "frame_0636.png256412",
+        "frame_0639.png249161",
+        "frame_0654.png270549",
+        "frame_0669.png275177",
+        "frame_0684.png274356",
+        "frame_0699.png274763",
+        "frame_0714.png273068",
+        "frame_0729.png277072",
+        "frame_0744.png277548",
+        "frame_0759.png279031",
+        "frame_0774.png288232",
+        "frame_0783.png277283",
+        "frame_0786.png262461",
+        "frame_0801.png269644",
+        "frame_0816.png269709",
+        "frame_0825.png270183",
+        "frame_0828.png258553",
+        "frame_0843.png269521",
+        "frame_0858.png267917",
+        "frame_0868.png268907",
+        "frame_0871.png254827",
+        "frame_0886.png267522",
+        "frame_0901.png240157",
+        "frame_0916.png245760",
+        "frame_0931.png250481",
+        "frame_0946.png249209",
+        "frame_0961.png248493",
+        "frame_0980.png248476",
+        "frame_0983.png241967",
+        "frame_0998.png260521",
+        "frame_1013.png264590",
+        "frame_1028.png261626",
+        "frame_1035.png262272"
+    ]
+}

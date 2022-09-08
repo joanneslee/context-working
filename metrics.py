@@ -84,7 +84,7 @@ class Iterator:
         self.outputDir = os.path.join(self.CWD, self.task,"ctx_output")
         self.ian = os.path.join(self.CWD,self.task, "ctx_ian")
         self.kay = os.path.join(self.CWD,self.task, "ctx_kay")
-        self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_v4")
+        self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_30fps") # vis_context_labels_v4
         self.consensus = os.path.join(self.CWD, self.task,"ctx_consensus")    
         self.surgeon =      os.path.join(self.CWD, self.task,"ctx_surgeon")    
         self.alpha = os.path.join(self.CWD, self.task,"k_alpha")
@@ -254,8 +254,8 @@ class Iterator:
                     pred = line.replace("\n","")
                     consensus_line = consensus_lines_u[i].replace("\n","")
 
-                    p_num =[int(x)+1 for x in pred.split(" ")[1:5]]
-                    con_num = [int(x)+1 for x in consensus_line.split(" ")[1:5]]
+                    p_num =[int(x) for x in pred.split(" ")[1:5]]
+                    con_num = [int(x) for x in consensus_line.split(" ")[1:5]]
                     frame_IOU.append(1-distance.jaccard(p_num,con_num))
 
                     p_l = "".join(pred.split(" ")[1:5])
