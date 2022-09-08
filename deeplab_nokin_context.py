@@ -1,3 +1,4 @@
+from multiprocessing import context
 import os, sys
 import json
 import pathlib
@@ -19,6 +20,7 @@ from shapely.geometry import LineString
 #from imantics import Polygons, Mask
 import utils 
 import rendering
+import settings
 
 import cv2
 
@@ -67,7 +69,7 @@ def main():
         print("Available task labels: ", available_labels)
         sys.exit()
     ''' 
-    task = "Suturing"
+    task = "Needle_Passing"
     I = Iterator(task)
     #I.DrawDeepLab() #TODO: get ctx lines like consensus
     I.GenerateContext()
@@ -421,85 +423,46 @@ class Iterator:
             print(e)        
         return LG_Thread_Info_Top,RG_Thread_Info_Top, LG_Thread_Info_Bottom,RG_Thread_Info_Bottom #! add LG Bottom, RG Top
 
-    def DrawSingleImageContextNP(self, LgrasperMask,RgrasperMask,ThreadSource,needleMask,ringMask,outputDest, CtxI,CtxI_Pred):
-        #J = JSONInterface(labelSource)
-        Rgrasper = utils.NPYInterface2()
+    def DrawSingleImageContextNP(self, L_grasper,R_grasper,Thread,Needle,Rings,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,inter_couts):
+        inter_count_names = ["LG_inter_T","RG_inter_T","LG_inter_N","RG_inter_N","N_inter_R"]
+        fig, ax = plt.subplots( nrows=1, ncols=1 )        
+        image = cv2.imread(imageFName)
+        plt.imshow(image, cmap='gray') 
+
+        masked_L_grasper = np.ma.masked_where(L_grasper < 0.9, L_grasper)
+        masked_R_grasper = np.ma.masked_where(R_grasper < 0.9, R_grasper)
+        masked_Thread = np.ma.masked_where(Thread < 0.9, Thread)
+        masked_Needle = np.ma.masked_where(Needle < 0.9, Needle)
+        masked_Rings = np.ma.masked_where(Rings < 0.9, Rings)
+        ax.imshow(masked_L_grasper, cmap='Spectral', alpha=0.5,interpolation=None) # I would add 
+        ax.imshow(masked_R_grasper, cmap='Spectral', alpha=0.5,interpolation=None)        
+        ax.imshow(masked_Thread, cmap='spring', alpha=0.5,interpolation=None)        
+        ax.imshow(masked_Needle, cmap='cool', alpha=0.5,interpolation=None)    
+        ax.imshow(masked_Rings, cmap='PuOr', alpha=0.5,interpolation=None)        
+        image_message = ["     GT:"+CtxI.getContext(frameNumber),"PRED:"+ctxPredLine]     
+          
+        i=0
+        for s in inter_couts:
+            image_message.append(inter_count_names[i]+":"+str(s))
+            i+=1
         try:
-            #(x_p_T,y_p_T), (i_T,j_T), inter_T = prednpyG_T.getIntersection_cached(grasper_gt,grasper, threadMask) # (center), (intersection), boolean
-            [grasper_gt,Lgrasper_n] = np.load(RgrasperMask,allow_pickle=True)
-            [grasper_gt,Rgrasper_n] = np.load(LgrasperMask,allow_pickle=True)
-            [grasper_gt,thread_n] = np.load(ThreadSource,allow_pickle=True)
-            [grasper_gt,needle_n] = np.load(needleMask,allow_pickle=True)
-            [grasper_gt,ring_n] = np.load(ringMask,allow_pickle=True)
-            Lgrasper_n[Lgrasper_n>0.95]=1 #! instead of 0.97
-            Lgrasper_n[Lgrasper_n<0.95]=0 #! instead of 0.97
-            Rgrasper_n[Rgrasper_n>0.95]=1 
-            Rgrasper_n[Rgrasper_n<0.95]=0 
-            thread_n[thread_n>0.95]=1 
-            thread_n[thread_n<0.95]=0 
-            needle_n[needle_n>0.95]=1 
-            needle_n[needle_n<0.95]=0 
-            ring_n[ring_n>0.95]=1 
-            ring_n[ring_n<0.95]=0 
-            L_grasper = np.squeeze(Lgrasper_n)
-            R_grasper = np.squeeze(Rgrasper_n)
-            thread = np.squeeze(thread_n)
-            needle = np.squeeze(needle_n)
-            ring = np.squeeze(ring_n)
-
-            #(x_p_R,y_p_R), (i_R,j_R), inter_T_R = Rgrasper.getIntersectionFastest(RgrasperMask, ThreadSource) # (center), (intersection), boolean
-            #(x_p_L,y_p_L), (i_L,j_L), inter_T_L = Rgrasper.getIntersectionFastest(LgrasperMask, ThreadSource) # (center), (intersection), boolean
-            inter_T_R, (i,j) = Rgrasper.isIntersecting(R_grasper,thread)
-            inter_T_L, (i,j) = Rgrasper.isIntersecting(L_grasper,thread)
-
-
-            #(x_p_N,y_p_N), (i_N,j_N), inter_N = prednpyG_N.getIntersection_cached(grasper_gt,grasper, needleMask) 
-            #(x_p_R,y_p_R), (i_R,j_R), inter_N_R = Rgrasper.getIntersectionFastest(RgrasperMask, needleMask) # (center), (intersection), boolean
-            #(x_p_L,y_p_L), (i_L,j_L), inter_N_L = Rgrasper.getIntersectionFastest(LgrasperMask, needleMask) # (center), (intersection), boolean
-            inter_N_R, (i,j) = Rgrasper.isIntersecting(R_grasper,needle)
-            inter_N_L, (i,j) = Rgrasper.isIntersecting(L_grasper,needle)
-
-            #(x_p_R,y_p_R), (i_R,j_R), inter_R = prednpyG_R.getIntersection_cached(grasper_gt,grasper, ringMask) 
-            #(x_p_R,y_p_R), (i_R,j_R), inter_R_R = Rgrasper.getIntersectionFastest(RgrasperMask, ringMask) # (center), (intersection), boolean
-            #(x_p_L,y_p_L), (i_L,j_L), inter_R_L = Rgrasper.getIntersectionFastest(LgrasperMask, ringMask) # (center), (intersection), boolean
-            inter_R_R, (i,j) = Rgrasper.isIntersecting(R_grasper,ring)
-            inter_R_L, (i,j) = Rgrasper.isIntersecting(L_grasper,ring)
-
-            #(x_p_R_N,y_p_R_N), (i_R_N,j_R_N), inter_R_N = prednpyR_N.getIntersection(needleMask, ringMask) 
-            #(x_p_L,y_p_L), (i_L,j_L), inter_R_N = Rgrasper.getIntersectionFastest(needleMask, ringMask) # (center), (intersection), boolean
-            inter_R_N, (i,j) = Rgrasper.isIntersecting(needle,ring)
-        #Lgrasper = NPYInterface2()
-        #print((x_p,y_p), inter)
-        except Exception:
-            inter_T_R,inter_T_L,inter_N_R,inter_N_L,inter_R_R,inter_R_L,inter_R_N = False,False,False,False,False,False,False
-
-        LG_inter_T = inter_T_L
-        RG_inter_T = inter_T_R        
-
-        LG_inter_N = inter_N_L
-        RG_inter_N = inter_N_R
-                
-        LG_inter_R = inter_R_L
-        RG_inter_R = inter_R_R
-                
-        '''
-        LG_Message = ""
-        RG_Message = ""
-        LG_Thread_Message = ""
-        RG_Thread_Message = ""
-        N_Message = ""
-        Lens_Message = ""
-        '''
-
-        #SingleThreadX, SingleThreadY = "_", "_"
-        #LGX,LGY,RGX,RGY,NX,NY,RingsX,RingsY = self.OrganizePoints(polygons,polyNames)
-        #LG_Info, RG_Info, N_Info, N_Intersection, Needle_Ring_Distances = self.CalcDistances(LGX,LGY,RGX,RGY,NX,NY,RingsX,RingsY) 
-        
-        #LG_Thread_Info = [1,LG_inter_T]
-        #RG_Thread_Info = [1,RG_inter_T]
-        #if(not LG_Thread_Info_Top[1] and LG_Thread_Info_Bottom[1] and not RG_Thread_Info_Top[1] and not RG_Thread_Info_Bottom[1]):
-        #    print("stop here")
-        return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,LG_inter_R,RG_inter_R,inter_R_N
+                L_Grasper_Points = [GrasperJawPoints[2],GrasperJawPoints[3]]
+                R_Grasper_Points = [GrasperJawPoints[0],GrasperJawPoints[1]]                
+                for point in L_Grasper_Points:
+                    drawObject = plt.Circle(point,radius=2,color='red', fill=True)
+                    ax.add_patch(drawObject)
+                for point in R_Grasper_Points:
+                    drawObject = plt.Circle(point,radius=2,color='green', fill=True)
+                    ax.add_patch(drawObject)
+        except Exception as e:
+            pass
+        try:
+            rendering.DrawTextArrPlt(image_message,ax)
+        except Exception as e:
+            print(e)
+            return
+        fig.savefig(outputFName) 
+        plt.close(fig)   
         
     def makeLenStr(self,d1,d2,d3,d4):
         if(len(d1)) != str(len(d2)) != (len(d3)) != (len(d4)) != 480:
@@ -594,12 +557,94 @@ class Iterator:
                     if min_needle_center_dist_point < min_needle_center_dist:
                         min_needle_center_dist = min_needle_center_dist_point
                     #distance form a point to a line
-                    
-
         return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,min_needle_center_dist
 
-    def GetSuturingIntersections(self, L_grasper,R_grasper,Thread,Needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred):
-        
+    def NPInter(self,L_grasper,R_grasper,Thread,Needle,Rings):
+        norm_rows = 480
+        norm_cols = 640
+        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R = 0, 0, 0, 0, 0
+        # we can also look at ammount and consider individual tresholds
+        # Possible expansion: now you have annotations for the grasper jaws
+        for r in range(norm_rows):
+            for c in range(norm_cols):
+                LG = L_grasper[r][c]
+                RG = R_grasper[r][c]
+                T = Thread[r][c]
+                N = Needle[r][c]
+                R = Rings[r][c]
+                if(LG==1):
+                    if(N==1):
+                        LG_inter_N+=1
+                    elif(T==1):
+                        LG_inter_T+=1
+                if(RG==1):
+                    if(N==1):
+                        RG_inter_N+=1
+                    elif(T==1):
+                        RG_inter_T+=1
+                if(N==1):
+                    if(R==1):
+                        N_inter_R+=1                    
+        return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R
+
+    def KTInter(self,L_grasper,R_grasper,Thread,Needle):
+        norm_rows = 480
+        norm_cols = 640
+        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N = 0, 0, 0, 0
+        # we can also look at ammount and consider individual tresholds
+        # Possible expansion: now you have annotations for the grasper jaws
+        for r in range(norm_rows):
+            for c in range(norm_cols):
+                LG = L_grasper[r][c]
+                RG = R_grasper[r][c]
+                T = Thread[r][c]
+                N = Needle[r][c]
+                if(LG==1):
+                    if(N==1):
+                        LG_inter_N+=1
+                    elif(T==1):
+                        LG_inter_T+=1
+                if(RG==1):
+                    if(N==1):
+                        RG_inter_N+=1
+                    elif(T==1):
+                        RG_inter_T+=1
+                if(N==1):
+                    if(N==1):
+                        N_inter_R+=1                    
+        return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N
+
+
+    
+    def GetNPIntersections(self, L_grasper,R_grasper,Thread,Needle,Rings):        
+        INTER_THRESH= 30
+        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R = self.NPInter(L_grasper,R_grasper,Thread,Needle,Rings)   
+        inter_counts = [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R]        
+        bool_inters = []
+        for item in inter_counts:
+            if item > INTER_THRESH:
+                bool_inters.append(True)
+            else:
+                bool_inters.append(False)
+        for i in range(len(inter_counts)):
+            print("i",i,"intersection counts",inter_counts[i],bool_inters[i])               
+        return inter_counts,bool_inters
+
+    def GetKTIntersections(self, L_grasper,R_grasper,Thread,Needle):
+        INTER_THRESH= 20
+        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N = self.KTInter(L_grasper,R_grasper,Thread,Needle)   
+        inter_counts = [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N]        
+        bool_inters = []
+        for item in inter_counts:
+            if item > INTER_THRESH:
+                bool_inters.append(True)
+            else:
+                bool_inters.append(False)
+        for i in range(len(inter_counts)):
+            print("i",i,"intersection counts",inter_counts[i],bool_inters[i])               
+        return inter_counts,bool_inters
+
+    def GetSuturingIntersections(self, L_grasper,R_grasper,Thread,Needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred):        
         lines = []
         norm_rows = 480
         norm_cols = 640
@@ -609,9 +654,7 @@ class Iterator:
         #    print("Row mismatch",self.makeLenStr(L_grasper,R_grasper,Thread,Needle))
         #if(len(L_grasper[0]) != norm_cols or len(R_grasper[0]) != norm_cols or len(Thread[0]) != norm_cols or len(Needle[0]) != norm_cols ):
         #    print("Col mismatch",self.makeLenStr0(L_grasper,R_grasper,Thread,Needle))
-
-        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,needle_center_dist = self.SuturingInter(L_grasper,R_grasper,Thread,Needle,TissuePoints)
-        
+        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,needle_center_dist = self.SuturingInter(L_grasper,R_grasper,Thread,Needle,TissuePoints)        
         try:
             L_Dist = self.distTwoPoints(GrasperJawPoints[2],GrasperJawPoints[3])
             R_Dist = self.distTwoPoints(GrasperJawPoints[0],GrasperJawPoints[1])
@@ -622,9 +665,54 @@ class Iterator:
         if(L_Dist < PARAM_JAW_DIST):
             L_Gripping = True
         if(R_Dist < PARAM_JAW_DIST):
-            R_Gripping = True
-        
+            R_Gripping = True        
         return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,L_Dist,R_Dist,min_Tissue_Dist,needle_center_dist
+
+    def GenerateContextLineNP(self,LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,L_Gripping,R_Gripping,frameNumber,contextLines):
+        def last5thState(s):
+            return s.split(" ")[-1]
+        L_G_Touch = 0
+        L_G_Hold = 0
+        R_G_Touch = 0
+        R_G_Hold = 0
+        Extra_State = 0
+        INTER_THRESH = 120
+        
+        if(R_Gripping):
+            if(RG_inter_N > INTER_THRESH):
+                R_G_Hold = 2
+            elif(RG_inter_T >INTER_THRESH ):
+                R_G_Hold = 3
+        else: #Right not gripping
+            if(RG_inter_N >INTER_THRESH):
+                R_G_Touch = 2
+            elif(RG_inter_T >INTER_THRESH):
+                R_G_Touch = 3
+        if(L_Gripping):            
+            if(LG_inter_N  >INTER_THRESH):
+                L_G_Hold = 2
+            elif(LG_inter_T  >INTER_THRESH):
+                L_G_Hold = 3
+        else:#Left not gripping
+            if(LG_inter_N  >INTER_THRESH):
+                L_G_Touch = 2
+            elif(LG_inter_T  >INTER_THRESH):
+                L_G_Touch = 3
+        if(len(contextLines) == 0):
+            Extra_State = 0
+        else:
+            last = last5thState(contextLines[-1])
+            if (last == "0" or last == "1") and N_inter_R > 200:
+                Extra_State = 2
+            elif (last == "0" ) and N_inter_R > 50:
+                Extra_State = 1
+            elif (last == "2") and N_inter_R == 0:
+                Extra_State = 0
+            
+        #if(R_G_Hold == 2 and L_G_Hold == 2 and min_Tissue_Dist < 5 and needle_center_dist > 20):
+        #    Extra_State = 2
+
+        return ""+ str(frameNumber) + " " + str(L_G_Hold) + " " + str( L_G_Touch) + " " + str(R_G_Hold) + " " + str(R_G_Touch) + " " + str(Extra_State)
 
     def GenerateContextLineS(self,LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,needle_center_dist,frameNumber):
 
@@ -993,45 +1081,68 @@ class Iterator:
                     outputFName = os.path.join(self.deeplabOutputDir,trialFname, file)
                     #print("outputFName",outputFName)
 
-                    TissueClosestIndex = TissueFrames[trialFname][0]
-                    frameNumber = 109
-                    tfs = TissueFrames[trialFname]
-                    TissueClosestIndex = self.findClosestIndex(frameNumber,tfs)
-                    
-                    TissuePoints = Tissues[trialFname][TissueClosestIndex]
-                    GrasperJawPoints = GrasperJaws[trialFname][TissueClosestIndex]
-                    #print("Drawing Segmentation labels and Keypoints:", os.path.basename(root),file)
+                    if "Suturing" in self.task: 
+                        TissueClosestIndex = TissueFrames[trialFname][0]
+                        #frameNumber = 109
+                        tfs = TissueFrames[trialFname]
+                        TissueClosestIndex = self.findClosestIndex(frameNumber,tfs)                    
+                        TissuePoints = Tissues[trialFname][str(TissueClosestIndex)]
+                        GrasperJawPoints = GrasperJaws[trialFname][str(TissueClosestIndex)]
+                        #print("Drawing Segmentation labels and Keypoints:", os.path.basename(root),file)
+                    else:
+                        gfs = GrasperFrames[trialFname]
+                        GrasperClosestIndex = self.findClosestIndex(frameNumber,gfs)              
+                        GrasperJawPoints = GrasperJaws[trialFname][str(GrasperClosestIndex)]
 
-                    RgrasperRoot = root.replace("images","deeplab_grasper_R_v4")
-                    LgrasperRoot = root.replace("images","deeplab_grasper_L_v4")
-                    threadRoot = root.replace("images","deeplab_thread_v4")
-                    ringRoot = root.replace("images","deeplab_rings_v4")
-                    needleRoot = root.replace("images","deeplab_needle_v4")
+                    RgrasperRoot = root.replace("images","deeplab_grasper_R_v3")
+                    LgrasperRoot = root.replace("images","deeplab_grasper_L_v3")
+                    threadRoot = root.replace("images","deeplab_thread_v3")
+                    ringRoot = root.replace("images","deeplab_rings_v3")
+                    needleRoot = root.replace("images","deeplab_needle_v3")
 
                     RgrasperMask = os.path.join(RgrasperRoot, utils.imageToNPY(file))
                     LgrasperMask = os.path.join(LgrasperRoot, utils.imageToNPY(file))
                     threadMask = os.path.join(threadRoot, utils.imageToNPY(file))
-                    ringMask = os.path.join(ringRoot, utils.imageToNPY(file))
                     needleMask = os.path.join(needleRoot, utils.imageToNPY(file))
+                    ringMask = os.path.join(ringRoot, utils.imageToNPY(file))
 
                     L_grasper = utils.NPYInterface3.loadArr(LgrasperMask)
                     R_grasper = utils.NPYInterface3.loadArr(RgrasperMask)
                     Thread = utils.NPYInterface3.loadArr(threadMask)
-                    Needle = utils.NPYInterface3.loadArr(needleMask)
-                    #ring = utils.NPYInterface3.loadArr(ringMask)
+                    if "Suturing" in self.task or "Needle" in self.task: Needle = utils.NPYInterface3.loadArr(needleMask)                    
+                    if "Needle" in self.task: Rings = utils.NPYInterface3.loadArr(ringMask)
                         
                     #MPI = MPInterface(MP_comb) # turn on for MPs as well
                     CtxI = utils.ContextInterface2(ctxFName)
                     CtxI_Pred = utils.ContextInterface(ctxFName,True)
+
+                    try:
+                        L_Dist = self.distTwoPoints(GrasperJawPoints[2],GrasperJawPoints[3])
+                        R_Dist = self.distTwoPoints(GrasperJawPoints[0],GrasperJawPoints[1])
+                    except Exception as e:
+                        L_Dist = 30
+                        R_Dist = 30 
+                    PARAM_JAW_DIST = 20
+                    if(L_Dist < PARAM_JAW_DIST):
+                        L_Gripping = True
+                    if(R_Dist < PARAM_JAW_DIST):
+                        R_Gripping = True    
                     
                     if(not os.path.isdir(outputRoot)):
                         path = pathlib.Path(outputRoot)
                         path.mkdir(parents=True, exist_ok=True)                
                     if("Knot" in self.task):
-                        LG_Thread_Info_Top,RG_Thread_Info_Top, LG_Thread_Info_Bottom,RG_Thread_Info_Bottom = self.DrawSingleImageContextKT(
-                            LgrasperMask,RgrasperMask,threadMask,outputFName, CtxI,CtxI_Pred)
+                        [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N],bool_inter = self.GetNPIntersections(L_grasper,R_grasper,Thread,Needle)
+                        ctxPredLine = self.GenerateContextLineNP(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,L_Gripping,R_Gripping,frameNumber)
                     if("Needle" in self.task):
-                        LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,LG_inter_R,RG_inter_R,Ring_Needle_inter =  self.DrawSingleImageContextNP(LgrasperMask,RgrasperMask,threadMask,needleMask,ringMask,outputFName, CtxI,CtxI_Pred)
+                        inter_couts,bool_inter = self.GetNPIntersections(L_grasper,R_grasper,Thread,Needle,Rings)
+                        [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R] = inter_couts
+                        ctxPredLine = self.GenerateContextLineNP(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,L_Gripping,R_Gripping,frameNumber,contextLines)
+                        contextLines.append(ctxPredLine)
+                        print(Trial,frameNumber,ctxPredLine)                        
+                        # TODO:
+                        self.DrawSingleImageContextNP(L_grasper,R_grasper,Thread,Needle,Rings,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,inter_couts)
+                    
                     if("Suturing" in self.task):
                         LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,L_Dist,R_Dist,min_Tissue_Dist,needle_center_dist = self.GetSuturingIntersections(L_grasper,R_grasper,Thread,Needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred)
                         ctxPredLine = self.GenerateContextLineS(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,needle_center_dist,frameNumber)
