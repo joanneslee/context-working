@@ -588,7 +588,7 @@ class Iterator:
                     if(R==1):
                         N_inter_R+=1 
                 if(R==1):
-                    if abs(r-y_c) < 50 and abs(c-x_c) < 50:
+                    if abs(r-y_c) < 30 and abs(c-x_c) < 30:
                         LocalRings[r][c] = 1
         return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,LocalRings
 
@@ -710,6 +710,8 @@ class Iterator:
             elif last == "1":
                 if x_center < x_nearby_ring:
                     Extra_State = 2
+                elif not R_Gripping:
+                    Extra_State = 0
                 else:
                     Extra_State = 1
             elif last == "2":
