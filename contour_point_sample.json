@@ -1,0 +1,143 @@
+{
+    "_via_settings": {
+        "ui": {
+            "annotation_editor_height": 25,
+            "annotation_editor_fontsize": 0.8,
+            "leftsidebar_width": 18,
+            "image_grid": {
+                "img_height": 80,
+                "rshape_fill": "none",
+                "rshape_fill_opacity": 0.3,
+                "rshape_stroke": "yellow",
+                "rshape_stroke_width": 2,
+                "show_region_shape": true,
+                "show_image_policy": "all"
+            },
+            "image": {
+                "region_label": "__via_region_id__",
+                "region_color": "__via_default_region_color__",
+                "region_label_font": "10px Sans",
+                "on_image_annotation_editor_placement": "NEAR_REGION"
+            }
+        },
+        "core": {
+            "buffer_size": 18,
+            "filepath": {},
+            "default_filepath": ""
+        },
+        "project": {
+            "name": "Contour_Format"
+        }
+    },
+    "_via_img_metadata": {
+        "frame_0967_pred.png3181": {
+            "filename": "frame_0967_pred.png",
+            "size": 3181,
+            "regions": [
+                {
+                    "shape_attributes": {
+                        "name": "polygon",
+                        "all_points_x": [
+                            486,
+                            494,
+                            489,
+                            501,
+                            521,
+                            538,
+                            556,
+                            569,
+                            570,
+                            546,
+                            539,
+                            533,
+                            528,
+                            501,
+                            490
+                        ],
+                        "all_points_y": [
+                            162,
+                            172,
+                            181,
+                            195,
+                            196,
+                            204,
+                            203,
+                            196,
+                            187,
+                            192,
+                            181,
+                            188,
+                            185,
+                            164,
+                            163
+                        ]
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "polygon",
+                        "all_points_x": [
+                            240,
+                            165,
+                            423,
+                            432
+                        ],
+                        "all_points_y": [
+                            210,
+                            94,
+                            69,
+                            178
+                        ]
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "polygon",
+                        "all_points_x": [
+                            250,
+                            265,
+                            265,
+                            250
+                        ],
+                        "all_points_y": [
+                            274,
+                            274,
+                            284,
+                            284
+                        ]
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "polygon",
+                        "all_points_x": [
+                            6,
+                            634,
+                            635,
+                            6
+                        ],
+                        "all_points_y": [
+                            4,
+                            7,
+                            472,
+                            472
+                        ]
+                    },
+                    "region_attributes": {}
+                }
+            ],
+            "file_attributes": {}
+        }
+    },
+    "_via_attributes": {
+        "region": {},
+        "file": {}
+    },
+    "_via_data_format_version": "2.0.10",
+    "_via_image_id_list": [
+        "frame_0967_pred.png3181"
+    ]
+}
