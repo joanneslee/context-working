@@ -11,16 +11,17 @@ colors =["#E36D6D","#5E81B5","#D47BC9","#7CEB8E","#C9602A","#77B9E0","#A278F0","
 
 def main():
     #path = 'C:\\Users\\ianre\\Desktop\\coda\\context-prediction-main\\Needle_Passing\\deeplab_grasper_L_v3\\Needle_Passing_S04_T01'
-    task = "Knot_Tying"
+    task = "Suturing"
     I = Iterator(task)
-    label_classes = ["deeplab_grasper_L_v3","deeplab_grasper_R_v3","deeplab_thread_v3"] #,"deeplab_needle_v3"
-    label_classNames = ["dl_grasper_L","dl_grasper_R","dl_thread"] # ,"dl_needle"
+    label_classes = ["deeplab_grasper_L_v3","deeplab_grasper_R_v3","deeplab_thread_v3","deeplab_needle_v3"] #,"deeplab_needle_v3"
+    label_classNames = ["dl_grasper_L","dl_grasper_R","dl_thread","dl_needle"] # ,"dl_needle"
     j=0
     for label_class in label_classes:
-        #I.findContours(label_class,label_classNames[j])
-        pass
+        I.findContours(label_class,label_classNames[j])
+        #pass
     
-    I.findRingContours("deeplab_rings_v3","ring_X")
+    #I.findRingContours("deeplab_rings_v3","ring_X")
+
 
 
 class Iterator:
@@ -33,6 +34,19 @@ class Iterator:
         self.tissueDir =  os.path.join(self.CWD,task,"tissue_keypoints")
         self.grasperJawDir = os.path.join(self.CWD,task,"grasper_jaw_keypoints")
         self.OS = "windows" 
+
+
+    def idRing(self, cx, cy):
+        points = [ [185,207],[290,213],[394,206],[497,236]]
+        closestIndex = -1
+        closestDist = 10000
+        for i in range(len(points)):
+            p = points[i]
+            d =utils.distTwoPoints([cx,cy],p)
+            if d < closestDist:
+                closestDist = d
+                closestIndex = i
+        return str(closestIndex+4),closestIndex
 
     def findRingContours(self,LabelClass,LabelClassName):
         Dirs = []
@@ -76,6 +90,10 @@ class Iterator:
 
                     contours, hierarchy = cv.findContours(thresh, cv.RETR_LIST   , cv.CHAIN_APPROX_SIMPLE)
                     #colors = 
+
+                    #RegionAttributes = ["Ring_4","Ring_5","Ring_6","Ring_7"]
+                    RegionAttributes = []
+                    Regions = []
                     if(len(contours) ==0):continue
                     areas = []
                     largestIndex = -1
@@ -84,27 +102,49 @@ class Iterator:
                         cnt = contours[k]
                         area = cv.contourArea(cnt)
                         areas.append(area)
+                        
+                        M = cv.moments(cnt)
+                        print( M )
+                        try:
+                            cx = int(M['m10']/M['m00'])
+                            cy = int(M['m01']/M['m00'])
+                        except Exception as e:
+                            print(e,"weird moment error")
+                            continue
+                        ringID,closestIndex = self.idRing(cx,cy)                        
+                        #Rcontours[closestIndex].append(cnt)
                         if area>largestArea:
                             largestIndex=k
                             largestArea=area
+                        X = []
+                        Y = []
+                        epsilon = 0.01*cv.arcLength(cnt,True)
+                        approx = cv.approxPolyDP(cnt,epsilon,True)
+                        for points in approx:
+                            x =int(points[0][0])
+                            y = int(points[0][1])
+                            X.append(x)
+                            Y.append(y)
+                        RegionAttributes.append("Ring_"+ringID)
+                        Regions.append([X,Y])
 
+                    #ringIDs = ["Ring_4","Ring_5","Ring_6","Ring_7"]
 
                     rbg = tuple(int(colors[0].lstrip("#")[j:j+2], 16) for j in (0, 2, 4))        
-                    cnt = contours[largestIndex]
-                    epsilon = 0.01*cv.arcLength(cnt,True)
-                    approx = cv.approxPolyDP(cnt,epsilon,True)
-                    cv.drawContours(im,[approx],0,rbg,1)
-                    cv.putText(im,LabelClassName,(cnt[0][0][0],cnt[0][0][1]), cv.FONT_HERSHEY_SIMPLEX,0.5,rbg)
+                    #cnt = contours[largestIndex]
+                    
+                    ##### DRAW
+                    #cv.drawContours(im,[approx],0,rbg,1)
+                    #cv.putText(im,LabelClassName,(cnt[0][0][0],cnt[0][0][1]), cv.FONT_HERSHEY_SIMPLEX,0.5,rbg)
+                    
                     #rbg = tuple(int(colors[i].lstrip("#")[j:j+2], 16) for j in (0, 2, 4))
                     #cv.drawContours(im,approx,0,rbg,thickness)
-                    X = []
-                    Y = []
-                    for points in approx:
-                        x =int(points[0][0])
-                        y = int(points[0][1])
-                        X.append(x)
-                        Y.append(y)
-                    VIA.addFrame(non_pred_name, fileSizeInBytes, X,Y)
+                    
+                    
+
+                    #Regions = [[X,Y],[X,Y]]
+
+                    VIA.addFrameMultiRegion(non_pred_name, fileSizeInBytes, Regions, RegionAttributes)
                     #VIA.addRings(file, LabelClassName, PolyPointsY)
                     '''
                     contours, hierarchy = cv.findContours(thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)

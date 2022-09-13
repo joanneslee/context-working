@@ -167,6 +167,71 @@ class ViaJSONInterface:
     def getDataArr(self):
         return self.dataArr
 
+class VIARingJSON:
+    def __init__(self, jsonLoc):
+        self.json_location = jsonLoc
+        self.frameNumbers = []
+        self.dataArr = []
+        self.ringArr = []
+
+        self.R4 = {}
+        self.R5 = {}
+        self.R6 = {}
+        self.R7 = {}
+        
+        # print("VIAjsonLoc:",jsonLoc)
+        with open(self.json_location) as f:
+            data = json.load(f)
+            self.dataDict = {}
+            self.ringDict = {}
+            for frame in data:
+                # now song is a dictionary
+                thisFrame = data[frame]
+                frameName = thisFrame["filename"]
+                frameNumber = int(frameName.replace("frame_", "").replace(".png", ""))
+                self.frameNumbers.append(frameNumber)
+                # print("Saved Via Label:",frameName)
+                regions = thisFrame["regions"]
+                r4p = []
+                r5p = []
+                r6p = []
+                r7p = []
+
+                for region in regions:
+                    points = [(region["shape_attributes"]["all_points_x"][i], region["shape_attributes"]["all_points_y"][i]) for i in range(len(region["shape_attributes"]["all_points_y"]))]
+                    ringID =  region["region_attributes"]["ringID"]                     
+                    if("4" in ringID):
+                        r4p.append(points)
+                    if("5" in ringID):
+                        r5p.append(points)
+                    if("6" in ringID):
+                        r6p.append(points)
+                    if("7" in ringID):
+                        r7p.append(points)
+
+                self.R4[str(frameNumber)] = r4p
+                self.R5[str(frameNumber)] = r5p
+                self.R6[str(frameNumber)] = r6p
+                self.R7[str(frameNumber)] = r7p
+                
+               # self.dataDict[str(frameNumber)] = points
+                #self.dataArr.append(points)
+                #self.ringDict[str(frameNumber)] = ringIDs
+                # for attribute, value in song.items():
+                #    print(attribute, value) # example usage
+    def getRingsPoints(self):
+        return self.R4,self.R5,self.R6,self.R7
+    def getDataDict(self):
+        return self.dataDict
+
+    def getFrameNumbers(self):
+        return self.frameNumbers
+    
+    def getRingIDs(self):
+        return self.ringArr
+
+    def getDataArr(self):
+        return self.dataArr
 
 class VIAPolyJSON:
     def __init__(self, jsonLoc):
@@ -222,6 +287,36 @@ class ViaJSONTemplate:
             self._via_image_id_list = []
             f.close()
 
+    def addFrameMultiRegion(self, file, fileSizeInBytes, Regions, RegionAttributes):
+        # self.data["_via_img_metadata"][file+str(fileSizeInBytes)] = self.imageEntry
+        thisFrame = {}
+        thisFrame["filename"] = file
+        thisFrame["size"] = fileSizeInBytes
+
+        thisFrame["regions"] = []
+        i=0
+        for r in Regions:     
+            RegionAttribute = RegionAttributes[i]
+            [X,Y] = r
+            region = {}
+            region["shape_attributes"] = {}
+            region["shape_attributes"]["name"] = "polygon"
+            region["shape_attributes"]["all_points_x"] = X
+            region["shape_attributes"]["all_points_y"] = Y
+            region["region_attributes"] = {"ringID":RegionAttribute}
+
+            thisFrame["regions"].append(region)
+            i+=1
+
+        thisFrame["file_attributes"] = {}
+
+        try:
+            self._via_image_id_list.append(file)
+        except Exception as e:
+            print(e, "list probably empty")
+            self._via_image_id_list = ["" + file]
+
+        self.data["_via_img_metadata"][file + str(fileSizeInBytes)] = thisFrame
     def addFrame(self, file, fileSizeInBytes, X, Y):
         # self.data["_via_img_metadata"][file+str(fileSizeInBytes)] = self.imageEntry
         thisFrame = {}

@@ -67,7 +67,7 @@ def main():
         print("Available task labels: ", available_labels)
         sys.exit()
     ''' 
-    task = "Suturing"
+    task = "Needle_Passing"
     I = Iterator(task)
     #I.DrawDeepLab() #TODO: get ctx lines like consensus
     I.averageConsensus()
@@ -84,7 +84,7 @@ class Iterator:
         self.imagesDir = os.path.join(self.CWD, task,"images")
         self.cogitoDir = os.path.join(self.CWD, task,"cogito_annotations")
         self.cogitoOutputDir = os.path.join(self.CWD, task,"cogito_labeled_images")
-        self.context_output = os.path.join(self.CWD,task,"vis_context_labels_v4")        
+        self.context_output = os.path.join(self.CWD,task,"vis_context_labels_v5")        
         self.deeplabOutputDir= os.path.join(self.CWD,task,"deeplab_labeled_images")     
         self.ctxConsensusDir = os.path.join(self.CWD,task,"ctx_consensus")   
         self.ctxSurgeonDir = os.path.join(self.CWD,task,"ctx_surgeon")   
@@ -969,7 +969,7 @@ class Iterator:
 
 
         count = 0
-        dir = os.path.join(self.CWD,self.task,"vis_context_labels_30fps")
+        dir = os.path.join(self.CWD,self.task,"vis_context_labels_30fps_v2")
         for root, dirs, files in os.walk(dir):
             for file in files:
                 #if "frame" not in file:
