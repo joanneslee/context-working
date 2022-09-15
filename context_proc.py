@@ -969,7 +969,7 @@ class Iterator:
 
 
         count = 0
-        dir = os.path.join(self.CWD,self.task,"vis_context_labels_30fps_v2")
+        dir = os.path.join(self.CWD,self.task,"context_proc_30fps")
         for root, dirs, files in os.walk(dir):
             for file in files:
                 #if "frame" not in file:

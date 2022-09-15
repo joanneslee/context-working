@@ -1,7 +1,11 @@
 deeplab_nokin_context2.py
-
-Suturing/deeplab_labeled_images
 __pycache__
-
-
 */deeplab_*/
+*/*/deeplab_*/
+*/annotations/
+*/contours/
+*/cogito_annotations/
+*/contour_points
+win-env/
+*.zip
+Suturing/contours
