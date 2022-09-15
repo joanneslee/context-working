@@ -10,6 +10,9 @@ from matplotlib.backends.backend_pdf import PdfPages
 from pkg_resources import invalid_marker
 import statistics
 from numpy.linalg import matrix_power
+from sklearn import metrics
+import utils
+import pathlib
 
 
 global unique_labels
@@ -50,44 +53,97 @@ class_num = 0
 def main(): 
     
     dir=os.getcwd()
-    '''
+    task = "Needle_Passing"
+
     try:
         task=sys.argv[1]
         #print(task)
-    except:
-        print("Error: no task provided \nUsage: python draw_labels.py <task>")
-        available_tasks = next(os.walk(os.path.join(dir, "images")))[1]
-        print("Available task images: ", available_tasks)
-        available_labels = next(os.walk(os.path.join(dir, "labels")))[1]
-        print("Available task labels: ", available_labels)
-        sys.exit()
-    '''
-
+    except Exception as e:
+        print("Error: no task provided \nUsage: python metrics.py <task>")
+        #available_tasks = next(os.walk(os.path.join(dir, "images")))[1]
+        #print("Available task images: ", available_tasks)
+        #available_labels = next(os.walk(os.path.join(dir, "ctx_consensus")))[1]
+        #print("Available task labels: ", available_labels)
+        #sys.exit()
+    
+    #y_true = np.array([[1,1,1,2,2,2,3,3,3,0,0,0],[1, 1, 0]])
+    #y_pred = np.array([[0,1,1,2,2,2,3,3,3,0,0,0],[1, 0, 0]])
+    #j = metrics.jaccard_score(y_true[0] ,y_pred[0], labels=None, average='micro', sample_weight=None, zero_division='warn')
+    #print("j",j)
     #print(task)
-    task = "Suturing" #then suturing to b done w/ jigs
-    I = Iterator(task)
+    #task = "Knot_tying" #then suturing to b done w/ jigs
+
+
+    I = MetricsIterator(task)
+    #I.generate30fps()
+    I.IOU()
+
+
     #I.fixStates()
     #I.poll()
     #I.verifyOutput()
     #I.showAllPlots()
 
 
-    #I.poll()
-    #I.metrics()
-    I.IOU()
     quit(); 
 
-class Iterator:
+class MetricsIterator:
     def __init__(self, task):
         self.CWD = os.path.dirname(os.path.realpath(__file__))        
         self.task = task
         self.outputDir = os.path.join(self.CWD, self.task,"ctx_output")
         self.ian = os.path.join(self.CWD,self.task, "ctx_ian")
         self.kay = os.path.join(self.CWD,self.task, "ctx_kay")
-        self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_30fps") # vis_context_labels_v4
+        self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_v5") # vis_context_labels_v4,context_proc
+        self.context_proc = os.path.join(self.CWD,self.task,"context_proc_30fps")
         self.consensus = os.path.join(self.CWD, self.task,"ctx_consensus")    
         self.surgeon =      os.path.join(self.CWD, self.task,"ctx_surgeon")    
         self.alpha = os.path.join(self.CWD, self.task,"k_alpha")
+        self.contextProc = os.path.join(self.CWD,task,"context_proc")
+
+    def generate30fps(self):
+        global class_num
+        # get a filename from Kay's set:
+        count = 0
+        intersections = []
+        IOU_frame = []
+        c1 = []
+        c2 = []
+        c3 = []
+        c4 = []
+        c5 = []
+
+        for root, dirs, files in os.walk(self.consensus): # self.consensus
+            for file in files:                
+                count=count+1
+                out_file = os.path.join(self.context_proc, file)                
+                #! IOU Automated vs Consensus
+                pred_file = os.path.join(self.pred, file)
+                consensus_file = os.path.join(self.consensus, file)
+                pred_lines = []
+                try:
+                    with open(pred_file) as pred_data:
+                        for line in pred_data:
+                            pred_lines.append(line.strip())
+                    consensus_lines = []
+                    with open(consensus_file) as consensus_data:
+                        for line in consensus_data:
+                            consensus_lines.append(line.strip())
+                except Exception as e:
+                    print(e)
+                    continue      
+
+
+                outdir = os.path.abspath(out_file + "/../")
+                pred_lines_u = self.unrollContext(pred_lines)                
+                consensus_lines_u = self.unrollContext(consensus_lines)
+
+                if(not os.path.isdir(outdir)):
+                    path = pathlib.Path(outdir)
+                    path.mkdir(parents=True, exist_ok=True)  
+
+                utils.save(out_file,pred_lines_u)  
+                print("Saved:",out_file)
 
     def unrollContext(self, lines):
         n_lines = []
@@ -202,9 +258,15 @@ class Iterator:
         count = 0
         intersections = []
         IOU_frame = []
+        c1 = []
+        c2 = []
+        c3 = []
+        c4 = []
+        c5 = []
+
         for root, dirs, files in os.walk(self.consensus): # self.consensus
             for file in files:
-                if("99"  in file):
+                if("99" in file):
                     continue
                 #print(file)
                 count=count+1
@@ -223,15 +285,18 @@ class Iterator:
 
                 
                 pred_lines = []
-                
-                with open(pred_file) as pred_data:
-                    for line in pred_data:
-                        pred_lines.append(line.strip())
+                try:
+                    with open(pred_file) as pred_data:
+                        for line in pred_data:
+                            pred_lines.append(line.strip())
 
-                consensus_lines = []
-                with open(consensus_file) as consensus_data:
-                    for line in consensus_data:
-                        consensus_lines.append(line.strip())
+                    consensus_lines = []
+                    with open(consensus_file) as consensus_data:
+                        for line in consensus_data:
+                            consensus_lines.append(line.strip())
+                except Exception as e:
+                    print(e)
+                    continue
                 
 
                 pred_lines_u = self.unrollContext(pred_lines)                
@@ -245,8 +310,19 @@ class Iterator:
                 con_arr = []
 
                 i = 0      
-                frame_IOU = []        
+                frame_IOU = []    
+                state1p = []
+                state2p = []
+                state3p = []
+                state4p = []
+                state5p = []
+                state1gt = []
+                state2gt = []
+                state3gt = []
+                state4gt = []
+                state5gt = []
                 for line in pred_lines_u:
+
                     if i >= len(pred_lines_u) or i >= len(consensus_lines_u):
                         continue
                     #! boolean array for distance
@@ -254,9 +330,20 @@ class Iterator:
                     pred = line.replace("\n","")
                     consensus_line = consensus_lines_u[i].replace("\n","")
 
-                    p_num =[int(x) for x in pred.split(" ")[1:5]]
-                    con_num = [int(x) for x in consensus_line.split(" ")[1:5]]
+                    p_num =[int(x)+1 for x in pred.split(" ")[1:6]]
+                    con_num = [int(x)+1 for x in consensus_line.split(" ")[1:6]]
                     frame_IOU.append(1-distance.jaccard(p_num,con_num))
+                    state1p.append(p_num[0])
+                    state2p.append(p_num[1])
+                    state3p.append(p_num[2])
+                    state4p.append(p_num[3])
+                    state5p.append(p_num[4])
+
+                    state1gt.append(con_num[0])
+                    state2gt.append(con_num[1])
+                    state3gt.append(con_num[2])
+                    state4gt.append(con_num[3])
+                    state5gt.append(con_num[4])                   
 
                     p_l = "".join(pred.split(" ")[1:5])
                     con_l = "".join(consensus_line.split(" ")[1:5])
@@ -279,13 +366,32 @@ class Iterator:
                     #out_lines.append(outPollRow)
                     #alpha_lines.append(kappaPollRow)
                     i=i+1
+                    
+                
+
+                s1 = metrics.jaccard_score(state1gt, state1p, labels=None, pos_label=1, average='micro', sample_weight=None, zero_division='warn')                
+                s2 = metrics.jaccard_score(state2gt, state2p, labels=None, pos_label=1, average='micro', sample_weight=None, zero_division='warn') 
+                s3 = metrics.jaccard_score(state3gt, state3p, labels=None, pos_label=1, average='micro', sample_weight=None, zero_division='warn') 
+                s4 = metrics.jaccard_score(state4gt, state4p, labels=None, pos_label=1, average='micro', sample_weight=None, zero_division='warn')
+                s5 = metrics.jaccard_score(state5gt, state5p, labels=None, pos_label=1, average='micro', sample_weight=None, zero_division='warn') 
+                c1.append(s1)
+                c2.append(s2)
+                c3.append(s3)
+                c4.append(s4)
+                c5.append(s5)
+                print(s1,s2,s3,s4,s5)
                 dis = distance.jaccard(pred_arr,con_arr)
                 intersections.append(1-dis)
                 IOU_frame.append(statistics.mean(frame_IOU))
                 print(file,dis,statistics.mean(frame_IOU))
                 #self.save(out_file,out_lines)
                 #self.save(alpha_file, alpha_lines)
-        
+        print("s1 avg",statistics.mean(c1))
+        print("s2 avg",statistics.mean(c2))
+        print("s3 avg",statistics.mean(c3))
+        print("s4 avg",statistics.mean(c4))
+        print("s5 avg",statistics.mean(c5))
+        print("\t\tsk avg:",statistics.mean([statistics.mean(c1),statistics.mean(c2),statistics.mean(c3),statistics.mean(c4),statistics.mean(c5)]))
         print("Frame level:",statistics.mean(intersections)) 
         print("Annotation level:",statistics.mean(IOU_frame))
         print(count,"files processed!")
