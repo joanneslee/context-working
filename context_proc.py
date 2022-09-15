@@ -91,9 +91,8 @@ class Iterator:
         self.ctxPredDir =  os.path.join(self.CWD,task,"ctx_output")   
         self.tissueDir =  os.path.join(self.CWD,task,"tissue_keypoints")
         self.grasperJawDir = os.path.join(self.CWD,task,"grasper_jaw_keypoints")
-        self.contextProc = os.path.join(self.CWD,task,"context_proc")
-
-        self.OS = "windows"   
+        self.contextProc = os.path.join(self.CWD,task,"vis_context_labels_v5")
+        self.OS = "windows"
         
     ''' Iterator: DrawSingleImageKT(imageSource, labelSource, target, DEBUG=False)
 
@@ -969,7 +968,7 @@ class Iterator:
 
 
         count = 0
-        dir = os.path.join(self.CWD,self.task,"context_proc_30fps")
+        dir = os.path.join(self.CWD,self.task,"context_proc_30fps_pred")
         for root, dirs, files in os.walk(dir):
             for file in files:
                 #if "frame" not in file:

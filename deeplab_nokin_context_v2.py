@@ -364,6 +364,7 @@ class Iterator:
 
                         #GT                    
                         #ctxPredLine, LG_inter_T, RG_inter_T = self.GenerateContextLineKT(gt,pred, L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)                         
+                        
                         contextLines.append(ctxPredLine)
                         print(Trial,frameNumber,ctxPredLine)
                         #self.DrawSingleImageContextKT(pred, gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T)
@@ -373,6 +374,7 @@ class Iterator:
                         needleShape, needleShape_gt = self.GetNeedleShapes(NeedlePoints,gtPolygons)
                         #gt, pred, ringShapes_gt, ringShapes, needleShape_gt, needleShape -> GT Test
                         #ctxPredLine, LG_inter_T, RG_inter_T,messages = "",0,0,[]                    # this causes list error, switching gt with pred
+                        
                         #pred, gt, ringShapes, ringShapes_gt, needleShape, needleShape_gt -> dev
                         ctxPredLine, LG_inter_T, RG_inter_T,messages = self.GenerateContextLineNP(pred, gt, ringShapes, ringShapes_gt, needleShape, needleShape_gt, L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX,currentRing)                        
                         #gt, pred, ringShapes_gt, ringShapes, needleShape_gt, needleShape -> GT Test 

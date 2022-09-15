@@ -94,12 +94,11 @@ class MetricsIterator:
         self.outputDir = os.path.join(self.CWD, self.task,"ctx_output")
         self.ian = os.path.join(self.CWD,self.task, "ctx_ian")
         self.kay = os.path.join(self.CWD,self.task, "ctx_kay")
-        self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_v5") # vis_context_labels_v4,context_proc
-        self.context_proc = os.path.join(self.CWD,self.task,"context_proc_30fps")
+        self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_v5_gt") # vis_context_labels_v4,context_proc
+        self.context_proc = os.path.join(self.CWD,self.task,"context_proc_30fps_pred")
         self.consensus = os.path.join(self.CWD, self.task,"ctx_consensus")    
         self.surgeon =      os.path.join(self.CWD, self.task,"ctx_surgeon")    
         self.alpha = os.path.join(self.CWD, self.task,"k_alpha")
-        self.contextProc = os.path.join(self.CWD,task,"context_proc")
 
     def generate30fps(self):
         global class_num
@@ -131,7 +130,7 @@ class MetricsIterator:
                             consensus_lines.append(line.strip())
                 except Exception as e:
                     print(e)
-                    continue      
+                    continue
 
 
                 outdir = os.path.abspath(out_file + "/../")
