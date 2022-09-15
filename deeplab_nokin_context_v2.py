@@ -336,7 +336,7 @@ class Iterator:
                     except Exception as e:
                         L_Dist = 0
                         R_Dist = 0 
-                    PARAM_JAW_DIST = 45
+                    PARAM_JAW_DIST = 25
                     #from orig 12, NP is best at 18
                     #NP 26: 0.5641
                     #NP 42: 0.57910839234271
@@ -360,10 +360,10 @@ class Iterator:
                         #pred, gt = self.GetKTShapes(gtPolygons,gtKeypoints,SingleThreadPoints,ThreadContours,LgrasperPoints,RgrasperPoints)     
                         
                         #dev                    
-                        #ctxPredLine, LG_inter_T, RG_inter_T = self.GenerateContextLineKT(pred, gt ,L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)    
+                        ctxPredLine, LG_inter_T, RG_inter_T = self.GenerateContextLineKT(pred, gt ,L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)    
 
                         #GT                    
-                        ctxPredLine, LG_inter_T, RG_inter_T = self.GenerateContextLineKT(gt,pred, L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)                         
+                        #ctxPredLine, LG_inter_T, RG_inter_T = self.GenerateContextLineKT(gt,pred, L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)                         
                         contextLines.append(ctxPredLine)
                         print(Trial,frameNumber,ctxPredLine)
                         #self.DrawSingleImageContextKT(pred, gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T)
@@ -387,10 +387,10 @@ class Iterator:
                         gt_bisector, gt_tissue, pred_bisector, pred_tissue,Bisector = self.GetTissueDist(TissuePoints,needleShape, needleShape_gt) 
 
                         #dev
-                        #ctxPredLine, LG_inter_T, RG_inter_T,messages = self.GenerateContextLineS(pred, gt ,needleShape,needleShape_gt ,L_Gripping,R_Gripping,frameNumber,contextLines,gt_bisector, gt_tissue, pred_bisector, pred_tissue,Bisector)
+                        ctxPredLine, LG_inter_T, RG_inter_T,messages = self.GenerateContextLineS(pred, gt ,needleShape,needleShape_gt ,L_Gripping,R_Gripping,frameNumber,contextLines,gt_bisector, gt_tissue, pred_bisector, pred_tissue,Bisector)
                         
                         #gt
-                        ctxPredLine, LG_inter_T, RG_inter_T,messages = self.GenerateContextLineS(gt, pred, needleShape_gt, needleShape, L_Gripping,R_Gripping,frameNumber,contextLines,gt_bisector, gt_tissue, pred_bisector, pred_tissue,Bisector)
+                        #ctxPredLine, LG_inter_T, RG_inter_T,messages = self.GenerateContextLineS(gt, pred, needleShape_gt, needleShape, L_Gripping,R_Gripping,frameNumber,contextLines,gt_bisector, gt_tissue, pred_bisector, pred_tissue,Bisector)
                                                 
                         messages.append("LJ Dist:"+"{:.2f}".format(L_Dist) + str(L_Gripping))
                         messages.append("RJ Dist:"+"{:.2f}".format(R_Dist)+ str(R_Gripping))
