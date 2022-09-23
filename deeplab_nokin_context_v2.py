@@ -1,4 +1,4 @@
-from email import message
+
 import os, sys
 import utils
 import pathlib
@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from shapely.ops import polygonize
 import math
+from matplotlib.patches import Rectangle
 
 #import metrics
 #import geopandas as gpd
@@ -24,7 +25,7 @@ def main():
 
     dir=os.getcwd()
     
-    task = "Needle_Passing"
+    task = "Suturing"
     try:
         task=sys.argv[1]
         #GT=sys.argv[1]
@@ -40,7 +41,7 @@ def main():
     
     I = Iterator(task)
     #I.DrawDeepLab() #TODO: get ctx lines like consensus
-    I.GenerateContext(SAVE=True)
+    I.GenerateContext(SAVE=False)
     #I = metrics.MetricsIterator(task)
     #I.IOU()
     #I.DrawLabelsContext()
@@ -366,7 +367,7 @@ class Iterator:
                         #ctxPredLine, LG_inter_T, RG_inter_T = self.GenerateContextLineKT(gt,pred, L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)                         
                         
                         contextLines.append(ctxPredLine)
-                        print(Trial,frameNumber,ctxPredLine)
+                        #print(Trial,frameNumber,ctxPredLine)
                         #self.DrawSingleImageContextKT(pred, gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T)
                     if("Needle" in self.task):
                         #pred, gt = self.GetGenShapes(gtPolygons,gtKeypoints,SingleThreadPoints,ThreadContours,LgrasperPoints,RgrasperPoints)
@@ -382,7 +383,7 @@ class Iterator:
 
                         contextLines.append(ctxPredLine)
                         print(Trial,frameNumber,ctxPredLine)
-                        #self.DrawSingleImageContextNP(pred, gt, ringShapes, ringShapes_gt, needleShape, needleShape_gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T,messages,GT=False)
+                        self.DrawSingleImageContextNP(pred, gt, ringShapes, ringShapes_gt, needleShape, needleShape_gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T,messages,GT=False)
                     if("Suturing" in self.task):              
                         needleShape, needleShape_gt = self.GetNeedleShapes(NeedlePoints,gtPolygons)
                         
@@ -394,11 +395,15 @@ class Iterator:
                         #gt
                         #ctxPredLine, LG_inter_T, RG_inter_T,messages = self.GenerateContextLineS(gt, pred, needleShape_gt, needleShape, L_Gripping,R_Gripping,frameNumber,contextLines,gt_bisector, gt_tissue, pred_bisector, pred_tissue,Bisector)
                                                 
-                        messages.append("LJ Dist:"+"{:.2f}".format(L_Dist) + str(L_Gripping))
-                        messages.append("RJ Dist:"+"{:.2f}".format(R_Dist)+ str(R_Gripping))
+                        #messages.append("LJ Dist:"+"{:.2f}".format(L_Dist) + str(L_Gripping))
+                        #messages.append("RJ Dist:"+"{:.2f}".format(R_Dist)+ str(R_Gripping))
+                        #messages.append("D(LG,T)"+"{:.2f}".format(LG_inter_T))
+                        #messages.append("D(RG,T):"+"{:.2f}".format(RG_inter_T))
+                        
+
                         contextLines.append(ctxPredLine)
                         #print(Trial,frameNumber,ctxPredLine)
-                        #self.DrawSingleImageContextS(pred, gt,needleShape,needleShape_gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T,messages)
+                        self.DrawSingleImageContextS(pred, gt,needleShape,needleShape_gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T,messages)
                     count += 1
             print("proc",os.path.basename(TrialRoot),"count:",frameNum)
             if(len(contextLines) > 2 and SAVE):                
@@ -485,8 +490,6 @@ class Iterator:
                 RG_dist_T = RG_dl.distance(T_dl)
             else: 
                 RG_dist_T = 100
-            
-           
            
             try:
                 if not isinstance(needleShape,list):
@@ -496,16 +499,32 @@ class Iterator:
                     RG_inter_N =  max([LG_dl.intersection(shape).area for shape in needleShape.geoms if not isinstance(needleShape,list)] )
                     LG_inter_N =  max( [RG_dl.intersection(shape).area for shape in needleShape.geoms if not isinstance(needleShape,list)] ) 
                     N_inter_TS = pred_tissue < 2 
-                    messages.append("Min LN"+"{:.2f}".format(LG_dist_N))
-                    messages.append("Min RN"+"{:.2f}".format(RG_dist_N))
+                    scaleF = 1
+                    messages.append("LG Hold\Contact")
+                    messages.append("D(LG,N):"+"{:.2f}".format(LG_dist_N/scaleF))
+                    messages.append("D(LG,T):"+"{:.2f}".format(LG_dist_T))
+                    messages.append("Inter(LG,N):"+"{:.2f}".format(RG_inter_N/scaleF))
+                    messages.append("α:"+str(not(L_Gripping)))
+                    messages.append("")
 
-                    messages.append("Inter LN"+"{:.2f}".format(RG_inter_N))
-                    messages.append("Inter RN"+"{:.2f}".format(LG_inter_N))
-                    messages.append("N to Tissue"+"{:.2f}".format(pred_tissue))
-                    messages.append("N to Bisector"+"{:.2f}".format(pred_bisector))
+
+                    messages.append("RG Hold\Contact")
+                    messages.append("D(RN,N):"+"{:.2f}".format(RG_dist_N/scaleF))
+                    messages.append("D(RG,T):"+"{:.2f}".format(RG_dist_T))
+                    messages.append("Inter(RG,N):"+"{:.2f}".format(LG_inter_N/scaleF))
+                    messages.append("α:"+str(not(R_Gripping)))
+                    messages.append("")
+
+                    messages.append("Needle State")
+                    messages.append("D(N,Ts):"+"{:.2f}".format(pred_tissue/scaleF))
+                    #messages.append("N to Bisector"+"{:.2f}".format(pred_bisector))
 
                     bi_x,bi_y = Bisector.centroid.x,Bisector.centroid.y
                     n_x,n_y = needleShape.geoms[0].centroid.x,needleShape.geoms[0].centroid.y
+                    #messages.append("D(N,Ts)"+"{:.2f}".format(pred_tissue))
+                    messages.append("N.x:"+"{:.2f}   ".format(n_x))
+                    messages.append("Ts.x:"+"{:.2f}   ".format(bi_x))
+                    messages.append("N.x<Ts.x:"+str(n_x<bi_x))
                 else:
                     Faulty = True
                 #RingDistances_N = [ min([needleShape.distance(shape) for shape in R_GROUP.geoms if not isinstance(needleShape,list) ])  for R_GROUP in ringShapes if not isinstance(R_GROUP,list)] if ringShapes != [] else []
@@ -612,8 +631,8 @@ class Iterator:
             R_G_Touch =0
             Extra_State=2
         
-        messages.append("1:"+str(sStarted))        
-        messages.append("2:"+str(isSRight))
+        #messages.append("1:"+str(sStarted))        
+        #messages.append("2:"+str(isSRight))
         return ""+ str(frameNumber) + " " + str(L_G_Hold) + " " + str( L_G_Touch) + " " + str(R_G_Hold) + " " + str(R_G_Touch) + " " + str(Extra_State), LG_dist_T,RG_dist_T,messages
        
     def GenerateContextLineNP(self,pred, gt, ringShapes,ringShapes_gt,needleShape,needleShape_gt ,L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX,currentRing, GT=False):
@@ -840,10 +859,7 @@ class Iterator:
 
         return ""+ str(frameNumber) + " " + str(L_G_Hold) + " " + str(L_G_Touch) + " " + str(R_G_Hold) + " " + str(R_G_Touch) + " " + str(Extra_State), LG_inter_T, RG_inter_T, messages 
 
-    def GenerateContextLineNP2(self,inter_couts,L_Gripping,R_Gripping,frameNumber,contextLines,Needle,LocalRings,needleSum,ROI_x, ROI_y):
-        np1 = [184,287,398,496]
-        np1x = [235,342,447]
-
+    def GenerateContextLineNP2(self,inter_couts,L_Gripping,R_Gripping,frameNumber,contextLines,Needle,LocalRings,needleSum,ROI_x, ROI_y,np1,np1x):
         LG_inter_T = 0
         RG_inter_T = 0
         LG_inter_N = 0
@@ -880,7 +896,7 @@ class Iterator:
             if(R_Gripping):
                 if(RG_inter_N > INTER_THRESH):
                     R_G_Hold = 2
-                elif(RG_inter_T >INTER_THRESH ):
+                elif(RG_inter_T > INTER_THRESH):
                     R_G_Hold = 3
             else: #Right not gripping
                 if(RG_inter_N >INTER_THRESH):
@@ -1145,7 +1161,15 @@ class Iterator:
         [LG_dl,RG_dl,T_dl] = pred
         [LG_Group_gt,RG_Group_gt,T_Group_gt] = gt
         image = cv.imread(imageFName)
+        
+        #atual
         plt.imshow(image, cmap='gray') 
+        
+        #for masks
+        #img_3 = np.zeros([1612,1612,3],dtype=np.uint8)
+        #img_3.fill(255)
+        #plt.imshow(img_3, cmap='gray') 
+
         if GT:        
             try:
                 x,y = unary_union(LG_Group_gt).exterior.xy
@@ -1167,23 +1191,31 @@ class Iterator:
                 print(e,"probably no thread GT annotation")
     
 
-
+        scale = 1
+        linewidth = 3
         try:
             x,y = unary_union(LG_dl).exterior.xy
-            plt.plot(x,y)                
+            x = [xx*scale for xx in x]
+            y = [yy*scale for yy in y]
+            plt.plot(x,y,color="green",linewidth=linewidth)                
         except Exception as e:
             print(e,"No LG DL label")
         try:
             x,y = unary_union(RG_dl).exterior.xy
-            plt.plot(x,y)
+            x = [xx*scale for xx in x]
+            y = [yy*scale for yy in y]
+            plt.plot(x,y,color="gold",linewidth=linewidth)
         except Exception as e:
             print(e,"No RG DL label") 
+
         if not isinstance(needleShape,list):
             for ns in needleShape.geoms:
                 try:
                     x,y = unary_union(ns).exterior.xy
-                    plt.plot(ns.centroid.x,ns.centroid.y)
-                    plt.plot(x,y)
+                    #plt.plot(ns.centroid.x,ns.centroid.y)
+                    x = [xx*scale for xx in x]
+                    y = [yy*scale for yy in y]
+                    plt.plot(x,y,color="red",linewidth=linewidth)
                 except Exception as e:
                     print(e,"No Needle DL label")
         
@@ -1192,25 +1224,69 @@ class Iterator:
 
         for thread in T_dl.geoms:
             if thread.exterior.xy:
-                #x,y = thread.exterior.xy
-                #plt.plot(x,y)
-                pass
+                x,y = thread.exterior.xy
+                x = [xx*scale for xx in x]
+                y = [yy*scale for yy in y]
+                plt.plot(x,y,color="blue",linewidth=linewidth)
 
-        strArr = [CtxI.getContext(frameNumber),ctxPredLine,"LG->T:"+"{:.2f}".format(LG_inter_T),"RG->T:"+"{:.2f}".format(RG_inter_T)]
+                pass
+        
+        ctxGT = CtxI.getContext(frameNumber).split(" ")
+        fnum = ctxGT[0] 
+        ctxGT.insert(1,"|")
+        ctxPred = ctxPredLine.split(" ")
+        ctxPred[0] = ctxGT[0] 
+        ctxPred.insert(1,"|")
+
+        contextMessage = ["Ground Truth:"," ".join(ctxGT),"","Predicted Context:"," ".join(ctxPred)]
         offset = 1
-        for s in strArr:
+        fs = 7
+        ctxOffset = 360
+        caxis = plt.gca()
+        caxis.add_patch(Rectangle((0 , 0), 390, 120, facecolor="white"))
+        caxis.add_patch(Rectangle((0 , 360), 130, 120, facecolor="white"))
+        #caxis.add_patch(Rectangle((640-250, 0), 250, 120, facecolor="white"))
+        for s in contextMessage:
+            #x = 640 - 250
+            x = 10
+            y = ctxOffset + 22 * offset; 
+            plt.text(x,y,s,fontsize=fs,color='black')
+            offset+=1        
+        offset = 1
+        mLG = messages[0:6]
+        mRG = messages[6:12]
+        mN = messages[12:]
+
+        for s in mLG:
             x = 10
             y = 22 * offset; 
-            plt.text(x,y,s,fontsize=10,color='red')
+            plt.text(x,y,s,fontsize=fs,color='black')
             offset+=1
 
+        offset = 1
+        for s in mRG:
+            x = 140
+            y = 22 * offset; 
+            plt.text(x,y,s,fontsize=fs,color='black')
+            offset+=1
+        offset = 1
+        for s in mN:
+            x = 280
+            y = 22 * offset; 
+            plt.text(x,y,s,fontsize=fs,color='black')
+            offset+=1
+        '''
         for s in messages:
             x = 10
             y = 22 * offset; 
-            plt.text(x,y,s,fontsize=10,color='red')
+            plt.text(x,y,s,fontsize=fs,color='black')
             offset+=1
+        '''
+        #outPath = os.path.(outputFName,"")
 
-        plt.savefig(outputFName)
+        plt.axis('off')
+        plt.savefig(outputFName, bbox_inches='tight')
+        #plt.savefig(outputFName)
         plt.close()
                 
     def DrawSingleImageContextKT(self, pred, gt,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,L_Gripping,R_Gripping,LG_inter_T, RG_inter_T,GT=False):
