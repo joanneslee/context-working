@@ -18,8 +18,8 @@ def main():
     label_classNames = ["dl_grasper_L","dl_grasper_R","dl_thread" ,"dl_needle"] # ,"dl_needle"
     j=0
     
-    I.findAllContoursUnion(label_class,label_classNames[j])
-    return
+    #I.findAllContoursUnion(label_class,label_classNames[j])
+    #return
     for label_class in label_classes:
         I.findAllContours(label_class,label_classNames[j])
         j+=1

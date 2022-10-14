@@ -24,3 +24,18 @@ Each task has its own data inputs and output folder, under which they are ordere
 * JSONInterface_cogito: Helps to extract polygons, keypoints, and polylines from cogito Annotaiton JSON files
 * JSONInterface_via: Helps to extract polygons, keypoints, and polylines from VGG Image Annotator (VIA) Annotaiton JSON files
 * Iterator: loops through all images and generates context labels
+
+## Notes:
+
+install requirements2.txt
+
+run `python deeplab_nokin_context_v2.py <Task name>
+
+task name can be one of:
+- Knot_Tying
+- Needle_Passing
+- Suturing
+
+Iterator class:
+
+
