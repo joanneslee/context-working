@@ -1,0 +1,2056 @@
+{
+    "frame_0046.png272682": {
+        "filename": "frame_0046.png",
+        "size": 272682,
+        "regions": [
+            {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [
+                        72,
+                        106,
+                        107,
+                        73
+                    ],
+                    "all_points_y": [
+                        250,
+                        252,
+                        264,
+                        272
+                    ]
+                },
+                "region_attributes": {}
+            }
+        ],
+        "file_attributes": {}
+    },
+    "frame_0061.png284199": {
+        "filename": "frame_0061.png",
+        "size": 284199,
+        "regions": [
+            {
+                "shape_attributes": {
+                    "name": "polygon",
+                    "all_points_x": [
+                        73,
+                        73,
+                        108,
+                        104
+                    ],
+                    "all_points_y": [
+                        255,
+                        273,
+                        266,
+                        252
+                    ]
+                },
+                "region_attributes": {}
+            }
+        ],
+        "file_attributes": {}
+    },
+    "frame_0076.png288264": {
+        "filename": "frame_0076.png",
+        "size": 288264,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0091.png290740": {
+        "filename": "frame_0091.png",
+        "size": 290740,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0106.png295585": {
+        "filename": "frame_0106.png",
+        "size": 295585,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0111.png293607": {
+        "filename": "frame_0111.png",
+        "size": 293607,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0114.png280906": {
+        "filename": "frame_0114.png",
+        "size": 280906,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0129.png289769": {
+        "filename": "frame_0129.png",
+        "size": 289769,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0144.png295982": {
+        "filename": "frame_0144.png",
+        "size": 295982,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0159.png297441": {
+        "filename": "frame_0159.png",
+        "size": 297441,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0174.png300464": {
+        "filename": "frame_0174.png",
+        "size": 300464,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0189.png301443": {
+        "filename": "frame_0189.png",
+        "size": 301443,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0204.png304999": {
+        "filename": "frame_0204.png",
+        "size": 304999,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0219.png301820": {
+        "filename": "frame_0219.png",
+        "size": 301820,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0234.png303936": {
+        "filename": "frame_0234.png",
+        "size": 303936,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0249.png302989": {
+        "filename": "frame_0249.png",
+        "size": 302989,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0264.png303376": {
+        "filename": "frame_0264.png",
+        "size": 303376,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0279.png277707": {
+        "filename": "frame_0279.png",
+        "size": 277707,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0294.png302002": {
+        "filename": "frame_0294.png",
+        "size": 302002,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0309.png292765": {
+        "filename": "frame_0309.png",
+        "size": 292765,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0324.png302349": {
+        "filename": "frame_0324.png",
+        "size": 302349,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0339.png306252": {
+        "filename": "frame_0339.png",
+        "size": 306252,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0354.png304872": {
+        "filename": "frame_0354.png",
+        "size": 304872,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0369.png287374": {
+        "filename": "frame_0369.png",
+        "size": 287374,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0384.png299451": {
+        "filename": "frame_0384.png",
+        "size": 299451,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0399.png300406": {
+        "filename": "frame_0399.png",
+        "size": 300406,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0414.png300126": {
+        "filename": "frame_0414.png",
+        "size": 300126,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0425.png301888": {
+        "filename": "frame_0425.png",
+        "size": 301888,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0428.png286308": {
+        "filename": "frame_0428.png",
+        "size": 286308,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0443.png307459": {
+        "filename": "frame_0443.png",
+        "size": 307459,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0458.png309932": {
+        "filename": "frame_0458.png",
+        "size": 309932,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0473.png311443": {
+        "filename": "frame_0473.png",
+        "size": 311443,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0488.png301789": {
+        "filename": "frame_0488.png",
+        "size": 301789,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0503.png315921": {
+        "filename": "frame_0503.png",
+        "size": 315921,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0518.png322729": {
+        "filename": "frame_0518.png",
+        "size": 322729,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0533.png323433": {
+        "filename": "frame_0533.png",
+        "size": 323433,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0548.png323877": {
+        "filename": "frame_0548.png",
+        "size": 323877,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0563.png322804": {
+        "filename": "frame_0563.png",
+        "size": 322804,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0578.png323177": {
+        "filename": "frame_0578.png",
+        "size": 323177,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0593.png323396": {
+        "filename": "frame_0593.png",
+        "size": 323396,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0604.png299713": {
+        "filename": "frame_0604.png",
+        "size": 299713,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0607.png256957": {
+        "filename": "frame_0607.png",
+        "size": 256957,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0622.png269976": {
+        "filename": "frame_0622.png",
+        "size": 269976,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0637.png279732": {
+        "filename": "frame_0637.png",
+        "size": 279732,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0652.png286192": {
+        "filename": "frame_0652.png",
+        "size": 286192,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0667.png292898": {
+        "filename": "frame_0667.png",
+        "size": 292898,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0682.png297959": {
+        "filename": "frame_0682.png",
+        "size": 297959,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0697.png306733": {
+        "filename": "frame_0697.png",
+        "size": 306733,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0712.png305822": {
+        "filename": "frame_0712.png",
+        "size": 305822,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0727.png306065": {
+        "filename": "frame_0727.png",
+        "size": 306065,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0742.png304900": {
+        "filename": "frame_0742.png",
+        "size": 304900,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0757.png306417": {
+        "filename": "frame_0757.png",
+        "size": 306417,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0772.png302349": {
+        "filename": "frame_0772.png",
+        "size": 302349,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0787.png304585": {
+        "filename": "frame_0787.png",
+        "size": 304585,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0802.png304698": {
+        "filename": "frame_0802.png",
+        "size": 304698,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0817.png304391": {
+        "filename": "frame_0817.png",
+        "size": 304391,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0832.png302302": {
+        "filename": "frame_0832.png",
+        "size": 302302,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0847.png303512": {
+        "filename": "frame_0847.png",
+        "size": 303512,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0862.png283613": {
+        "filename": "frame_0862.png",
+        "size": 283613,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0877.png285301": {
+        "filename": "frame_0877.png",
+        "size": 285301,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0892.png286226": {
+        "filename": "frame_0892.png",
+        "size": 286226,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0907.png270761": {
+        "filename": "frame_0907.png",
+        "size": 270761,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0922.png278885": {
+        "filename": "frame_0922.png",
+        "size": 278885,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0934.png287839": {
+        "filename": "frame_0934.png",
+        "size": 287839,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0937.png273100": {
+        "filename": "frame_0937.png",
+        "size": 273100,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0952.png290817": {
+        "filename": "frame_0952.png",
+        "size": 290817,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0967.png293229": {
+        "filename": "frame_0967.png",
+        "size": 293229,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0976.png293468": {
+        "filename": "frame_0976.png",
+        "size": 293468,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0979.png280200": {
+        "filename": "frame_0979.png",
+        "size": 280200,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_0994.png290200": {
+        "filename": "frame_0994.png",
+        "size": 290200,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1009.png294518": {
+        "filename": "frame_1009.png",
+        "size": 294518,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1024.png300239": {
+        "filename": "frame_1024.png",
+        "size": 300239,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1039.png297896": {
+        "filename": "frame_1039.png",
+        "size": 297896,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1054.png299688": {
+        "filename": "frame_1054.png",
+        "size": 299688,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1069.png300739": {
+        "filename": "frame_1069.png",
+        "size": 300739,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1084.png302862": {
+        "filename": "frame_1084.png",
+        "size": 302862,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1099.png299196": {
+        "filename": "frame_1099.png",
+        "size": 299196,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1114.png300237": {
+        "filename": "frame_1114.png",
+        "size": 300237,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1120.png302893": {
+        "filename": "frame_1120.png",
+        "size": 302893,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1123.png284572": {
+        "filename": "frame_1123.png",
+        "size": 284572,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1138.png299813": {
+        "filename": "frame_1138.png",
+        "size": 299813,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1153.png300298": {
+        "filename": "frame_1153.png",
+        "size": 300298,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1168.png300553": {
+        "filename": "frame_1168.png",
+        "size": 300553,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1186.png302738": {
+        "filename": "frame_1186.png",
+        "size": 302738,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1189.png287081": {
+        "filename": "frame_1189.png",
+        "size": 287081,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1204.png271744": {
+        "filename": "frame_1204.png",
+        "size": 271744,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1219.png287008": {
+        "filename": "frame_1219.png",
+        "size": 287008,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1234.png288609": {
+        "filename": "frame_1234.png",
+        "size": 288609,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1249.png292155": {
+        "filename": "frame_1249.png",
+        "size": 292155,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1264.png290756": {
+        "filename": "frame_1264.png",
+        "size": 290756,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1279.png291701": {
+        "filename": "frame_1279.png",
+        "size": 291701,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1294.png293399": {
+        "filename": "frame_1294.png",
+        "size": 293399,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1309.png294144": {
+        "filename": "frame_1309.png",
+        "size": 294144,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1324.png296517": {
+        "filename": "frame_1324.png",
+        "size": 296517,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1339.png298459": {
+        "filename": "frame_1339.png",
+        "size": 298459,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1354.png298919": {
+        "filename": "frame_1354.png",
+        "size": 298919,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1369.png300505": {
+        "filename": "frame_1369.png",
+        "size": 300505,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1384.png300936": {
+        "filename": "frame_1384.png",
+        "size": 300936,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1399.png301235": {
+        "filename": "frame_1399.png",
+        "size": 301235,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1414.png302084": {
+        "filename": "frame_1414.png",
+        "size": 302084,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1429.png303165": {
+        "filename": "frame_1429.png",
+        "size": 303165,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1444.png277033": {
+        "filename": "frame_1444.png",
+        "size": 277033,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1459.png277530": {
+        "filename": "frame_1459.png",
+        "size": 277530,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1474.png282956": {
+        "filename": "frame_1474.png",
+        "size": 282956,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1489.png284928": {
+        "filename": "frame_1489.png",
+        "size": 284928,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1504.png264892": {
+        "filename": "frame_1504.png",
+        "size": 264892,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1519.png266496": {
+        "filename": "frame_1519.png",
+        "size": 266496,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1534.png270487": {
+        "filename": "frame_1534.png",
+        "size": 270487,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1549.png271237": {
+        "filename": "frame_1549.png",
+        "size": 271237,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1564.png274105": {
+        "filename": "frame_1564.png",
+        "size": 274105,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1579.png276565": {
+        "filename": "frame_1579.png",
+        "size": 276565,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1594.png278436": {
+        "filename": "frame_1594.png",
+        "size": 278436,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1597.png260740": {
+        "filename": "frame_1597.png",
+        "size": 260740,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1612.png277274": {
+        "filename": "frame_1612.png",
+        "size": 277274,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1627.png284027": {
+        "filename": "frame_1627.png",
+        "size": 284027,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1642.png286798": {
+        "filename": "frame_1642.png",
+        "size": 286798,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1657.png286912": {
+        "filename": "frame_1657.png",
+        "size": 286912,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1667.png286509": {
+        "filename": "frame_1667.png",
+        "size": 286509,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1670.png271660": {
+        "filename": "frame_1670.png",
+        "size": 271660,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1685.png286510": {
+        "filename": "frame_1685.png",
+        "size": 286510,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1700.png288684": {
+        "filename": "frame_1700.png",
+        "size": 288684,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1708.png290599": {
+        "filename": "frame_1708.png",
+        "size": 290599,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1711.png275121": {
+        "filename": "frame_1711.png",
+        "size": 275121,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1726.png289097": {
+        "filename": "frame_1726.png",
+        "size": 289097,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1741.png292359": {
+        "filename": "frame_1741.png",
+        "size": 292359,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1756.png293605": {
+        "filename": "frame_1756.png",
+        "size": 293605,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1761.png293442": {
+        "filename": "frame_1761.png",
+        "size": 293442,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1764.png280168": {
+        "filename": "frame_1764.png",
+        "size": 280168,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1779.png290980": {
+        "filename": "frame_1779.png",
+        "size": 290980,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1794.png289949": {
+        "filename": "frame_1794.png",
+        "size": 289949,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1809.png286937": {
+        "filename": "frame_1809.png",
+        "size": 286937,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1824.png293440": {
+        "filename": "frame_1824.png",
+        "size": 293440,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1839.png293421": {
+        "filename": "frame_1839.png",
+        "size": 293421,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1854.png295059": {
+        "filename": "frame_1854.png",
+        "size": 295059,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1869.png294426": {
+        "filename": "frame_1869.png",
+        "size": 294426,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1884.png294363": {
+        "filename": "frame_1884.png",
+        "size": 294363,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1899.png296632": {
+        "filename": "frame_1899.png",
+        "size": 296632,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1914.png294189": {
+        "filename": "frame_1914.png",
+        "size": 294189,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1929.png295543": {
+        "filename": "frame_1929.png",
+        "size": 295543,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1944.png295707": {
+        "filename": "frame_1944.png",
+        "size": 295707,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1959.png295880": {
+        "filename": "frame_1959.png",
+        "size": 295880,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1974.png295031": {
+        "filename": "frame_1974.png",
+        "size": 295031,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_1989.png297057": {
+        "filename": "frame_1989.png",
+        "size": 297057,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2004.png297933": {
+        "filename": "frame_2004.png",
+        "size": 297933,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2019.png276932": {
+        "filename": "frame_2019.png",
+        "size": 276932,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2034.png280466": {
+        "filename": "frame_2034.png",
+        "size": 280466,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2049.png280843": {
+        "filename": "frame_2049.png",
+        "size": 280843,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2066.png279901": {
+        "filename": "frame_2066.png",
+        "size": 279901,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2069.png277994": {
+        "filename": "frame_2069.png",
+        "size": 277994,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2084.png293366": {
+        "filename": "frame_2084.png",
+        "size": 293366,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2099.png292687": {
+        "filename": "frame_2099.png",
+        "size": 292687,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2114.png266974": {
+        "filename": "frame_2114.png",
+        "size": 266974,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2129.png274198": {
+        "filename": "frame_2129.png",
+        "size": 274198,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2144.png274808": {
+        "filename": "frame_2144.png",
+        "size": 274808,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2151.png277811": {
+        "filename": "frame_2151.png",
+        "size": 277811,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2154.png260998": {
+        "filename": "frame_2154.png",
+        "size": 260998,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2169.png279331": {
+        "filename": "frame_2169.png",
+        "size": 279331,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2184.png283747": {
+        "filename": "frame_2184.png",
+        "size": 283747,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2199.png283156": {
+        "filename": "frame_2199.png",
+        "size": 283156,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2214.png286203": {
+        "filename": "frame_2214.png",
+        "size": 286203,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2232.png290772": {
+        "filename": "frame_2232.png",
+        "size": 290772,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2235.png276153": {
+        "filename": "frame_2235.png",
+        "size": 276153,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2250.png296450": {
+        "filename": "frame_2250.png",
+        "size": 296450,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2265.png297011": {
+        "filename": "frame_2265.png",
+        "size": 297011,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2280.png294888": {
+        "filename": "frame_2280.png",
+        "size": 294888,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2295.png294964": {
+        "filename": "frame_2295.png",
+        "size": 294964,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2301.png296419": {
+        "filename": "frame_2301.png",
+        "size": 296419,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2304.png281248": {
+        "filename": "frame_2304.png",
+        "size": 281248,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2319.png292875": {
+        "filename": "frame_2319.png",
+        "size": 292875,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2334.png298351": {
+        "filename": "frame_2334.png",
+        "size": 298351,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2349.png295436": {
+        "filename": "frame_2349.png",
+        "size": 295436,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2364.png303178": {
+        "filename": "frame_2364.png",
+        "size": 303178,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2379.png304607": {
+        "filename": "frame_2379.png",
+        "size": 304607,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2394.png302706": {
+        "filename": "frame_2394.png",
+        "size": 302706,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2406.png285808": {
+        "filename": "frame_2406.png",
+        "size": 285808,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2409.png254865": {
+        "filename": "frame_2409.png",
+        "size": 254865,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2424.png269693": {
+        "filename": "frame_2424.png",
+        "size": 269693,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2439.png281661": {
+        "filename": "frame_2439.png",
+        "size": 281661,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2454.png282401": {
+        "filename": "frame_2454.png",
+        "size": 282401,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2469.png281909": {
+        "filename": "frame_2469.png",
+        "size": 281909,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2485.png281145": {
+        "filename": "frame_2485.png",
+        "size": 281145,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2488.png266865": {
+        "filename": "frame_2488.png",
+        "size": 266865,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2503.png283539": {
+        "filename": "frame_2503.png",
+        "size": 283539,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2518.png280848": {
+        "filename": "frame_2518.png",
+        "size": 280848,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2533.png282150": {
+        "filename": "frame_2533.png",
+        "size": 282150,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2548.png282014": {
+        "filename": "frame_2548.png",
+        "size": 282014,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2563.png285479": {
+        "filename": "frame_2563.png",
+        "size": 285479,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2578.png284476": {
+        "filename": "frame_2578.png",
+        "size": 284476,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2593.png283735": {
+        "filename": "frame_2593.png",
+        "size": 283735,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2608.png283467": {
+        "filename": "frame_2608.png",
+        "size": 283467,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2623.png284240": {
+        "filename": "frame_2623.png",
+        "size": 284240,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2638.png285087": {
+        "filename": "frame_2638.png",
+        "size": 285087,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2653.png288727": {
+        "filename": "frame_2653.png",
+        "size": 288727,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2668.png290745": {
+        "filename": "frame_2668.png",
+        "size": 290745,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2683.png289677": {
+        "filename": "frame_2683.png",
+        "size": 289677,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2698.png289194": {
+        "filename": "frame_2698.png",
+        "size": 289194,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2713.png277612": {
+        "filename": "frame_2713.png",
+        "size": 277612,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2728.png282434": {
+        "filename": "frame_2728.png",
+        "size": 282434,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2743.png258357": {
+        "filename": "frame_2743.png",
+        "size": 258357,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2758.png264393": {
+        "filename": "frame_2758.png",
+        "size": 264393,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2773.png264427": {
+        "filename": "frame_2773.png",
+        "size": 264427,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2788.png265614": {
+        "filename": "frame_2788.png",
+        "size": 265614,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2803.png266111": {
+        "filename": "frame_2803.png",
+        "size": 266111,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2818.png266090": {
+        "filename": "frame_2818.png",
+        "size": 266090,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2833.png268407": {
+        "filename": "frame_2833.png",
+        "size": 268407,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2848.png268821": {
+        "filename": "frame_2848.png",
+        "size": 268821,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2863.png271900": {
+        "filename": "frame_2863.png",
+        "size": 271900,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2878.png272865": {
+        "filename": "frame_2878.png",
+        "size": 272865,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2893.png272505": {
+        "filename": "frame_2893.png",
+        "size": 272505,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2908.png272746": {
+        "filename": "frame_2908.png",
+        "size": 272746,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2923.png274689": {
+        "filename": "frame_2923.png",
+        "size": 274689,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2938.png274291": {
+        "filename": "frame_2938.png",
+        "size": 274291,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2953.png275572": {
+        "filename": "frame_2953.png",
+        "size": 275572,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2968.png275544": {
+        "filename": "frame_2968.png",
+        "size": 275544,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2983.png278911": {
+        "filename": "frame_2983.png",
+        "size": 278911,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_2998.png274987": {
+        "filename": "frame_2998.png",
+        "size": 274987,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3013.png260465": {
+        "filename": "frame_3013.png",
+        "size": 260465,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3028.png269547": {
+        "filename": "frame_3028.png",
+        "size": 269547,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3047.png277976": {
+        "filename": "frame_3047.png",
+        "size": 277976,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3050.png266061": {
+        "filename": "frame_3050.png",
+        "size": 266061,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3065.png284760": {
+        "filename": "frame_3065.png",
+        "size": 284760,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3080.png285364": {
+        "filename": "frame_3080.png",
+        "size": 285364,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3095.png286109": {
+        "filename": "frame_3095.png",
+        "size": 286109,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3110.png287454": {
+        "filename": "frame_3110.png",
+        "size": 287454,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3125.png292054": {
+        "filename": "frame_3125.png",
+        "size": 292054,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3140.png294272": {
+        "filename": "frame_3140.png",
+        "size": 294272,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3155.png300540": {
+        "filename": "frame_3155.png",
+        "size": 300540,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3170.png300974": {
+        "filename": "frame_3170.png",
+        "size": 300974,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3185.png303379": {
+        "filename": "frame_3185.png",
+        "size": 303379,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3200.png299407": {
+        "filename": "frame_3200.png",
+        "size": 299407,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3215.png299701": {
+        "filename": "frame_3215.png",
+        "size": 299701,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3226.png299652": {
+        "filename": "frame_3226.png",
+        "size": 299652,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3229.png281938": {
+        "filename": "frame_3229.png",
+        "size": 281938,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3244.png296982": {
+        "filename": "frame_3244.png",
+        "size": 296982,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3259.png297965": {
+        "filename": "frame_3259.png",
+        "size": 297965,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3274.png296028": {
+        "filename": "frame_3274.png",
+        "size": 296028,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3289.png295958": {
+        "filename": "frame_3289.png",
+        "size": 295958,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3306.png292035": {
+        "filename": "frame_3306.png",
+        "size": 292035,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3309.png265098": {
+        "filename": "frame_3309.png",
+        "size": 265098,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3324.png290218": {
+        "filename": "frame_3324.png",
+        "size": 290218,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3339.png291798": {
+        "filename": "frame_3339.png",
+        "size": 291798,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3354.png290213": {
+        "filename": "frame_3354.png",
+        "size": 290213,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3369.png295412": {
+        "filename": "frame_3369.png",
+        "size": 295412,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3384.png292656": {
+        "filename": "frame_3384.png",
+        "size": 292656,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3399.png293934": {
+        "filename": "frame_3399.png",
+        "size": 293934,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3414.png293059": {
+        "filename": "frame_3414.png",
+        "size": 293059,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3429.png292576": {
+        "filename": "frame_3429.png",
+        "size": 292576,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3444.png295578": {
+        "filename": "frame_3444.png",
+        "size": 295578,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3459.png292336": {
+        "filename": "frame_3459.png",
+        "size": 292336,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3472.png292849": {
+        "filename": "frame_3472.png",
+        "size": 292849,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3475.png275235": {
+        "filename": "frame_3475.png",
+        "size": 275235,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3490.png286656": {
+        "filename": "frame_3490.png",
+        "size": 286656,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3505.png288325": {
+        "filename": "frame_3505.png",
+        "size": 288325,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3520.png289615": {
+        "filename": "frame_3520.png",
+        "size": 289615,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3535.png289286": {
+        "filename": "frame_3535.png",
+        "size": 289286,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3550.png289643": {
+        "filename": "frame_3550.png",
+        "size": 289643,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3565.png288904": {
+        "filename": "frame_3565.png",
+        "size": 288904,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3580.png288849": {
+        "filename": "frame_3580.png",
+        "size": 288849,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3595.png289685": {
+        "filename": "frame_3595.png",
+        "size": 289685,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3612.png274967": {
+        "filename": "frame_3612.png",
+        "size": 274967,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3615.png251002": {
+        "filename": "frame_3615.png",
+        "size": 251002,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3630.png265314": {
+        "filename": "frame_3630.png",
+        "size": 265314,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3645.png277564": {
+        "filename": "frame_3645.png",
+        "size": 277564,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3657.png284327": {
+        "filename": "frame_3657.png",
+        "size": 284327,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3660.png271837": {
+        "filename": "frame_3660.png",
+        "size": 271837,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3675.png283602": {
+        "filename": "frame_3675.png",
+        "size": 283602,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3690.png295238": {
+        "filename": "frame_3690.png",
+        "size": 295238,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3705.png298681": {
+        "filename": "frame_3705.png",
+        "size": 298681,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3720.png297167": {
+        "filename": "frame_3720.png",
+        "size": 297167,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3735.png298549": {
+        "filename": "frame_3735.png",
+        "size": 298549,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3748.png297831": {
+        "filename": "frame_3748.png",
+        "size": 297831,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3751.png282844": {
+        "filename": "frame_3751.png",
+        "size": 282844,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3766.png299381": {
+        "filename": "frame_3766.png",
+        "size": 299381,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3781.png297342": {
+        "filename": "frame_3781.png",
+        "size": 297342,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3796.png301428": {
+        "filename": "frame_3796.png",
+        "size": 301428,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3811.png298960": {
+        "filename": "frame_3811.png",
+        "size": 298960,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3826.png300382": {
+        "filename": "frame_3826.png",
+        "size": 300382,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3841.png299727": {
+        "filename": "frame_3841.png",
+        "size": 299727,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3856.png297721": {
+        "filename": "frame_3856.png",
+        "size": 297721,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3861.png298349": {
+        "filename": "frame_3861.png",
+        "size": 298349,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3864.png285075": {
+        "filename": "frame_3864.png",
+        "size": 285075,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3879.png300151": {
+        "filename": "frame_3879.png",
+        "size": 300151,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3894.png288757": {
+        "filename": "frame_3894.png",
+        "size": 288757,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3900.png294226": {
+        "filename": "frame_3900.png",
+        "size": 294226,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3903.png261491": {
+        "filename": "frame_3903.png",
+        "size": 261491,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3918.png285776": {
+        "filename": "frame_3918.png",
+        "size": 285776,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3933.png290987": {
+        "filename": "frame_3933.png",
+        "size": 290987,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3948.png291062": {
+        "filename": "frame_3948.png",
+        "size": 291062,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3963.png292228": {
+        "filename": "frame_3963.png",
+        "size": 292228,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3978.png293286": {
+        "filename": "frame_3978.png",
+        "size": 293286,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_3993.png294156": {
+        "filename": "frame_3993.png",
+        "size": 294156,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4008.png292308": {
+        "filename": "frame_4008.png",
+        "size": 292308,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4024.png297167": {
+        "filename": "frame_4024.png",
+        "size": 297167,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4027.png279708": {
+        "filename": "frame_4027.png",
+        "size": 279708,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4042.png295414": {
+        "filename": "frame_4042.png",
+        "size": 295414,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4057.png293966": {
+        "filename": "frame_4057.png",
+        "size": 293966,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4072.png293676": {
+        "filename": "frame_4072.png",
+        "size": 293676,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4087.png293590": {
+        "filename": "frame_4087.png",
+        "size": 293590,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4102.png294367": {
+        "filename": "frame_4102.png",
+        "size": 294367,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4117.png293527": {
+        "filename": "frame_4117.png",
+        "size": 293527,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4132.png291607": {
+        "filename": "frame_4132.png",
+        "size": 291607,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4147.png293692": {
+        "filename": "frame_4147.png",
+        "size": 293692,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4162.png290534": {
+        "filename": "frame_4162.png",
+        "size": 290534,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4177.png292596": {
+        "filename": "frame_4177.png",
+        "size": 292596,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4192.png288746": {
+        "filename": "frame_4192.png",
+        "size": 288746,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4207.png270403": {
+        "filename": "frame_4207.png",
+        "size": 270403,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4222.png275042": {
+        "filename": "frame_4222.png",
+        "size": 275042,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4237.png279986": {
+        "filename": "frame_4237.png",
+        "size": 279986,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4252.png285143": {
+        "filename": "frame_4252.png",
+        "size": 285143,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4267.png287973": {
+        "filename": "frame_4267.png",
+        "size": 287973,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4282.png262122": {
+        "filename": "frame_4282.png",
+        "size": 262122,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4297.png263651": {
+        "filename": "frame_4297.png",
+        "size": 263651,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4312.png264078": {
+        "filename": "frame_4312.png",
+        "size": 264078,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4327.png264945": {
+        "filename": "frame_4327.png",
+        "size": 264945,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4342.png272248": {
+        "filename": "frame_4342.png",
+        "size": 272248,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4357.png279221": {
+        "filename": "frame_4357.png",
+        "size": 279221,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4372.png282067": {
+        "filename": "frame_4372.png",
+        "size": 282067,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4387.png283398": {
+        "filename": "frame_4387.png",
+        "size": 283398,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4402.png284143": {
+        "filename": "frame_4402.png",
+        "size": 284143,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4417.png292852": {
+        "filename": "frame_4417.png",
+        "size": 292852,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4432.png290002": {
+        "filename": "frame_4432.png",
+        "size": 290002,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4447.png288402": {
+        "filename": "frame_4447.png",
+        "size": 288402,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4462.png299934": {
+        "filename": "frame_4462.png",
+        "size": 299934,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4477.png307304": {
+        "filename": "frame_4477.png",
+        "size": 307304,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4492.png313357": {
+        "filename": "frame_4492.png",
+        "size": 313357,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4507.png287521": {
+        "filename": "frame_4507.png",
+        "size": 287521,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4522.png290179": {
+        "filename": "frame_4522.png",
+        "size": 290179,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4537.png260594": {
+        "filename": "frame_4537.png",
+        "size": 260594,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4552.png263983": {
+        "filename": "frame_4552.png",
+        "size": 263983,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4567.png269015": {
+        "filename": "frame_4567.png",
+        "size": 269015,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4582.png267805": {
+        "filename": "frame_4582.png",
+        "size": 267805,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4597.png268892": {
+        "filename": "frame_4597.png",
+        "size": 268892,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4612.png270469": {
+        "filename": "frame_4612.png",
+        "size": 270469,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4627.png281220": {
+        "filename": "frame_4627.png",
+        "size": 281220,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4642.png285720": {
+        "filename": "frame_4642.png",
+        "size": 285720,
+        "regions": [],
+        "file_attributes": {}
+    },
+    "frame_4649.png285859": {
+        "filename": "frame_4649.png",
+        "size": 285859,
+        "regions": [],
+        "file_attributes": {}
+    }
+}

@@ -67,7 +67,7 @@ def main():
         print("Available task labels: ", available_labels)
         sys.exit()
     ''' 
-    task = "Needle_Passing"
+    task = "Suturing"
     I = Iterator(task)
     #I.DrawDeepLab() #TODO: get ctx lines like consensus
     I.averageConsensus()
@@ -968,7 +968,7 @@ class Iterator:
 
 
         count = 0
-        dir = os.path.join(self.CWD,self.task,"context_proc_30fps_pred")
+        dir = os.path.join(self.CWD,self.task,"context_proc_30fps_gt")
         for root, dirs, files in os.walk(dir):
             for file in files:
                 #if "frame" not in file:

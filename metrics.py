@@ -78,7 +78,6 @@ def main():
     #I.generate30fps()
     I.IOU()
 
-
     #I.fixStates()
     #I.poll()
     #I.verifyOutput()
@@ -95,7 +94,7 @@ class MetricsIterator:
         self.ian = os.path.join(self.CWD,self.task, "ctx_ian")
         self.kay = os.path.join(self.CWD,self.task, "ctx_kay")
         self.pred = os.path.join(self.CWD, self.task,"vis_context_labels_v5_gt") # vis_context_labels_v4,context_proc
-        self.context_proc = os.path.join(self.CWD,self.task,"context_proc_30fps_pred")
+        self.context_proc = os.path.join(self.CWD,self.task,"context_proc_30fps_gt")
         self.consensus = os.path.join(self.CWD, self.task,"ctx_consensus")    
         self.surgeon =      os.path.join(self.CWD, self.task,"ctx_surgeon")    
         self.alpha = os.path.join(self.CWD, self.task,"k_alpha")

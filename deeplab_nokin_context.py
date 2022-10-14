@@ -76,8 +76,6 @@ def main():
     I = Iterator(task)
     #I.DrawDeepLab() #TODO: get ctx lines like consensus
     I.GenerateContext()
-
-
     #I.DrawLabelsContext()
     quit();    
            
@@ -400,25 +398,56 @@ class Iterator:
         plt.close(fig)
 
     def DrawSingleImageContextNP(self, L_grasper,R_grasper,Thread,Needle,Rings,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,inter_couts,LocalRings):
+        norm_rows = 480
+        norm_cols = 640
         inter_count_names = ["LG_inter_T","RG_inter_T","LG_inter_N","RG_inter_N","N_inter_R"]
         fig, ax = plt.subplots( nrows=1, ncols=1 )        
         image = cv2.imread(imageFName)
         plt.imshow(image, cmap='gray') 
 
-        masked_L_grasper = np.ma.masked_where(L_grasper < 0.9, L_grasper)
-        masked_R_grasper = np.ma.masked_where(R_grasper < 0.9, R_grasper)
+        #masked_L_grasper = np.ma.masked_where(L_grasper < 0.9, L_grasper)
+        #masked_R_grasper = np.ma.masked_where(R_grasper < 0.9, R_grasper)
         masked_Thread = np.ma.masked_where(Thread < 0.9, Thread)
         masked_Needle = np.ma.masked_where(Needle < 0.9, Needle)
         #masked_Rings = np.ma.masked_where(Rings < 0.9, Rings)
         masked_Rings = np.ma.masked_where(LocalRings < 0.9, LocalRings) 
-        ax.imshow(masked_L_grasper, cmap='Spectral', alpha=0.5,interpolation=None) # I would add 
-        ax.imshow(masked_R_grasper, cmap='Spectral', alpha=0.5,interpolation=None)        
+        #ax.imshow(masked_L_grasper, cmap='Spectral', alpha=0.5,interpolation=None) # I would add 
+        #ax.imshow(masked_R_grasper, cmap='Spectral', alpha=0.5,interpolation=None)        
         ax.imshow(masked_Thread, cmap='spring', alpha=0.5,interpolation=None)        
         ax.imshow(masked_Needle, cmap='cool', alpha=0.5,interpolation=None)    
-        ax.imshow(masked_Rings, cmap='autumn', alpha=0.5,interpolation=None)        
+        ax.imshow(masked_Rings, cmap='autumn', alpha=0.5,interpolation=None)
+
         image_message = ["     GT:"+CtxI.getContext(frameNumber),"PRED:"+ctxPredLine]     
-          
+        
+        try:
+            L_gv = Image.new('1', (norm_cols,norm_rows))
+            draw = ImageDraw.Draw(L_gv)
+            (lg_y_center,lg_x_center) = ndimage.center_of_mass( np.ma.masked_where(L_grasper < 0.9, L_grasper))
+            draw.line( [GrasperJawPoints[2][0], GrasperJawPoints[2][1], lg_x_center, lg_y_center],  width=7, fill=128)
+            draw.line( [GrasperJawPoints[3][0], GrasperJawPoints[3][1], lg_x_center, lg_y_center],  width=7, fill=128)        
+            #L_gv.save('temp.png')
+            #L_gv.show()
+            Left_v = np.asarray(L_gv)
+            R_gv = Image.new('1', (norm_cols,norm_rows))
+            draw = ImageDraw.Draw(R_gv)
+            (rg_y_center,rg_x_center) = ndimage.center_of_mass( np.ma.masked_where(R_grasper < 0.9, R_grasper))
+            draw.line( [GrasperJawPoints[0][0], GrasperJawPoints[0][1], rg_x_center, rg_y_center],  width=7, fill=128)
+            draw.line( [GrasperJawPoints[1][0], GrasperJawPoints[1][1], rg_x_center, rg_y_center],  width=7, fill=128)       
+            #R_gv.save('temp.png')
+            #R_gv.show()
+            Right_v = np.asarray(R_gv)
+            
+            #Right_v = np.load('temp.png')
+            masked_Left_v = np.ma.masked_where(Left_v < 0.9, Left_v)
+            masked_Right_v = np.ma.masked_where(Right_v < 0.9, Right_v)
+            ax.imshow(masked_Left_v, cmap='Spectral', alpha=0.5,interpolation=None)        
+            ax.imshow(masked_Right_v, cmap='Spectral', alpha=0.5,interpolation=None)        
+            #ax.show(im)
+        except Exception as e:
+            print(e)          
         i=0
+
+
         for s in inter_couts:
             image_message.append(inter_count_names[i]+":"+str(s))
             i+=1
@@ -436,7 +465,7 @@ class Iterator:
             pass
         (y_center,x_center) = ndimage.center_of_mass(Needle)
         needleSum = np.sum(Needle)
-        print("needle sum",needleSum)
+        #print("needle sum",needleSum)
         if(needleSum>120):
             drawObject = plt.Circle((x_center, y_center),radius=4,color='white', fill=True)
             ax.add_patch(drawObject)
@@ -453,6 +482,7 @@ class Iterator:
         if(len(d1)) != str(len(d2)) != (len(d3)) != (len(d4)) != 480:
             return str(len(d1))+"="+str(len(d2))+"="+str(len(d3))+"="+str(len(d4))
         else: "no match" 
+    
     def makeLenStr0(self,d1,d2,d3,d4):
         if(len(d1[0])) != str(len(d2[0])) != (len(d3[0])) != (len(d4[0])):
             return str(len(d1[0]))+"="+ str(len(d2[0]))+"="+ str(len(d3[0]))+"="+ str(len(d4[0]))
@@ -508,7 +538,6 @@ class Iterator:
         c4 = Points[-1]
 
         return [(c1[0]+c2[0])/2,(c1[1]+c2[1])/2],[(c3[0]+c4[0])/2,(c3[1]+c4[1])/2] 
-
 
     #@jit(target_backend='cuda') 
     def SuturingInter(self,L_grasper,R_grasper,Thread,Needle,TissuePoints):
@@ -616,14 +645,15 @@ class Iterator:
         LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,LocalRings = self.NPInter(L_grasper,R_grasper,Thread,Needle,Rings)   
         inter_counts = [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R]        
         bool_inters = []
-
+        '''
         for item in inter_counts:
             if item > INTER_THRESH:
                 bool_inters.append(True)
             else:
                 bool_inters.append(False)
         for i in range(len(inter_counts)):
-            print("i",i,"intersection counts",inter_counts[i],bool_inters[i])               
+            print("i",i,"intersection counts",inter_counts[i],bool_inters[i])            
+        '''   
         return inter_counts,bool_inters,LocalRings
 
     def GetKTIntersections(self, L_grasper,R_grasper,Thread):
@@ -664,7 +694,12 @@ class Iterator:
             R_Gripping = True        
         return LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,L_Dist,R_Dist,min_Tissue_Dist,needle_center_dist
 
-    def GenerateContextLineNP(self,LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,L_Gripping,R_Gripping,frameNumber,contextLines,Needle,LocalRings):
+    def GenerateContextLineNP(self,inter_couts,L_Gripping,R_Gripping,frameNumber,contextLines,Needle,LocalRings,needleSum,ROI_x, ROI_y):
+        np1 = [184,287,398,496]
+        np1x = [235,342,447]
+        #np2 = [211,310,417,507]
+        #np3 = [204, 315, 422,507]
+        [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R] = inter_couts
         def last5thState(s):
             return s.split(" ")[-1]
         L_G_Touch = 0
@@ -672,53 +707,113 @@ class Iterator:
         R_G_Touch = 0
         R_G_Hold = 0
         Extra_State = 0
-        INTER_THRESH = 120
-        
-
+        INTER_THRESH = 120 
         (y_nearby_ring,x_nearby_ring) = ndimage.center_of_mass(LocalRings)
+        localRingsMass = np.sum(LocalRings)
         (y_center,x_center) = ndimage.center_of_mass(Needle)
-        
-        if(R_Gripping):
-            if(RG_inter_N > INTER_THRESH):
-                R_G_Hold = 2
-            elif(RG_inter_T >INTER_THRESH ):
-                R_G_Hold = 3
-        else: #Right not gripping
-            if(RG_inter_N >INTER_THRESH):
-                R_G_Touch = 2
-            elif(RG_inter_T >INTER_THRESH):
-                R_G_Touch = 3
-        if(L_Gripping):            
-            if(LG_inter_N  >INTER_THRESH):
-                L_G_Hold = 2
-            elif(LG_inter_T  >INTER_THRESH):
-                L_G_Hold = 3
-        else:#Left not gripping
-            if(LG_inter_N  >INTER_THRESH):
-                L_G_Touch = 2
-            elif(LG_inter_T  >INTER_THRESH):
-                L_G_Touch = 3
+        print("needle y_center:",y_center,"x_center:",x_center)
+
+        dists = [ abs(x_center-p) for p in np1]
+        dists2 = [ abs(x_center-p) for p in np1x]
+        distsROI1 = [ abs(x_center-p) for p in np1]        
+        distsROI2 = [ abs(x_center-p) for p in np1x]
+        d = min(dists)
+        d2 = min(dists2)
+        ROIXmin = min(distsROI2)
+        print("dists 1:",d,":",dists)
+        print("dists 2:",d2,":",dists2)
+
+        dists2 = [ abs(x_center-p) for p in np1x]
+
+        if needleSum > 25:
+            print("\t===>Ignoring Needle")
+            if(R_Gripping):
+                if(RG_inter_N > INTER_THRESH):
+                    R_G_Hold = 2
+                elif(RG_inter_T >INTER_THRESH ):
+                    R_G_Hold = 3
+            else: #Right not gripping
+                if(RG_inter_N >INTER_THRESH):
+                    R_G_Touch = 2
+                elif(RG_inter_T >INTER_THRESH):
+                    R_G_Touch = 3
+            if(L_Gripping):            
+                if(LG_inter_N  >INTER_THRESH):
+                    L_G_Hold = 2
+                elif(LG_inter_T  >INTER_THRESH):
+                    L_G_Hold = 3
+            else:#Left not gripping
+                if(LG_inter_N  >INTER_THRESH):
+                    L_G_Touch = 2
+                elif(LG_inter_T  >INTER_THRESH):
+                    L_G_Touch = 3
+        else:
+            s_ = contextLines[-1].split(" ")
+            L_G_Hold =s_[1]
+            L_G_Touch = s_[2]
+            R_G_Hold = s_[3]
+            R_G_Touch = s_[4]
+
         if(len(contextLines) == 0):
             Extra_State = 0
         else:
-            last = last5thState(contextLines[-1])
-            if last == "0":
-                if N_inter_R > 200:
-                    Extra_State = 1
-                else:
-                    Extra_State = 0
-            elif last == "1":
-                if x_center < x_nearby_ring:
-                    Extra_State = 2
-                elif not R_Gripping:
-                    Extra_State = 0
-                else:
-                    Extra_State = 1
-            elif last == "2":
-                if not R_Gripping:
-                    Extra_State = 0
-                else: 
-                    Extra_State = 2
+            print("\tNeedle sum, LocalRing sum",needleSum,localRingsMass,"accepted 5th?",str( needleSum > 50 and localRingsMass >20))
+            print("")
+            if needleSum > 50 and localRingsMass >8 :
+                last = last5thState(contextLines[-1])
+                if last == "0":
+                    if N_inter_R > 150:
+                        Extra_State = 1
+                    else:
+                        Extra_State = 0
+                elif last == "1":                    
+                    if (d < d2 ):
+                        Extra_State = 2
+                        print("\td < d2 ,Extra_State = 2")
+                    elif d2 < 10:
+                        Extra_State = 0
+                    else:
+                        Extra_State = 1
+                    '''
+                    if N_inter_R > 200:
+                        Extra_State = 2
+                    elif x_center < x_nearby_ring:
+                        Extra_State = 2
+                    elif not R_Gripping or not L_Gripping:
+                        Extra_State = 0
+                    else:
+                        Extra_State = 1
+                    '''
+                elif last == "2":
+                    if not R_Gripping or not L_Gripping:
+                        Extra_State = 0
+                    elif d2 < 10:
+                        Extra_State = 0
+                    else: 
+                        Extra_State = 2
+                
+            else:
+                last = last5thState(contextLines[-1])
+                if last == "1":                    
+                    if (d < d2 ):
+                        Extra_State = 2
+                    elif d2 < 10:
+                        Extra_State = 0
+                    else:
+                        Extra_State = 1
+
+                elif last == "2":
+                    if not R_Gripping:
+                        Extra_State = 0
+                    elif ROIXmin < 20:
+                        Extra_State = 0
+                    else: 
+                        Extra_State = 2
+                
+                Extra_State = last5thState(contextLines[-1])
+
+            if N_inter_R > 100:
+                Extra_State = 2
             
         #if(R_G_Hold == 2 and L_G_Hold == 2 and min_Tissue_Dist < 5 and needle_center_dist > 20):
         #    Extra_State = 2
@@ -728,7 +823,8 @@ class Iterator:
     def GenerateContextLineKT(self,LG_inter_T,RG_inter_T,L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX):
         # any time Grasper_DistX is negative > 2, then thread wrapped
         # then lose
-        # then tight for as long the right grasper is disntance is more than 250 and the absolute left grasper x is under 100
+        # then tight for as long the right grasper is disntance is more than 250 and the absolute left grasper x is under 100  
+
         def last5thState(s):
             return s.split(" ")[-1]
         L_G_Touch = 0
@@ -754,7 +850,7 @@ class Iterator:
             Extra_State = 0
         else:
             last = last5thState(contextLines[-1])
-            if (last == "0") and Grasper_DistX < 0:                
+            if last == "0" and Grasper_DistX < 0:                
                 Extra_State = 1 #+wrapped
             elif last == "1":
                 if Grasper_DistX > 100:                    
@@ -807,6 +903,7 @@ class Iterator:
                 L_G_Touch = 2
             elif(LG_inter_T):
                 L_G_Touch = 3
+
         if(N_inter_TS):
             if(R_G_Hold == 2 and L_G_Hold == 2):
                 Extra_State = 0
@@ -1094,7 +1191,7 @@ class Iterator:
         Tissues = {} 
         TissueFrames = {}
         GrasperJaws = {}
-        GrasperFrames = {}
+        GrasperFrames = {}        
         for root, dirs, files in os.walk(self.tissueDir):
             for file in files:
                 #if "frame" not in file:
@@ -1123,6 +1220,8 @@ class Iterator:
             break
         print("Trials:",Dirs)
         for Trial in Dirs:
+            #if "Needle_Passing_S05_T03" not in file:
+            #    continue
             TrialRoot = os.path.join(self.imagesDir,Trial)
             contextLines = []
             ctxFName = os.path.join(self.ctxConsensusDir, Trial+".txt")  
@@ -1204,12 +1303,15 @@ class Iterator:
                         ctxPredLine = self.GenerateContextLineKT(LG_inter_T,RG_inter_T,L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX)
                         contextLines.append(ctxPredLine)
                         print(Trial,frameNumber,ctxPredLine)
-                        self.DrawSingleImageContextKT(L_grasper,R_grasper,Thread,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,inter_couts,Grasper_DistX,L_Gripping,R_Gripping)
+                        #self.DrawSingleImageContextKT(L_grasper,R_grasper,Thread,GrasperJawPoints,imageFName,outputFName,CtxI,ctxPredLine,frameNumber,inter_couts,Grasper_DistX,L_Gripping,R_Gripping)
                     if("Needle" in self.task):
-                        inter_couts,bool_inter,LocalRings = self.GetNPIntersections(L_grasper,R_grasper,Thread,Needle,Rings)
-                        [LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R] = inter_couts                        
-                        #(x_center, y_center) = ndimage.center_of_mass(Needle)
-                        ctxPredLine = self.GenerateContextLineNP(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_R,L_Gripping,R_Gripping,frameNumber,contextLines,Needle,LocalRings)
+                        inter_couts,bool_inter,LocalRings = self.GetNPIntersections(L_grasper,R_grasper,Thread,Needle,Rings)       
+                        (L_y_center,L_x_center) = ndimage.center_of_mass(L_grasper)
+                        (R_y_center,R_x_center) = ndimage.center_of_mass(R_grasper)
+                        ROI_y = abs(R_y_center-L_y_center)/2
+                        ROI_x = abs(R_x_center-L_x_center)/2
+                        needleSum = np.sum(Needle)
+                        ctxPredLine = self.GenerateContextLineNP(inter_couts,L_Gripping,R_Gripping,frameNumber,contextLines,Needle,LocalRings,needleSum,ROI_x, ROI_y)
                         contextLines.append(ctxPredLine)
                         print(Trial,frameNumber,ctxPredLine)
                         # TODO:
@@ -1217,6 +1319,7 @@ class Iterator:
                     
                     if("Suturing" in self.task):
                         LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,L_Dist,R_Dist,min_Tissue_Dist,needle_center_dist = self.GetSuturingIntersections(L_grasper,R_grasper,Thread,Needle,TissuePoints,GrasperJawPoints,imageFName,outputFName,CtxI,CtxI_Pred)
+
                         ctxPredLine = self.GenerateContextLineS(LG_inter_T,RG_inter_T,LG_inter_N,RG_inter_N,N_inter_TS,L_Gripping,R_Gripping,min_Tissue_Dist,needle_center_dist,frameNumber)
                         contextLines.append(ctxPredLine)
                         print(Trial,frameNumber,ctxPredLine)

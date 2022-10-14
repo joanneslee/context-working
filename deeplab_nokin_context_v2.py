@@ -15,10 +15,10 @@ from matplotlib.patches import Rectangle
 #import metrics
 #import geopandas as gpd
 
-global sStarted
-global isSRight
-isSRight = True
-sStarted = False
+global Suturing_Needle_out_of_Tissue
+global Suturing_Needle_Right_of_Tissue
+Suturing_Needle_Right_of_Tissue = True
+Suturing_Needle_out_of_Tissue = False
 
 
 def main():
@@ -301,7 +301,6 @@ class Iterator:
                     #Thread = utils.NPYInterface3.loadArr(threadMask)
                     #if "Suturing" in self.task or "Needle" in self.task: Needle = utils.NPYInterface3.loadArr(needleMask)                    
                     #if "Needle" in self.task: Rings = utils.NPYInterface3.loadArr(ringMask)
-                        
                     #MPI = MPInterface(MP_comb) # turn on for MPs as well
 
                     CtxI = utils.ContextInterface2(ctxFName)
@@ -541,8 +540,8 @@ class Iterator:
         R_G_Hold = 0
         Extra_State = 0
         INTER_THRESH = 1
-        global sStarted
-        global isSRight
+        global Suturing_Needle_out_of_Tissue
+        global Suturing_Needle_Right_of_Tissue
 
         if not Faulty:
             if(R_Gripping):                
@@ -567,28 +566,28 @@ class Iterator:
                 elif(LG_dist_T < INTER_THRESH):
                     L_G_Touch = 3
 
-            if not sStarted:
+            if not Suturing_Needle_out_of_Tissue:
                 Extra_State = 2
                 if L_G_Touch == 2:
-                    sStarted = True
+                    Suturing_Needle_out_of_Tissue = True
                 if LG_dist_N < 200:
-                    sStarted = True
-            if sStarted:
+                    Suturing_Needle_out_of_Tissue = True
+            if Suturing_Needle_out_of_Tissue:
                 if len(contextLines) > 0:
                     last = last5thState(contextLines[-1])
                 else:
                     last = "0"
             
                 if(bi_x > n_x):
-                    isSRight = False
+                    Suturing_Needle_Right_of_Tissue = False
                 else:
-                    isSRight = True
+                    Suturing_Needle_Right_of_Tissue = True
 
                 if(last == "0"):
-                    if(pred_tissue < 10 and pred_bisector>7 and isSRight):
+                    if(pred_tissue < 10 and pred_bisector>7 and Suturing_Needle_Right_of_Tissue):
                         Extra_State = 1
                 elif(last == "1"):
-                    if not isSRight:
+                    if not Suturing_Needle_Right_of_Tissue:
                         if(pred_tissue < 9):
                             Extra_State = 1
                         else:
@@ -600,7 +599,7 @@ class Iterator:
                             Extra_State = 2
 
                 elif(last == "2"):
-                    if not isSRight:
+                    if not Suturing_Needle_Right_of_Tissue:
                         if not R_Gripping:
                             Extra_State = 0
                         else:
@@ -610,13 +609,6 @@ class Iterator:
                             Extra_State = 0
                         else:
                             Extra_State = 2
-
-            #if(R_G_Hold == 2):
-            #    Extra_State = 1 #if needle end is near the tissue
-            #if(L_G_Hold == 2):
-            #    Extra_State = 1 #if needle end is near the tissue  
-            #if(R_G_Hold == 2 and L_G_Hold == 2 and pred_tissue < 5 and pred_bisector > 20):
-            #    Extra_State = 2
 
         elif (len(contextLines) > 0):
             s_ = contextLines[-1].split(" ")
@@ -631,13 +623,10 @@ class Iterator:
             R_G_Touch =0
             Extra_State=2
         
-        #messages.append("1:"+str(sStarted))        
-        #messages.append("2:"+str(isSRight))
         return ""+ str(frameNumber) + " " + str(L_G_Hold) + " " + str( L_G_Touch) + " " + str(R_G_Hold) + " " + str(R_G_Touch) + " " + str(Extra_State), LG_dist_T,RG_dist_T,messages
        
     def GenerateContextLineNP(self,pred, gt, ringShapes,ringShapes_gt,needleShape,needleShape_gt ,L_Gripping,R_Gripping,frameNumber,contextLines,Grasper_DistX,currentRing, GT=False):
-        np1 = [184,287,398,496]
-        np1x = [235,342,447]
+        
         [LG_dl,RG_dl,T_dl] = pred
         [LG_Group_gt,RG_Group_gt,T_Group_gt] = gt  
         [R4_Group,R5_Group,R6_Group,R7_Group] = ringShapes
@@ -676,6 +665,9 @@ class Iterator:
                 #closestRingCenterX,closestRingCenterY = ringShapes[ringID].geoms[0].centroid.x,ringShapes[ringID].geoms[0].centroid.x,
                 closestRingCenterX,closestRingCenterY = ringShapes[ringID].centroid.x,ringShapes[ringID].centroid.y
                 
+                RingXCoors = [ np.average([ shape.centroid.x for shape in R_GROUP.geoms ]) for R_GROUP in ringShapes ] if ringShapes != [] else []
+
+
                 RingDistances_N = [ min([needleShape.distance(shape) for shape in R_GROUP.geoms if not isinstance(needleShape,list) ])  for R_GROUP in ringShapes if not isinstance(R_GROUP,list)] if ringShapes != [] else []
                 RingInter_N =  [ max([needleShape.intersection(shape).area for shape in R_GROUP.geoms if not isinstance(needleShape,list)])  for R_GROUP in ringShapes  if not isinstance(R_GROUP,list)] if ringShapes != [] else []
                 minLRing = min(RingDistances_L)
@@ -689,8 +681,8 @@ class Iterator:
                 x_center,y_center = needleShape.centroid.x,needleShape.centroid.y
 
 
-                dists = [ abs(x_center-p) for p in np1]
-                dists2 = [ abs(x_center-p) for p in np1x]
+                dists = [ abs(x_center-p) for p in RingXCoors]
+                dists2 = [ abs(x_center-p) for p in RingXCoors]
                 DistanceToRingCenter = min(dists)
                 DistanceToRingInCenter = min(dists2)
                 messages.append("ToRing:"+"{:.2f}".format(DistanceToRingCenter))
@@ -710,24 +702,6 @@ class Iterator:
         R_G_Hold = 0
         Extra_State = 0
         INTER_THRESH = 1
-        #geo.Polygon().centroid
-        #(y_nearby_ring,x_nearby_ring) = ndimage.center_of_mass(LocalRings)
-        #localRingsMass = np.sum(LocalRings)        
-        
-        #print("Needle Center",y_center,x_center )
-        #print("needle y_center:",y_center,"x_center:",x_center)
-
-        #dists = [ abs(x_center-p) for p in np1]
-        #dists2 = [ abs(x_center-p) for p in np1x]
-        #distsROI1 = [ abs(x_center-p) for p in np1]        
-        #distsROI2 = [ abs(x_center-p) for p in np1x]
-        #d = min(dists)
-        #d2 = min(dists2)
-        #ROIXmin = min(distsROI2)
-        #print("dists 1:",d,":",dists)
-        #print("dists 2:",d2,":",dists2)
-
-        #dists2 = [ abs(x_center-p) for p in np1x]
         
         if not Faulty:
             #print("\t===>Ignoring Needle")
@@ -821,32 +795,7 @@ class Iterator:
              
             else:
                 last = last5thState(contextLines[-1])
-                '''
                 
-                if last == "0":                    
-                    if (x_center < closestRingCenterX ):
-                        Extra_State = 2
-                    elif minNRing < 10:
-                        Extra_State = 0
-                    else:
-                        Extra_State = 1
-
-                if last == "1":                    
-                    if (x_center < closestRingCenterX ):
-                        Extra_State = 2
-                    elif minNRing < 10:
-                        Extra_State = 0
-                    else:
-                        Extra_State = 1
-
-                elif last == "2":
-                    if not R_Gripping:
-                        Extra_State = 0
-                    elif LG_x_center < 20:
-                        Extra_State = 0
-                    else: 
-                        Extra_State = 2
-                '''
                 Extra_State = last5thState(contextLines[-1])
                 messages.append(str(last)+":Faulty:"+str(Extra_State))
 
