@@ -583,32 +583,30 @@ class Iterator:
                 else:
                     Suturing_Needle_Right_of_Tissue = True
 
-                if(last == "0"):
-                    if(pred_tissue < 10 and pred_bisector>7 and Suturing_Needle_Right_of_Tissue):
+                if last == "0" and (pred_tissue < 10 and pred_bisector>7 and Suturing_Needle_Right_of_Tissue):
+                    Extra_State = 1
+                elif last == "1" and (not Suturing_Needle_Right_of_Tissue):
+                   
+                    if(pred_tissue < 9):
                         Extra_State = 1
-                elif(last == "1"):
-                    if not Suturing_Needle_Right_of_Tissue:
-                        if(pred_tissue < 9):
-                            Extra_State = 1
-                        else:
-                            Extra_State = 0
                     else:
-                        if(pred_tissue < 10):
-                            Extra_State = 1
-                        else:
-                            Extra_State = 2
+                        Extra_State = 0
+                elif last == "1":
+                    if(pred_tissue < 10):
+                        Extra_State = 1
+                    else:
+                        Extra_State = 2
 
-                elif(last == "2"):
-                    if not Suturing_Needle_Right_of_Tissue:
-                        if not R_Gripping:
-                            Extra_State = 0
-                        else:
-                            Extra_State = 2
+                elif last == "2" and (not Suturing_Needle_Right_of_Tissue):
+                    if not R_Gripping:
+                        Extra_State = 0
                     else:
-                        if RG_dist_N > 40 or not R_Gripping:
-                            Extra_State = 0
-                        else:
-                            Extra_State = 2
+                        Extra_State = 2
+                elif last == "2":
+                    if RG_dist_N > 40 or not R_Gripping:
+                        Extra_State = 0
+                    else:
+                        Extra_State = 2
 
         elif (len(contextLines) > 0):
             s_ = contextLines[-1].split(" ")
@@ -746,52 +744,38 @@ class Iterator:
             if not Faulty:
 
                 last = last5thState(contextLines[-1])
-                if last == "0":
-                    if minNRing < 10:
-                        Extra_State = 1
-                        messages.append(str(last)+":minNRing < 10:"+str(Extra_State))
-                    else:
-                        Extra_State = 0
-                        messages.append(str(last)+":minNRing < 10E:"+str(Extra_State))
+                if last == "0" and minNRing < 10:
+                    Extra_State = 1
+                    messages.append(str(last)+":minNRing < 10:"+str(Extra_State))
+                elif last == "0":
+                    Extra_State = 0
+                    messages.append(str(last)+":minNRing < 10E:"+str(Extra_State))
+                elif last == "1" and maxInter_RN > 3:
+                    Extra_State = 2
+                    messages.append(str(last)+":maxInter_RN > 3:"+str(Extra_State))
+                elif last == "1" and minNRing > 10:
+                    Extra_State = 0
+                    messages.append(str(last)+":minNRing > 10:"+str(Extra_State))
+                elif last == "1" and (x_center < closestRingCenterX):
+                    Extra_State = 8
+                    messages.append(str(last)+":x_center < closestRingCenterX:"+str(Extra_State))
                 elif last == "1":
-
-                    if maxInter_RN > 3:
-                        Extra_State = 2
-                        messages.append(str(last)+":maxInter_RN > 3:"+str(Extra_State))
-                    elif minNRing > 10:
-                        Extra_State = 0
-                        messages.append(str(last)+":minNRing > 10:"+str(Extra_State))
-                    elif (x_center < closestRingCenterX):
-                        Extra_State = 8
-                        messages.append(str(last)+":x_center < closestRingCenterX:"+str(Extra_State))
-                    else:
-                        Extra_State = 1
-                        messages.append(str(last)+":E:"+str(Extra_State))
-                    '''
-                    if N_inter_R > 200:
-                        Extra_State = 2
-                    elif x_center < x_nearby_ring:
-                        Extra_State = 2
-                    elif not R_Gripping or not L_Gripping:
-                        Extra_State = 0
-                    else:
-                        Extra_State = 1
-                    '''
-                elif last == "2":
-                    if DistanceToRingInCenter < 10:
-                        Extra_State = 0
-                    elif not R_Gripping or not L_Gripping:
-                        Extra_State = 0
-                        messages.append(str(last)+":not R_Gripping or not L_Gripping:"+str(Extra_State))
-                    elif minNRing > 10:
-                        Extra_State = 0
-                        messages.append(str(last)+":minNRing > 10:"+str(Extra_State))
-                    elif maxInter_RN == 0:
-                        Extra_State = 1
-                        messages.append(str(last)+":maxInter_RN == 0:"+str(Extra_State))
-                    else: 
-                        Extra_State = 2
-                        messages.append(str(last)+":E:"+str(Extra_State))
+                    Extra_State = 1
+                    messages.append(str(last)+":E:"+str(Extra_State))
+                elif last == "2" and  DistanceToRingInCenter < 10:
+                    Extra_State = 0
+                elif last == "2" and (not R_Gripping or not L_Gripping):
+                    Extra_State = 0
+                    messages.append(str(last)+":not R_Gripping or not L_Gripping:"+str(Extra_State))
+                elif last == "2" and minNRing > 10:
+                    Extra_State = 0
+                    messages.append(str(last)+":minNRing > 10:"+str(Extra_State))
+                elif last == "2" and maxInter_RN == 0:
+                    Extra_State = 1
+                    messages.append(str(last)+":maxInter_RN == 0:"+str(Extra_State))
+                elif last == "2": 
+                    Extra_State = 2
+                    messages.append(str(last)+":E:"+str(Extra_State))
              
             else:
                 last = last5thState(contextLines[-1])
@@ -987,20 +971,18 @@ class Iterator:
             last = last5thState(contextLines[-1])
             if last == "0" and Grasper_DistX < 0:                
                 Extra_State = 1 #+wrapped
+            elif last == "1" and Grasper_DistX > 130:
+                                  
+                Extra_State = 2 # lose
             elif last == "1":
-                if Grasper_DistX > 130:                    
-                    Extra_State = 2 # lose
-                else:
                     Extra_State = 1
+            elif last == "2" and Grasper_DistX > 150:
+                Extra_State = 3 # tight
             elif last == "2":
-                if Grasper_DistX > 150:
-                    Extra_State = 3 # tight
-                else:
                     Extra_State = 2 # lose
+            elif last == "3" and (not L_Gripping or not R_Gripping):                
+                Extra_State = 0 # tight
             elif last == "3":
-                if not L_Gripping or not R_Gripping:
-                    Extra_State = 0 # tight
-                else:
                     Extra_State = 3 # lose 
         return ""+ str(frameNumber) + " " + str(L_G_Hold) + " " + str(L_G_Touch) + " " + str(R_G_Hold) + " " + str(R_G_Touch) + " " + str(Extra_State), LG_inter_T, RG_inter_T
 
