@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-import os
+import os,sys
 import utils
 import pathlib
 
@@ -11,22 +11,50 @@ colors =["#E36D6D","#5E81B5","#D47BC9","#7CEB8E","#C9602A","#77B9E0","#A278F0","
 
 def main():
     #path = 'C:\\Users\\ianre\\Desktop\\coda\\context-prediction-main\\Needle_Passing\\deeplab_grasper_L_v3\\Needle_Passing_S04_T01'
+    dir=os.getcwd()    
+    task = "Needle_Passing"
+    try:
+        task=sys.argv[1]
+    except:
+        print("Error: no task provided","Usage: python contours.py <task>","Default Task"+task)
+
     
-    task = "Suturing"
     I = Iterator(task)
-    label_classes = ["deeplab_grasper_L_v3","deeplab_grasper_R_v3","deeplab_thread_v3","deeplab_needle_v3"] #,"deeplab_needle_v3"
-    label_classNames = ["dl_grasper_L","dl_grasper_R","dl_thread" ,"dl_needle"] # ,"dl_needle"
-    j=0
-    
-    #I.findAllContoursUnion(label_class,label_classNames[j])
-    #return
+    label_classes = ["deeplab_grasper_L_v3","deeplab_grasper_R_v3","deeplab_thread_v3"] #,"deeplab_needle_v3"
+    label_classNames = ["dl_grasper_L","dl_grasper_R","dl_thread" ] # ,"dl_needle"
+
+    if "Suturing" in task:
+        label_classes.append("deeplab_needle_v3") 
+        label_classNames.append("dl_needle")
+        j=0    
+        for label_class in label_classes:
+            I.findAllContours(label_class,label_classNames[j])
+            j+=1             
+    elif "Needle" in task:
+        I.findRingContours("deeplab_rings_v3","")
+        label_classes.append("deeplab_needle_v3") 
+        label_classNames.append("dl_needle")
+        j=0    
+        for label_class in label_classes:
+            I.findAllContours(label_class,label_classNames[j])
+            j+=1 
+    elif "Knot" in task:        
+        j=0    
+        for label_class in label_classes:
+            I.findAllContours(label_class,label_classNames[j])
+            j+=1 
+    elif "All_Contours_Single_Object":        
+        j=0    
+        for label_class in label_classes:
+            I.findAllContoursUnion(label_class,label_classNames[j])
+            j+=1 
+        
+    '''    
     for label_class in label_classes:
         I.findAllContours(label_class,label_classNames[j])
-        j+=1
-
-
-    
-    #I.findRingContours("deeplab_rings_v3","ring_X")
+        j+=1 
+    I.findRingContours("deeplab_rings_v3","ring_X")
+    '''
 
 
 
@@ -54,12 +82,12 @@ class Iterator:
                 closestIndex = i
         return str(closestIndex+4),closestIndex
 
-    def findRingContours(self,LabelClass,LabelClassName):
+    def findRingContours(self,LabelClass,LabelClassName, SAVE_TEST_IMAGE=False, SAVE_DATA=False, DEBUG=False):
         Dirs = []
         for root, dirs, files in os.walk(self.imagesDir):
             Dirs = dirs
             break
-        print("Trials:",Dirs)
+        print("find Contours for Rings in trials:",Dirs)
         TrialNum = 0
         for Trial in Dirs:
             TrialRoot = os.path.join(self.CWD,self.task,LabelClass,Trial)
@@ -70,6 +98,7 @@ class Iterator:
             VIAOutput =  os.path.join(PointsRoot,Trial+".json")
             # load json points for trial
             VIA = utils.ViaJSONTemplate(VIATemplate)
+            print("\n\tTrial:",Trial)
 
             for root, dirs, files in os.walk(TrialRoot):
                 for file in files:
@@ -110,7 +139,7 @@ class Iterator:
                         areas.append(area)
                         
                         M = cv.moments(cnt)
-                        print( M )
+                        #print( M )
                         try:
                             cx = int(M['m10']/M['m00'])
                             cy = int(M['m01']/M['m00'])
@@ -166,10 +195,14 @@ class Iterator:
                         i=i+1
                     
                     '''
-                    cv.imwrite(testFname,im)
-                    print("len contours:",len(contours),hierarchy)
+                    if SAVE_TEST_IMAGE:                        
+                        cv.imwrite(testFname,im)
+                    if DEBUG:
+                        print("\tlen contours:",len(contours),'\n\t' + str(hierarchy).replace('\n', '\n\t'))
                     #return
-            VIA.save(VIAOutput)
+                    print(len(contours), end =" ")
+            if SAVE_DATA:
+                VIA.save(VIAOutput)
             TrialNum+=1
         print("Processed ",TrialNum,"trials")
 
@@ -280,12 +313,12 @@ class Iterator:
             TrialNum+=1
         print("Processed ",TrialNum,"trials")
 
-    def findAllContours(self, LabelClass,LabelClassName):
+    def findAllContours(self, LabelClass,LabelClassName, SAVE_TEST_IMAGE=False, SAVE_DATA=False , DEBUG=False):
         Dirs = []
         for root, dirs, files in os.walk(self.imagesDir):
             Dirs = dirs
             break
-        print("Trials:",Dirs)
+        print("Finding contours for object:",LabelClass, "for trials:",Dirs)
         TrialNum = 0
         for Trial in Dirs:
             TrialRoot = os.path.join(self.CWD,self.task,LabelClass,Trial)
@@ -296,6 +329,7 @@ class Iterator:
             VIAOutput =  os.path.join(PointsRoot,Trial+".json")
             # load json points for trial
             VIA = utils.ViaJSONTemplate(VIATemplate)
+            print("\n\n\tTrial:",Trial,":",LabelClass)
 
             for root, dirs, files in os.walk(TrialRoot):
                 for file in files:
@@ -369,11 +403,14 @@ class Iterator:
                                 Regions.append([X,Y])
                         else: 
                             break
-                    print(areasInOrderSaved,"------------",areas)
+                    if DEBUG:
+                        print(areasInOrderSaved,"------------",areas, end=" ")
+                    print(areasInOrderSaved,end=" ")
                             
                     VIA.addFrameMultiRegion(non_pred_name, fileSizeInBytes, Regions, RegionAttributes)
-                    #cv.imwrite(testFname,img_3)
-                    if False:
+                    if SAVE_TEST_IMAGE:
+                        cv.imwrite(testFname,img_3)
+                    if DEBUG:
                         if len(contours) > 2:
                             print("=======================================================================================================================================================================================================================>",LabelClassName)
                             print("len contours:",len(contours),hierarchy)
@@ -383,7 +420,8 @@ class Iterator:
                         else:
                             print("len contours:",len(contours),hierarchy)
                     #return
-            VIA.save(VIAOutput)
+            if SAVE_DATA:
+                VIA.save(VIAOutput)
             TrialNum+=1
         print("Processed ",TrialNum,"trials")
 
