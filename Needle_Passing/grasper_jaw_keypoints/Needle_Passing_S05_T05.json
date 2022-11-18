@@ -2689,16 +2689,32 @@
                 {
                     "shape_attributes": {
                         "name": "point",
-                        "cx": 471,
-                        "cy": 133
+                        "cx": 466,
+                        "cy": 191
                     },
                     "region_attributes": {}
                 },
                 {
                     "shape_attributes": {
                         "name": "point",
-                        "cx": 466,
-                        "cy": 127
+                        "cx": 464,
+                        "cy": 167
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 474,
+                        "cy": 140
+                    },
+                    "region_attributes": {}
+                },
+                {
+                    "shape_attributes": {
+                        "name": "point",
+                        "cx": 472,
+                        "cy": 132
                     },
                     "region_attributes": {}
                 }
