@@ -132,7 +132,7 @@ It's set up now to read labels from Via
 
 
 class ViaJSONInterface:
-    def __init__(self, jsonLoc):
+    def __init__(self, jsonLoc,TestMode=False,MatchLines=0):
         self.json_location = jsonLoc
         self.frameNumbers = []
         self.dataArr = []
@@ -155,6 +155,8 @@ class ViaJSONInterface:
                 ]
                 self.dataDict[str(frameNumber)] = points
                 self.dataArr.append(points)
+                if(len(regions) != MatchLines and TestMode):
+                    print("\t\t Error: unexpected number of datapoints (",len(regions),MatchLines,") ",jsonLoc,"frame",frameNumber )
                 # for attribute, value in song.items():
                 #    print(attribute, value) # example usage
 
