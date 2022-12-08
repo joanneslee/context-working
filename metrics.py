@@ -76,12 +76,16 @@ def main():
 
     I = MetricsIterator(task)
     #I.generate30fps()
-    I.IOU()
+    #I.IOU()
+    I.resampleTest()
 
     #I.fixStates()
     #I.poll()
     #I.verifyOutput()
     #I.showAllPlots()
+
+
+
 
 
     quit(); 
@@ -143,6 +147,28 @@ class MetricsIterator:
                 utils.save(out_file,pred_lines_u)  
                 print("Saved:",out_file)
 
+    def resampleTest(self):
+        count = 0
+        for root, dirs, files in os.walk(self.consensus): # self.consensus
+            for file in files:                
+                count=count+1
+                consensus_file = os.path.join(self.consensus, file)
+                try:
+                    consensus_lines = []
+                    with open(consensus_file) as consensus_data:
+                        for line in consensus_data:
+                            consensus_lines.append(line.strip())
+                except Exception as e:
+                    print(e)
+                
+                consensus_lines_unrolled = self.unrollContext(consensus_lines)
+                consensus_lines_10 = self.resampleContext(consensus_lines_unrolled, 10)
+                consensus_lines_15 = self.resampleContext(consensus_lines_unrolled, 15)
+
+
+                return
+
+
     def unrollContext(self, lines):
         n_lines = []
         start = lines[0].split(" ")[0] 
@@ -164,6 +190,56 @@ class MetricsIterator:
                 n_lines.append(str(k) + " " + " ".join(lines[i].split(" ")[1:] ))
         
         n_lines.append(lines[len(lines)-1])
+        return n_lines
+
+    def resampleContext(self, lines, sampleRate):
+        def getMax(lines,start,end):
+            d = {}
+            for state in lines[start:end]:                            
+                if state in d:    # Check if key in hash table
+                    d[state] += 1 # Increment counter
+                else:
+                    d[state] = 1  # Create counter for vote
+            if len(d) > 0: return max(d, key=d.get)
+            else: return 0
+        n_lines = []
+        start = lines[0].split(" ")[0] 
+        start = int(start)
+        MAX = lines[-1].split(" ")[0]
+
+        line_numbers = []
+        lh = [] # left hold
+        lc = [] # left contact
+        rh = [] # right hold
+        rc = [] # right contact
+        s5 = [] # 5th state
+        for i in range(0,len(lines)-1):
+            l_split = []
+            l_split = lines[i].split(" ")
+            line_numbers.append(l_split[0])
+            lh.append(l_split[1])
+            lc.append(l_split[2])
+            rh.append(l_split[3])
+            rc.append(l_split[4])
+            s5.append(l_split[5])
+
+        i=0
+        window_start = 0
+        window_end = sampleRate
+        while i < len(lines): 
+            
+            lh_s = getMax(lh, window_start, window_end)  
+            lc_s = getMax(lc, window_start, window_end)  
+            rh_s = getMax(rh, window_start, window_end)  
+            rc_s = getMax(rc, window_start, window_end)  
+            s5_s = getMax(s5, window_start, window_end) 
+            
+            n_lines.append(str(i) + " " + str(lh_s) + " " + str(lc_s) + " " + str(rh_s) + " " + str(rc_s) + " " + str(s5_s))
+            
+            i+=sampleRate
+            window_start+=sampleRate
+            window_end+=sampleRate
+
         return n_lines
 
         
