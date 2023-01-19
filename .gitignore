@@ -1,6 +1,7 @@
 deeplab_nokin_context2.py
 __pycache__
 */deeplab_labeled_images/
+*/deeplab_labeled_images_test/
 win-env/
 *.zip
 *.avi
