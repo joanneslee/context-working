@@ -90,6 +90,7 @@ class Iterator:
             frameNum = 0
             currentRing = 7
             for root, dirs, files in os.walk(TrialRoot):
+                #files.sort()
                 for file in files:
                     if "frame" not in file:
                         continue
@@ -351,6 +352,7 @@ class Iterator:
         Tissues, TissueFrames = {}, {}
         foundAnyData = False
         for root, dirs, files in os.walk(self.tissueDir):
+            #files.sort()
             for file in files:
                 fileID = file.replace(".json","") 
                 #if "frame" not in file:
@@ -369,6 +371,7 @@ class Iterator:
         GrasperJaws, GrasperFrames = {}, {}
         foundAnyData = False
         for root, dirs, files in os.walk(self.grasperJawDir):
+            # files.sort()
             for file in files:
                 fileID = file.replace(".json","") 
                 #if "frame" not in file:
@@ -388,7 +391,10 @@ class Iterator:
         DeeplabVIAFrames = {}
 
         for root, dirs, files in os.walk(self.contourDir):
+            # files.sort()
             for file in files:
+                #if ".DS_Store" in file:
+                #    continue
                 fileID = file.replace(".json","") 
                 #if "frame" not in file:
                 label_class = os.path.basename(root)

@@ -34,7 +34,7 @@ class VideoInterface:
             TrialRoot = os.path.join(self.CWD,self.task,"deeplab_labeled_images",Trial)
            
             img_array = []
-            for filename in glob.glob(TrialRoot+'/*.png'):
+            for filename in sorted(glob.glob(TrialRoot+'/*.png')):
                 img = cv.imread(filename)
                 height, width, layers = img.shape
                 size = (width,height)
