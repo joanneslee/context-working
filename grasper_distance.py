@@ -27,16 +27,18 @@ def main():
 
     I = Iterator(task)
 
+    I.closestGrasperDist()
+
     # get series of images of grasper distance plots beside images
     # I.grasperDistScript()
-    I.GrasperDistImages(SAVE=False)
+    # I.GrasperDistImages(SAVE=False)
 
     # get series of images of centers of graspers
     #I.GrasperCenterImages(SAVE=False)
 
     # turn series of images into a video
     V = VideoInterface(task)
-    V.makevideos()
+    # V.makevideos()
 
     quit();
 
@@ -65,6 +67,148 @@ class Iterator:
 
         self.OS = "windows"
 
+    # get closest grasper distance
+    def closestGrasperDist(self):
+        # get grasper contour data
+        # (from the output of contours.py)
+        DeeplabVIAPoints, DeeplabVIAFrames, DeeplabVIARings = self.getContourData()
+
+        # need to generate for all trials and all tasks
+        # but for now focus on Suturing_S02_T01
+        FilenamesInTask = [
+            "Suturing_S02_T01"]  # self.getFilenamesinTask()  # will get all the trials (from the images folder)
+        print("Trials:", "Suturing_S02_T01")  # FilenamesInTask)
+
+        for Trial in FilenamesInTask:
+            # dictionary {frame_number : centroid point}
+            gt_Centroid_L = {}
+            gt_Centroid_R = {}
+            pred_Centroid_L = {}
+            pred_Centroid_R = {}
+            gt_dist = {}
+            pred_dist = {}
+
+            TrialRoot = os.path.join(self.imagesDir, Trial)
+            ctxFName = os.path.join(self.ctxConsensusDir, Trial + ".txt")
+            ctxPredFName = os.path.join(self.context_output, Trial + ".txt")
+            frameNum = 0
+            for root, dirs, files in os.walk(TrialRoot):
+                files.sort()
+                for file in files:
+                    if "frame" not in file:
+                        continue
+                    frameNum += 1
+                    imageRoot = root
+                    frameNumber = int(file.replace(".png", "").split("_")[1])
+                    trialFname = os.path.basename(root)
+                    imageFName = os.path.join(imageRoot, file)
+                    cogitoRoot = root.replace("images", "annotations")
+                    cogitoFName = os.path.join(cogitoRoot, utils.imageToJSON(file))
+                    outputRoot = os.path.join(self.deeplabOutputDir, trialFname)
+                    # outputFName = os.path.join(self.deeplabOutputDir, trialFname, file)
+
+                    gplotRoot = os.path.join(self.plotImagesDir, trialFname)
+                    plot_file = 'plot_' + file
+                    gplotFName = os.path.join(self.plotImagesDir, trialFname, plot_file)
+                    # print("GPLOTFNAME:", gplotFName)
+
+                    annotationRoot = root.replace("images", "annotations")
+                    annotationFile = os.path.join(annotationRoot, utils.imageToJSON(file))
+
+                    # All _dl_points contains the contours that are applicable for this Task and Trial combo
+                    All_dl_points = DeeplabVIAPoints[trialFname]  # ["class"]["frame"] = list of points
+
+                    # Getting particular contours (array of points)
+                    try:
+                        LgrasperPoints = All_dl_points["dl_grasper_L"][str(frameNumber)]
+                    except Exception as e:
+                        print(e, "in LgrasperPoints")
+                        LgrasperPoints = {}
+
+                    try:
+                        RgrasperPoints = All_dl_points["dl_grasper_R"][str(frameNumber)]
+                    except Exception as e:
+                        print(e, "in RgrasperPoints")
+                        RgrasperPoints = {}
+
+                    CtxI = utils.ContextInterface2(ctxFName)
+                    J = utils.JSONInterface(annotationFile)
+
+                    # gtPolygons are Ground Truth contour points for the cogito labels
+                    gtPolygons = J.getPolygonsDict();  # graspers only in KT, (don't need needle mask)
+                    # print(type(gtPolygons)) # dict
+                    # print(gtPolygons) # tool : points
+
+                    # gtKeypoints are Ground Truth points from cogito labels
+                    gtKeypoints = J.getKeyPointsDict();  # not needed, only for GetCommonShapes function
+                    cn, polylineSeries = J.getPolyLines();  # not needed
+                    SingleThreadX = []
+                    SingleThreadY = []
+                    for i in range(len(polylineSeries)):
+                        l = len(polylineSeries)
+                        for j in range(0, len(polylineSeries[i]), 2):
+                            SingleThreadX.append(polylineSeries[i][j])
+                            SingleThreadY.append(polylineSeries[i][j + 1])
+                    SingleThreadPoints = [(SingleThreadX[i], SingleThreadY[i]) for i in range(len(SingleThreadX))]
+
+                    if (not os.path.isdir(outputRoot)):
+                        path = pathlib.Path(outputRoot)
+                        path.mkdir(parents=True, exist_ok=True)
+
+                    # pred has all the polygons from Zoey's masks
+                    # gt has all the polygons from cogito
+                    pred, gt = self.GetCommonShapes(gtPolygons, gtKeypoints, SingleThreadPoints, polylineSeries,
+                                                    LgrasperPoints, RgrasperPoints)
+
+                    # function for getting grasper distance? no; need frame number
+
+                    # multipolygons in left and right graspers
+                    gt_mpoly_l = gt[0]
+                    gt_mpoly_r = gt[1]
+
+                    pred_mpoly_l = pred[0]
+                    pred_mpoly_r = pred[1]
+
+                    # print("PRED_MPOLY_L:", pred_mpoly_l)
+                    # print(type(pred_mpoly_l))
+
+                    # find grasper center
+                    for polygon in gt_mpoly_l:
+                        gt_l_center = polygon.centroid
+                        gt_Centroid_L[frameNumber] = gt_l_center
+                        print("gt_Centroid_L:", gt_l_center)
+
+                    for polygon in pred_mpoly_l:
+                        pred_l_center = polygon.centroid
+                        pred_Centroid_L[frameNumber] = pred_l_center
+                        print("pred_Centroid_L:", pred_l_center)
+
+                    for polygon in gt_mpoly_r:
+                        gt_r_center = polygon.centroid
+                        gt_Centroid_R[frameNumber] = gt_r_center
+                        print("gt_Centroid_R:", gt_r_center)
+
+                    for polygon in pred_mpoly_r:
+                        pred_r_center = polygon.centroid
+                        pred_Centroid_R[frameNumber] = pred_r_center
+                        print("pred_Centroid_R:", pred_r_center)
+
+                    # finding distance between graspers of gt and pred
+                    pred_d = pred_l_center.distance(pred_r_center)
+                    pred_dist[frameNumber] = pred_d
+                    print("PRED_DIST", pred_d)
+
+                    gt_d = gt_l_center.distance(gt_r_center)
+                    gt_dist[frameNumber] = gt_d
+                    print("GT_DIST", gt_d)
+
+            # closest gt and pred grasper distance for each trial
+            pred_closest_dist_fn = min(pred_dist, key=pred_dist.get)
+            pred_closest_dist = pred_dist[pred_closest_dist_fn]
+            gt_closest_dist_fn = min(gt_dist, key=gt_dist.get)
+            gt_closest_dist = gt_dist[gt_closest_dist_fn]
+            print("Closest grasper distance (pred) :", pred_closest_dist, "at", pred_closest_dist_fn)
+            print("Closest grasper distance (gt) :", gt_closest_dist, "at", gt_closest_dist_fn)
 
     # original script
     # produces plots showing grasper distance over time (at a frame number)
@@ -275,7 +419,6 @@ class Iterator:
 
                 # puts plot and raw images side by side
                 # iterates over all trials in a task
-                # implemented in function below
 
 
     # refactored version
@@ -550,16 +693,17 @@ class Iterator:
                         pred_Centroid_R[frameNumber] = pred_r_center
                         print("pred_Centroid_R:", pred_r_center)
 
-                    ### BREAK ###
+            ### BREAK ###
 
-                    # PLOTTING
-                    # one video for each trial, need plots of each frame
+            # PLOTTING
+            # one video for each trial, need plots of each frame
 
-                    # function for plotting
-                    self.plotGrasperDist(pred_Centroid_L, pred_Centroid_R, gplotRoot)  # save option? choose gt or pred?
+            # function for plotting
+            self.plotGrasperCenter(pred_Centroid_L, pred_Centroid_R, gplotRoot)  # save option? choose gt or pred?
 
-                    # function to add images beside plot
-                    #self.plotBesideImage()  # save option?
+            # function to add images beside plot
+            # need to have saved plot images from plotGrasperDist()
+            #self.plotBesideImage()  # save option?
 
             print("proc", os.path.basename(TrialRoot), "count:", frameNum)
 
@@ -607,6 +751,8 @@ class Iterator:
             plot_file_path = os.path.join(gplotRoot, plot_filename)
             # print("PLOT_FILE_PATH: ", plot_file_path)
 
+            plt.show()
+            # if SAVE == TRUE:
             # plt.savefig(plot_file_path)
             line.remove()
             f_text.remove()
