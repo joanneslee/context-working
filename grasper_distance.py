@@ -26,12 +26,18 @@ def main():
     #     print("Error: no task provided", "Usage: python deeplab_nokin_context_v3.py <task>", "Default Task" + task)
 
     I = Iterator(task)
-    # get series of images with plots beside images
+
+    # get series of images of grasper distance plots beside images
+    # I.grasperDistScript()
     I.GrasperDistImages(SAVE=False)
+
+    # get series of images of centers of graspers
+    #I.GrasperCenterImages(SAVE=False)
 
     # turn series of images into a video
     V = VideoInterface(task)
     V.makevideos()
+
     quit();
 
 
@@ -67,14 +73,6 @@ class Iterator:
         # (from the output of contours.py)
         DeeplabVIAPoints, DeeplabVIAFrames, DeeplabVIARings = self.getContourData()
 
-        # dictionary {frame_number : centroid point}
-        gt_Centroid_L = {}
-        gt_Centroid_R = {}
-        pred_Centroid_L = {}
-        pred_Centroid_R = {}
-        gt_dist = {}
-        pred_dist = {}
-
         # need to generate for all trials and all tasks
         # but for now focus on Suturing_S02_T01
         FilenamesInTask = [
@@ -82,6 +80,14 @@ class Iterator:
         print("Trials:", "Suturing_S02_T01")  # FilenamesInTask)
 
         for Trial in FilenamesInTask:
+            # dictionary {frame_number : centroid point}
+            gt_Centroid_L = {}
+            gt_Centroid_R = {}
+            pred_Centroid_L = {}
+            pred_Centroid_R = {}
+            gt_dist = {}
+            pred_dist = {}
+
             TrialRoot = os.path.join(self.imagesDir, Trial)
             ctxFName = os.path.join(self.ctxConsensusDir, Trial + ".txt")
             ctxPredFName = os.path.join(self.context_output, Trial + ".txt")
@@ -198,74 +204,82 @@ class Iterator:
                     print("GT_DIST", gt_d)
 
             print("proc", os.path.basename(TrialRoot), "count:", frameNum)
-        print(gt_Centroid_L)
-        print(pred_Centroid_L)
-        print(gt_Centroid_R)
-        print(pred_Centroid_R)
-        print(pred_dist)
-        print(gt_dist)
-        print("done processing")
-        #return gt_Centroid_L, gt_Centroid_R, pred_Centroid_L, pred_Centroid_R, gt_dist, pred_dist
 
-        ### BREAK ###
+            # need centers and distances for each trial
+            print(gt_Centroid_L)
+            print(pred_Centroid_L)
+            print(gt_Centroid_R)
+            print(pred_Centroid_R)
+            print(pred_dist)
+            print(gt_dist)
+            print("done processing")
+            #return gt_Centroid_L, gt_Centroid_R, pred_Centroid_L, pred_Centroid_R, gt_dist, pred_dist
 
-        # plot location of grasper center on 2D plot
-        # over time
-        # plotting distance between vs. time
+            ### BREAK ###
 
-        #gt_dist = {}
-        #pred_dist = {}
-        #gt_Centroid_L, gt_Centroid_R, pred_Centroid_L, pred_Centroid_R, gt_dist, pred_dist = self.GetGrasperDist()
+            # plot location of grasper center on 2D plot
+            # over time
+            # plotting distance between vs. time
 
-        # for gt
-        # create dataframe
-        gt_dataframe = pd.DataFrame({'frame_number': gt_dist.keys(),
-                                     'distance': gt_dist.values()})
+            #gt_dist = {}
+            #pred_dist = {}
+            #gt_Centroid_L, gt_Centroid_R, pred_Centroid_L, pred_Centroid_R, gt_dist, pred_dist = self.GetGrasperDist()
 
-        # for pred
-        # create dataframe
-        pred_dataframe = pd.DataFrame({'frame_number': pred_dist.keys(),
-                                       'distance': pred_dist.values()})
+            # for gt
+            # create dataframe
+            gt_dataframe = pd.DataFrame({'frame_number': gt_dist.keys(),
+                                         'distance': gt_dist.values()})
 
-        # for gt?
+            # for pred
+            # create dataframe
+            pred_dataframe = pd.DataFrame({'frame_number': pred_dist.keys(),
+                                           'distance': pred_dist.values()})
 
-        # for pred
-        for n in pred_dist.keys():  # for each frame number
-            # plot entire graph
-            # Plotting the time series of given dataframe
-            plt.plot(pred_dataframe.frame_number, pred_dataframe.distance, color='blue')
+            # for gt?
 
-            # Giving title to the chart using plt.title
-            plt.title('Distance Between Graspers by Frames')
+            # for pred
+            for n in pred_dist.keys():  # for each frame number
+                # plot entire graph
+                # Plotting the time series of given dataframe
+                plt.plot(pred_dataframe.frame_number, pred_dataframe.distance, color='blue')
 
-            # Providing x and y label to the chart
-            plt.xlabel('Frame')
-            plt.ylabel('Distance Between Graspers')
+                # Giving title to the chart using plt.title
+                plt.title('Distance Between Graspers by Frames')
 
-            # draw vertical line at each frame number
-            # save each graph
-            # only one line may be specified; full height
-            line = plt.axvline(x=n, color='red', label='axvline - full height')
-            # frame number test
-            f_text = plt.text(5050, 530, "Frame " + str(n))
+                # Providing x and y label to the chart
+                plt.xlabel('Frame')
+                plt.ylabel('Distance Between Graspers')
 
-            # change savefig default directory output
-            # to: in task (Suturing), folder grasper_plot_images, in appropriate Trial folder
-            plot_filename = 'plot_frame_' + str(n).zfill(4) + '.png'  # add leading zeros
-            plot_file_path = os.path.join(gplotRoot, plot_filename)
-            # print("PLOT_FILE_PATH: ", plot_file_path)
+                # draw vertical line at each frame number
+                # save each graph
+                # only one line may be specified; full height
+                line = plt.axvline(x=n, color='red', label='axvline - full height')
+                # frame number test
+                f_text = plt.text(5050, 530, "Frame " + str(n))
 
-            # plt.savefig(plot_file_path)
-            line.remove()
-            f_text.remove()
+                # change savefig default directory output
+                # to: in task (Suturing), folder grasper_plot_images, in appropriate Trial folder
+                plot_filename = 'plot_frame_' + str(n).zfill(4) + '.png'  # add leading zeros
+                plot_file_path = os.path.join(gplotRoot, plot_filename)
+                # print("PLOT_FILE_PATH: ", plot_file_path)
 
-            # here: have saved plots for each frame
+                # plt.show()
+                # plt.savefig(plot_file_path)
+                line.remove()
+                f_text.remove()
 
-            # call function to add image next to graph
+                # by here: should have saved plots for each frame
+                # next : call function to add image next to graph
+
+                ### BREAK ###
+
+                # puts plot and raw images side by side
+                # iterates over all trials in a task
+                # implemented in function below
 
 
     # refactored version
-    def GrasperDistImages(self):
+    def GrasperDistImages(self, SAVE=False):
         # get grasper contour data
         # (from the output of contours.py)
         DeeplabVIAPoints, DeeplabVIAFrames, DeeplabVIARings = self.getContourData()
@@ -399,22 +413,157 @@ class Iterator:
                     gt_dist[frameNumber] = gt_d
                     print("GT_DIST", gt_d)
 
+            ### BREAK ###
+
+            # PLOTTING
+            # one video for each trial, need plots of each frame
+
+            # function for plotting
+            self.plotGrasperDist(gt_dist, pred_dist, gplotRoot)  # save option? choose gt or pred?
+
+            # function to add images beside plot
+            # need to have saved plot images from plotGrasperDist()
+            self.plotBesideImage()  # save option?
+
+            print("proc", os.path.basename(TrialRoot), "count:", frameNum)
+
+    def GrasperCenterImages(self, SAVE=False):
+        # get grasper contour data
+        # (from the output of contours.py)
+        DeeplabVIAPoints, DeeplabVIAFrames, DeeplabVIARings = self.getContourData()
+
+        # need to generate for all trials and all tasks
+        # but for now focus on Suturing_S02_T01
+        FilenamesInTask = [
+            "Suturing_S02_T01"]  # self.getFilenamesinTask()  # will get all the trials (from the images folder)
+        print("Trials:", "Suturing_S02_T01")  # FilenamesInTask)
+
+        for Trial in FilenamesInTask:
+            # dictionary {frame_number : centroid point}
+            gt_Centroid_L = {}
+            gt_Centroid_R = {}
+            pred_Centroid_L = {}
+            pred_Centroid_R = {}
+
+            TrialRoot = os.path.join(self.imagesDir, Trial)
+            ctxFName = os.path.join(self.ctxConsensusDir, Trial + ".txt")
+            ctxPredFName = os.path.join(self.context_output, Trial + ".txt")
+            frameNum = 0
+            for root, dirs, files in os.walk(TrialRoot):
+                files.sort()
+                for file in files:
+                    if "frame" not in file:
+                        continue
+                    frameNum += 1
+                    imageRoot = root
+                    frameNumber = int(file.replace(".png", "").split("_")[1])
+                    trialFname = os.path.basename(root)
+                    imageFName = os.path.join(imageRoot, file)
+                    cogitoRoot = root.replace("images", "annotations")
+                    cogitoFName = os.path.join(cogitoRoot, utils.imageToJSON(file))
+                    outputRoot = os.path.join(self.deeplabOutputDir, trialFname)
+                    # outputFName = os.path.join(self.deeplabOutputDir, trialFname, file)
+
+                    gplotRoot = os.path.join(self.plotImagesDir, trialFname)
+                    plot_file = 'plot_' + file
+                    gplotFName = os.path.join(self.plotImagesDir, trialFname, plot_file)
+                    # print("GPLOTFNAME:", gplotFName)
+
+                    annotationRoot = root.replace("images", "annotations")
+                    annotationFile = os.path.join(annotationRoot, utils.imageToJSON(file))
+
+                    # All _dl_points contains the contours that are applicable for this Task and Trial combo
+                    All_dl_points = DeeplabVIAPoints[trialFname]  # ["class"]["frame"] = list of points
+
+                    # Getting particular contours (array of points)
+                    try:
+                        LgrasperPoints = All_dl_points["dl_grasper_L"][str(frameNumber)]
+                    except Exception as e:
+                        print(e, "in LgrasperPoints")
+                        LgrasperPoints = {}
+
+                    try:
+                        RgrasperPoints = All_dl_points["dl_grasper_R"][str(frameNumber)]
+                    except Exception as e:
+                        print(e, "in RgrasperPoints")
+                        RgrasperPoints = {}
+
+                    CtxI = utils.ContextInterface2(ctxFName)
+                    J = utils.JSONInterface(annotationFile)
+
+                    # gtPolygons are Ground Truth contour points for the cogito labels
+                    gtPolygons = J.getPolygonsDict();  # graspers only in KT, (don't need needle mask)
+                    # print(type(gtPolygons)) # dict
+                    # print(gtPolygons) # tool : points
+
+                    # gtKeypoints are Ground Truth points from cogito labels
+                    gtKeypoints = J.getKeyPointsDict();  # not needed, only for GetCommonShapes function
+                    cn, polylineSeries = J.getPolyLines();  # not needed
+                    SingleThreadX = []
+                    SingleThreadY = []
+                    for i in range(len(polylineSeries)):
+                        l = len(polylineSeries)
+                        for j in range(0, len(polylineSeries[i]), 2):
+                            SingleThreadX.append(polylineSeries[i][j])
+                            SingleThreadY.append(polylineSeries[i][j + 1])
+                    SingleThreadPoints = [(SingleThreadX[i], SingleThreadY[i]) for i in range(len(SingleThreadX))]
+
+                    if (not os.path.isdir(outputRoot)):
+                        path = pathlib.Path(outputRoot)
+                        path.mkdir(parents=True, exist_ok=True)
+
+                    # pred has all the polygons from Zoey's masks
+                    # gt has all the polygons from cogito
+                    pred, gt = self.GetCommonShapes(gtPolygons, gtKeypoints, SingleThreadPoints, polylineSeries,
+                                                    LgrasperPoints, RgrasperPoints)
+
+                    # function for getting grasper distance? no; need frame number
+
+                    # multipolygons in left and right graspers
+                    gt_mpoly_l = gt[0]
+                    gt_mpoly_r = gt[1]
+
+                    pred_mpoly_l = pred[0]
+                    pred_mpoly_r = pred[1]
+
+                    # print("PRED_MPOLY_L:", pred_mpoly_l)
+                    # print(type(pred_mpoly_l))
+
+                    # find grasper center
+                    for polygon in gt_mpoly_l:
+                        gt_l_center = polygon.centroid
+                        gt_Centroid_L[frameNumber] = gt_l_center
+                        print("gt_Centroid_L:", gt_l_center)
+
+                    for polygon in pred_mpoly_l:
+                        pred_l_center = polygon.centroid
+                        pred_Centroid_L[frameNumber] = pred_l_center
+                        print("pred_Centroid_L:", pred_l_center)
+
+                    for polygon in gt_mpoly_r:
+                        gt_r_center = polygon.centroid
+                        gt_Centroid_R[frameNumber] = gt_r_center
+                        print("gt_Centroid_R:", gt_r_center)
+
+                    for polygon in pred_mpoly_r:
+                        pred_r_center = polygon.centroid
+                        pred_Centroid_R[frameNumber] = pred_r_center
+                        print("pred_Centroid_R:", pred_r_center)
+
                     ### BREAK ###
 
                     # PLOTTING
                     # one video for each trial, need plots of each frame
 
                     # function for plotting
-                    self.plotGrasperDist(gt_dist, pred_dist, gplotRoot)  # save option? choose gt or pred?
+                    self.plotGrasperDist(pred_Centroid_L, pred_Centroid_R, gplotRoot)  # save option? choose gt or pred?
 
                     # function to add images beside plot
-                    self.plotBesideImage()  # save option?
+                    #self.plotBesideImage()  # save option?
 
             print("proc", os.path.basename(TrialRoot), "count:", frameNum)
 
-
-
-    def plotGrasperDist(self, gt_dist, pred_dist, gplotRoot):
+    def plotGrasperCenter(self, left_grasper_coord, right_grasper_coord, gplotRoot):
         # plot location of grasper center on 2D plot
         # over time (frame number)
         # plotting distance between vs. time
@@ -422,8 +571,8 @@ class Iterator:
 
         # for gt (not implemented)
         # create dataframe
-        gt_dataframe = pd.DataFrame({'frame_number': gt_dist.keys(),
-                                     'distance': gt_dist.values()})
+        # gt_dataframe = pd.DataFrame({'frame_number': gt_dist.keys(),
+        #                             'distance': gt_dist.values()})
 
         # for pred
         # create dataframe
@@ -463,15 +612,61 @@ class Iterator:
             f_text.remove()
 
             # by here: should have saved plots for each frame
-
             # next : call function to add image next to graph
 
+    def plotGrasperDist(self, gt_dist, pred_dist, gplotRoot):
+        # plot location of grasper center on 2D plot
+        # over time (frame number)
+        # plotting distance between vs. time
 
-        ### BREAK ###
 
-        # puts plot and raw images side by side
-        # iterates over all trials in a task
-        # implemented in function below
+        # for gt (not implemented)
+        # create dataframe
+        gt_dataframe = pd.DataFrame({'frame_number': gt_dist.keys(),
+                                     'distance': gt_dist.values()})
+
+        # for pred
+        # create dataframe
+        pred_dataframe = pd.DataFrame({'frame_number': pred_dist.keys(),
+                                       'distance': pred_dist.values()})
+
+        # for gt?
+
+        # for pred
+        for n in pred_dist.keys():  # for eacgh frame number
+            # plot entire graph
+            # Plotting the time series of given dataframe
+            plt.plot(pred_dataframe.frame_number, pred_dataframe.distance, color='blue')
+
+            # Giving title to the chart using plt.title
+            plt.title('Distance Between Graspers by Frames')
+
+            # Providing x and y label to the chart
+            plt.xlabel('Frame')
+            plt.ylabel('Distance Between Graspers')
+
+            # draw vertical line at each frame number
+            # save each graph
+            # only one line may be specified; full height
+            line = plt.axvline(x=n, color='red', label='axvline - full height')
+            # frame number test
+            f_text = plt.text(5050, 530, "Frame " + str(n))
+
+            # change savefig default directory output
+            # to: in task (Suturing), folder grasper_plot_images, in appropriate Trial folder
+            plot_filename = 'plot_frame_' + str(n).zfill(4) + '.png'  # add leading zeros
+            plot_file_path = os.path.join(gplotRoot, plot_filename)
+            # print("PLOT_FILE_PATH: ", plot_file_path)
+
+            # plt.show()
+            # if SAVE == TRUE:
+            # plt.savefig(plot_file_path)
+            line.remove()
+            f_text.remove()
+
+            # by here: should have saved plots for each frame
+            # next : call function to add image next to graph
+
 
     def plotBesideImage(self):
         FilenamesInTask = ["Suturing_S02_T01"]  # self.getFilenamesinTask()
@@ -515,7 +710,8 @@ class Iterator:
                     img_plot = cv.hconcat([im1, im2])
                     # cv.imshow('image and plot', img_plot)
                     # cv.waitKey(0);
-                    #cv.imwrite(plotImageOutputFName, img_plot)
+                    # if SAVE == TRUE:
+                    # cv.imwrite(plotImageOutputFName, img_plot)
 
 
     def getContourData(self):
