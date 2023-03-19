@@ -27,14 +27,14 @@ def main():
 
     I = Iterator(task)
 
-    I.closestGrasperDist()
+    #I.closestGrasperDist()
 
     # get series of images of grasper distance plots beside images
     # I.grasperDistScript()
     # I.GrasperDistImages(SAVE=False)
 
     # get series of images of centers of graspers
-    #I.GrasperCenterImages(SAVE=False)
+    I.GrasperCenterImages(SAVE=False)
 
     # turn series of images into a video
     V = VideoInterface(task)
@@ -50,6 +50,7 @@ class Iterator:
         self.task = task
         self.plotImagesDir = os.path.join(self.CWD, task, "grasper_plot_images")
         self.plotNextToImagesDir = os.path.join(self.CWD, task, "grasper_plot_sidebyside")
+        self.centerImagesDir = os.path.join(self.CWD, task, "center_images")
         self.imagesDir = os.path.join(self.CWD, task, "images")
         self.cogitoDir = os.path.join(self.CWD, task, "annotations")
         self.cogitoOutputDir = os.path.join(self.CWD, task, "cogito_labeled_images")
@@ -708,57 +709,80 @@ class Iterator:
             print("proc", os.path.basename(TrialRoot), "count:", frameNum)
 
     def plotGrasperCenter(self, left_grasper_coord, right_grasper_coord, gplotRoot):
-        # plot location of grasper center on 2D plot
-        # over time (frame number)
-        # plotting distance between vs. time
+        # add location of grasper center on original image as markers
+        # need center markers at each frame number to make video
+
+        FilenamesInTask = ["Suturing_S02_T01"]  # self.getFilenamesinTask()
+        for Trial in FilenamesInTask:
+            # DLImagesRoot = os.path.join(self.CWD, self.task, "deeplab_labeled_images", Trial)
+            TrialRoot = os.path.join(self.imagesDir, Trial)
+            # TrialRoot = os.path.join(self.plotImagesDir, Trial)
+            frameNum = 0
+            for root, dirs, files in os.walk(TrialRoot):
+                files.sort()
+                for file in files:
+                    if "frame" not in file:
+                        continue
+                    frameNum += 1
+                    imageRoot = root
+                    frameNumber = int(file.replace(".png", "").split("_")[1])
+                    trialFname = os.path.basename(root)
+                    imageFName = os.path.join(imageRoot, file)
+
+                    #gplotRoot = os.path.join(self.plotImagesDir, trialFname)
+                    centerRoot = os.path.join(self.centerImagesDir, trialFname)
+                    # plot_file = 'plot_' + file
+                    # gplotFName = os.path.join(self.plotImagesDir, trialFname, plot_file)
+                    # print("GPLOTFNAME:", gplotFName)
+
+                    # plotImageOutputRoot = os.path.join(self.plotNextToImagesDir, trialFname)
+                    # plotImageOutputFName = os.path.join(self.plotNextToImagesDir, trialFname, file)
+                    #print("plotImageOutputFName:", plotImageOutputFName)
+
+                    # graph_path = os.path.join(self.CWD, 'grasper_distance_plot.png')
+                    # for n in frame number:
+                    im = cv.imread(imageFName)  # imageFName raw image? outputFName is labelled imaged
+                    print("IMAGEFNAME:", imageFName)
+
+                    # imageFName size: (480, 640, 3); outputFName size: (389, 488, 3)
+                    print("IMAGEFNAME SHAPE:", im.shape)
+
+                    # title to the chart
+                    plt.title('Location of Grasper Centers')
+
+                    # frame number text
+                    f_text = plt.text(540, -10, "Frame " + str(frameNumber))
+
+                    # get coordinates of the grasper centers
+                    # dictionary {frame_number : centroid point}
+                    # left_grasper_coord[frameNumber] = Point
+                    l_x = left_grasper_coord[frameNumber].x
+                    l_y = left_grasper_coord[frameNumber].y
+                    r_x = right_grasper_coord[frameNumber].x
+                    r_y = right_grasper_coord[frameNumber].y
+
+                    # add center markers
+                    plt.plot(l_x, l_y, marker='o', color="red")
+                    plt.plot(r_x, r_y, marker='o', color="red")
+
+                    # add contours to better understand center markers
 
 
-        # for gt (not implemented)
-        # create dataframe
-        # gt_dataframe = pd.DataFrame({'frame_number': gt_dist.keys(),
-        #                             'distance': gt_dist.values()})
+                    plt.imshow(im)
+                    plt.show()
 
-        # for pred
-        # create dataframe
-        pred_dataframe = pd.DataFrame({'frame_number': pred_dist.keys(),
-                                       'distance': pred_dist.values()})
+                    # save image with center markers
+                    # change savefig default directory output
+                    # to: in task (Suturing), folder grasper_plot_images, in appropriate Trial folder
+                    center_filename = 'center_frame_' + str(frameNumber).zfill(4) + '.png'  # add leading zeros
+                    center_file_path = os.path.join(centerRoot, center_filename)
+                    # print("CENTER_FILE_PATH: ", center_file_path)
 
-        # for gt?
+                    # if SAVE == TRUE:
+                    # plt.savefig(center_file_path)
+                    f_text.remove()
+                    # cv.imwrite(plotImageOutputFName, img_plot)
 
-        # for pred
-        for n in pred_dist.keys():  # for each frame number
-            # plot entire graph
-            # Plotting the time series of given dataframe
-            plt.plot(pred_dataframe.frame_number, pred_dataframe.distance, color='blue')
-
-            # Giving title to the chart using plt.title
-            plt.title('Distance Between Graspers by Frames')
-
-            # Providing x and y label to the chart
-            plt.xlabel('Frame')
-            plt.ylabel('Distance Between Graspers')
-
-            # draw vertical line at each frame number
-            # save each graph
-            # only one line may be specified; full height
-            line = plt.axvline(x=n, color='red', label='axvline - full height')
-            # frame number test
-            f_text = plt.text(5050, 530, "Frame " + str(n))
-
-            # change savefig default directory output
-            # to: in task (Suturing), folder grasper_plot_images, in appropriate Trial folder
-            plot_filename = 'plot_frame_' + str(n).zfill(4) + '.png'  # add leading zeros
-            plot_file_path = os.path.join(gplotRoot, plot_filename)
-            # print("PLOT_FILE_PATH: ", plot_file_path)
-
-            plt.show()
-            # if SAVE == TRUE:
-            # plt.savefig(plot_file_path)
-            line.remove()
-            f_text.remove()
-
-            # by here: should have saved plots for each frame
-            # next : call function to add image next to graph
 
     def plotGrasperDist(self, gt_dist, pred_dist, gplotRoot):
         # plot location of grasper center on 2D plot
