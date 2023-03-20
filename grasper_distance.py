@@ -55,7 +55,8 @@ class Iterator:
         self.cogitoDir = os.path.join(self.CWD, task, "annotations")
         self.cogitoOutputDir = os.path.join(self.CWD, task, "cogito_labeled_images")
         self.context_output = os.path.join(self.CWD, task, "vis_context_labels_v5")
-        self.deeplabOutputDir = os.path.join(self.CWD, task, "deeplab_labeled_images")
+        self.deeplabOutputDir = os.path.join(self.CWD, task, "deeplab_labeled_images_test")
+        self.drawContourDir = os.path.join(self.CWD, task, "draw_contour_images")
         self.ctxConsensusDir = os.path.join(self.CWD, task, "ctx_consensus")
         self.ctxSurgeonDir = os.path.join(self.CWD, task, "ctx_surgeon")
         self.ctxPredDir = os.path.join(self.CWD, task, "ctx_output")
@@ -607,6 +608,7 @@ class Iterator:
                     cogitoFName = os.path.join(cogitoRoot, utils.imageToJSON(file))
                     outputRoot = os.path.join(self.deeplabOutputDir, trialFname)
                     # outputFName = os.path.join(self.deeplabOutputDir, trialFname, file)
+                    drawFName = os.path.join(self.drawContourDir, trialFname, file)
 
                     gplotRoot = os.path.join(self.plotImagesDir, trialFname)
                     plot_file = 'plot_' + file
@@ -622,6 +624,7 @@ class Iterator:
                     # Getting particular contours (array of points)
                     try:
                         LgrasperPoints = All_dl_points["dl_grasper_L"][str(frameNumber)]
+                        print("LgrasperPoints:", LgrasperPoints)
                     except Exception as e:
                         print(e, "in LgrasperPoints")
                         LgrasperPoints = {}
@@ -670,11 +673,12 @@ class Iterator:
                     pred_mpoly_l = pred[0]
                     pred_mpoly_r = pred[1]
 
-                    # print("PRED_MPOLY_L:", pred_mpoly_l)
-                    # print(type(pred_mpoly_l))
+                    print("PRED_MPOLY_L:", pred_mpoly_l)
+                    print(type(pred_mpoly_l))
 
                     # find grasper center
                     for polygon in gt_mpoly_l:
+                        print("POLYGON:", polygon)
                         gt_l_center = polygon.centroid
                         gt_Centroid_L[frameNumber] = gt_l_center
                         print("gt_Centroid_L:", gt_l_center)
@@ -699,14 +703,74 @@ class Iterator:
             # PLOTTING
             # one video for each trial, need plots of each frame
 
+            # plot on images with contours?
+            # temp solution: plot centers on deeplab_labeled_images_test
+            # (these images have contours drawn on the images already) --> not work image not right size
+                    #self.drawContourImage(pred, gt, imageFName, drawFName, GT=False)
+
             # function for plotting
             self.plotGrasperCenter(pred_Centroid_L, pred_Centroid_R, gplotRoot)  # save option? choose gt or pred?
 
-            # function to add images beside plot
-            # need to have saved plot images from plotGrasperDist()
-            #self.plotBesideImage()  # save option?
-
             print("proc", os.path.basename(TrialRoot), "count:", frameNum)
+
+    # draw only grasper contours (for suturing task images (with threads, no rings)?)
+    def drawContourImage(self, pred, gt, imageFName, drawFName, GT=False):
+        [LG_dl, RG_dl] = pred
+        [LG_Group_gt, RG_Group_gt] = gt
+        image = cv.imread(imageFName)
+
+        # actual/original image
+        plt.imshow(image, cmap='gray')
+
+        # for masks
+        # img_3 = np.zeros([1612,1612,3],dtype=np.uint8)
+        # img_3.fill(255)
+        # plt.imshow(img_3, cmap='gray')
+
+        if GT:
+            try:
+                x, y = unary_union(LG_Group_gt).exterior.xy
+                plt.plot(x, y)
+                plt.plot(LG_Group_gt.centroid.x, LG_Group_gt.centroid.y)
+            except Exception as e:
+                print(e, "No LG_Group_gt")
+
+            try:
+                x, y = unary_union(RG_Group_gt).exterior.xy
+                plt.plot(RG_Group_gt.centroid.x, RG_Group_gt.centroid.y)
+                plt.plot(x, y)
+            except Exception as e:
+                print(e, "no RG GT annotation")
+
+        scale = 1
+        linewidth = 1
+        try:
+            x, y = unary_union(LG_dl).exterior.xy
+            x = [xx * scale for xx in x]
+            y = [yy * scale for yy in y]
+            plt.plot(x, y, color="green", linewidth=linewidth)
+        except Exception as e:
+            print(e, "No LG DL label")
+        try:
+            x, y = unary_union(RG_dl).exterior.xy
+            x = [xx * scale for xx in x]
+            y = [yy * scale for yy in y]
+            plt.plot(x, y, color="gold", linewidth=linewidth)
+        except Exception as e:
+            print(e, "No RG DL label")
+
+        # outPath = os.path.(outputFName,"")
+
+        #plt.axis('off')
+        plt.gca().set_axis_off()
+        plt.subplots_adjust(top=1, bottom=0, right=1, left=0,
+                            hspace=0, wspace=0)
+        plt.margins(0, 0)
+
+        #plt.show()
+        plt.savefig(drawFName)
+
+        plt.close()
 
     def plotGrasperCenter(self, left_grasper_coord, right_grasper_coord, gplotRoot):
         # add location of grasper center on original image as markers
@@ -715,10 +779,12 @@ class Iterator:
         FilenamesInTask = ["Suturing_S02_T01"]  # self.getFilenamesinTask()
         for Trial in FilenamesInTask:
             # DLImagesRoot = os.path.join(self.CWD, self.task, "deeplab_labeled_images", Trial)
+            DLImagesRoot = os.path.join(self.deeplabOutputDir, Trial)
+            DrawRoot = os.path.join(self.drawContourDir, Trial)
             TrialRoot = os.path.join(self.imagesDir, Trial)
             # TrialRoot = os.path.join(self.plotImagesDir, Trial)
             frameNum = 0
-            for root, dirs, files in os.walk(TrialRoot):
+            for root, dirs, files in os.walk(DrawRoot):
                 files.sort()
                 for file in files:
                     if "frame" not in file:
@@ -756,30 +822,48 @@ class Iterator:
                     # get coordinates of the grasper centers
                     # dictionary {frame_number : centroid point}
                     # left_grasper_coord[frameNumber] = Point
-                    l_x = left_grasper_coord[frameNumber].x
-                    l_y = left_grasper_coord[frameNumber].y
-                    r_x = right_grasper_coord[frameNumber].x
-                    r_y = right_grasper_coord[frameNumber].y
-
                     # add center markers
-                    plt.plot(l_x, l_y, marker='o', color="red")
-                    plt.plot(r_x, r_y, marker='o', color="red")
+                    try:
+                        l_x = left_grasper_coord[frameNumber].x
+                        l_y = left_grasper_coord[frameNumber].y
 
-                    # add contours to better understand center markers
+                        l_center_pt, = plt.plot(l_x, l_y, marker='o', color="red")
+                    except Exception as e:
+                        print(e, "no left grasper center coordinates")
 
+                    try:
+                        r_x = right_grasper_coord[frameNumber].x
+                        r_y = right_grasper_coord[frameNumber].y
+
+                        r_center_pt, = plt.plot(r_x, r_y, marker='o', color="red")
+                    except Exception as e:
+                        print(e, "no right grasper center coordinates")
+
+                    # add contours to better understand center markers - done
 
                     plt.imshow(im)
-                    plt.show()
+                    #plt.show()
 
                     # save image with center markers
                     # change savefig default directory output
                     # to: in task (Suturing), folder grasper_plot_images, in appropriate Trial folder
-                    center_filename = 'center_frame_' + str(frameNumber).zfill(4) + '.png'  # add leading zeros
+                    center_filename = 'frame_' + str(frameNumber).zfill(4) + '.png'  # add leading zeros
                     center_file_path = os.path.join(centerRoot, center_filename)
                     # print("CENTER_FILE_PATH: ", center_file_path)
 
                     # if SAVE == TRUE:
-                    # plt.savefig(center_file_path)
+                    #plt.savefig(center_file_path)
+
+                    # removing points
+                    try:
+                        l_center_pt.remove()
+                    except Exception as e:
+                        print(e, "no left grasper center to remove")
+
+                    try:
+                        r_center_pt.remove()
+                    except Exception as e:
+                        print(e, "no right grasper center to remove")
                     f_text.remove()
                     # cv.imwrite(plotImageOutputFName, img_plot)
 
@@ -803,7 +887,7 @@ class Iterator:
         # for gt?
 
         # for pred
-        for n in pred_dist.keys():  # for eacgh frame number
+        for n in pred_dist.keys():  # for each frame number
             # plot entire graph
             # Plotting the time series of given dataframe
             plt.plot(pred_dataframe.frame_number, pred_dataframe.distance, color='blue')
@@ -1008,7 +1092,10 @@ class VideoInterface:
         '''
         TrialNum = 0
         for Trial in Dirs:
-            TrialRoot = os.path.join(self.CWD, self.task, "grasper_plot_sidebyside", Trial)
+            # here: edit directory root of images
+            TrialRoot = os.path.join(self.CWD, self.task, "center_images", Trial)
+            # plotNextToImagesDir = os.path.join(self.CWD, task, "grasper_plot_sidebyside")
+            # centerImagesDir = os.path.join(self.CWD, task, "center_images")
 
             img_array = []
             for filename in sorted(glob.glob(TrialRoot + '/*.png')):
@@ -1017,7 +1104,8 @@ class VideoInterface:
                 size = (width, height)
                 img_array.append(img)
 
-            out = cv.VideoWriter(self.CWD + '/plot_' + Trial + '.mp4', cv.VideoWriter_fourcc(*'mp4v'), 15, size)
+            # here: edit file name
+            out = cv.VideoWriter(self.CWD + '/center_' + Trial + '.mp4', cv.VideoWriter_fourcc(*'mp4v'), 15, size)
 
             for i in range(len(img_array)):
                 for j in range(3):
